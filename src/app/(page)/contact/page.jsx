@@ -1,12 +1,13 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 
-// Fix for Next.js SSR: Dynamic import for Leaflet Map
+// Dynamic import for Leaflet components to avoid SSR issues
 const DynamicMap = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
+const TileLayer = dynamic(() => import('react-leaflet').then(mod => mod.TileLayer), { ssr: false });
+const Marker = dynamic(() => import('react-leaflet').then(mod => mod.Marker), { ssr: false });
+const Popup = dynamic(() => import('react-leaflet').then(mod => mod.Popup), { ssr: false });
 
 const Container = ({ children, className }) => {
   return (
@@ -22,6 +23,13 @@ const Contact = () => {
     latitude: 41.2995,
     zoom: 13,
   });
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Ensure the map is only rendered after the component is mounted
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <div className='max-w-3xl mx-auto p-6'>
@@ -40,17 +48,20 @@ const Contact = () => {
         <p><strong>Email:</strong> oiltrade.uz@mail.ru</p>
       </div>
 
-      <div className="w-full h-64 mt-6">
-        <DynamicMap center={[viewState.latitude, viewState.longitude]} zoom={viewState.zoom} style={{ height: '100%', width: '100%' }}>
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          <Marker position={[41.2995, 69.2401]}>
-            <Popup>Tashkent, Uzbekistan</Popup>
-          </Marker>
-        </DynamicMap>
-      </div>
+      {/* Only render the map after the component has mounted on the client-side */}
+      {isMounted && (
+        <div className="w-full h-64 mt-6">
+          <DynamicMap center={[viewState.latitude, viewState.longitude]} zoom={viewState.zoom} style={{ height: '100%', width: '100%' }}>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <Marker position={[41.2995, 69.2401]}>
+              <Popup>Tashkent, Uzbekistan</Popup>
+            </Marker>
+          </DynamicMap>
+        </div>
+      )}
 
       <div className="mt-6">
         <Image

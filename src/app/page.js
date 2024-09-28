@@ -1,5 +1,6 @@
 // app/page.js
-import HomeContent from "../app/components/HomeContent/HomeContent";
+
+import HomeContent from "./components/HomeContent/HomeContent";
 
 export default function Home() {
   return (
