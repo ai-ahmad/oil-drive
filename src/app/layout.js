@@ -4,7 +4,7 @@ import Sidebar from "./components/SideBar/Sidebar";
 import "./globals.css";
 
 export const metadata = {
-  title: "Главная страница — Пример",
+  title: "oiltradeuz ",
   description: "Это описание главной страницы вашего приложения.",
   keywords: "Next.js, SEO, оптимизация",
   robots: "index, follow",
