@@ -1,4 +1,7 @@
+// app/layout.js
 import localFont from "next/font/local";
+import Navigation from "../app/components/Navigations/Header";
+import Sidebar from "./components/SideBar/Sidebar";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -23,7 +26,22 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        {/* Добавляем общие элементы лейаута */}
+        <Navigation />
+
+        <div className="flex">
+          {/* Sidebar присутствует на всех страницах */}
+          <Sidebar />
+          
+          {/* Основной контент страницы */}
+          <div className="flex-grow">
+            {children}
+          </div>
+        </div>
+
+        <footer>
+          {/* Футер также на всех страницах */}
+        </footer>
       </body>
     </html>
   );
