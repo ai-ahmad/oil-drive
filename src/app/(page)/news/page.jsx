@@ -12,7 +12,7 @@ export default function News() {
     const getNews = async () => {
       try {
         // Fetch news from the API
-        const response = await axios.get('http://localhost:5001/api/v1/news');
+        const response = await axios.get('http://localhost:5000/api/v1/news');
         setNews(response.data);
       } catch (error) {
         console.error('Error fetching news:', error);
@@ -30,7 +30,7 @@ export default function News() {
         {news.map((item) => (
           <article key={item._id} className="border-b pb-8">
             <Image
-              src={item.images && item.images.length > 0 ? `http://localhost:5001${item.images[0]}` : '/default.jpg'}
+              src={item.images && item.images.length > 0 ? `http://localhost:5000${item.images[0]}` : '/default.jpg'}
               alt={item.title}
               width={400}
               height={200}

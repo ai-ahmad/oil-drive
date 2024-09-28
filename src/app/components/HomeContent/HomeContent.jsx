@@ -11,7 +11,7 @@ const HomeContent = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const request = await axios.get("http://localhost:5001/api/v1/card");
+        const request = await axios.get("http://localhost:5000/api/v1/card");
         if (request.status === 200) {
           setProducts(request.data);
         } else {
@@ -24,6 +24,8 @@ const HomeContent = () => {
     
     fetchProducts();
   }, []);
+
+  console.log(products)
   
   return (
     <div className="container mx-auto p-4 sm:p-6 md:p-8 lg:p-10">
@@ -33,15 +35,13 @@ const HomeContent = () => {
             {/* Product Image */}
             <div className="flex justify-center h-[200px] sm:h-[250px]">
               <Image
-                src={`http://localhost:5001/${product.image}`} 
+                src={`http://localhost:5000/${product.image}`} 
                 alt={product.name} 
                 width={200} 
                 height={200}
                 className="object-contain"
               />
             </div>
-
-         
 
             {/* Product Description */}
             <div className="mt-4">
@@ -69,7 +69,6 @@ const HomeContent = () => {
                 </button>
               </div>
 
-              {/* More Info Button */}
             
             </div>
           </div>
