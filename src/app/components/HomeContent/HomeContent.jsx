@@ -27,7 +27,7 @@ const HomeContent = () => {
   
   return (
     <div className="container mx-auto p-4 sm:p-6 md:p-8 lg:p-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <a href='simple' className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <div key={product._id} className="bg-white shadow-md rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 flex flex-col justify-between min-h-[400px]">
             {/* Product Image */}
@@ -41,22 +41,14 @@ const HomeContent = () => {
               />
             </div>
 
-            {/* Rating */}
-            <div className="flex items-center justify-between mt-2">
-              <div className="flex">
-                {Array.from({ length: product.rating }, (_, i) => (
-                  <CiStar key={i} className="text-yellow-500 text-lg sm:text-xl" />
-                ))}
-              </div>
-              <p className="text-sm text-gray-500">{`отзывов ${product.reviews || 0}`}</p>
-            </div>
+         
 
             {/* Product Description */}
             <div className="mt-4">
               <p className="text-gray-700 text-sm sm:text-base md:text-lg">{product.description}</p>
 
             
-              <div className="flex items-center border-b py-2 mt-2">
+              <div className="flex items-center py-2 mt-2">
                 <CiShoppingTag className="text-gray-600 mr-1" />
                 <p className="text-sm sm:text-base">{product.category}</p>
               </div>
@@ -64,9 +56,7 @@ const HomeContent = () => {
         
               <div className="flex items-center justify-between mt-4">
                 <span className="font-bold text-lg sm:text-xl md:text-2xl">{product.price ? `${product.price} сум` : "- сум."}</span>
-                <span className={`text-sm sm:text-base ${product.stock ? 'text-green-500' : 'text-red-500'}`}>
-                  {product.stock ? <><FaCheck /> В наличии</> : "Нет в наличии"}
-                </span>
+             
               </div>
 
             
@@ -84,7 +74,7 @@ const HomeContent = () => {
             </div>
           </div>
         ))}
-      </div>
+      </a>
     </div>
   );
 };
