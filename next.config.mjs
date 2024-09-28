@@ -2,7 +2,7 @@
 
 export default {
     images: {
-      domains: ['oiltrade.uz'],
+      domains: ['oiltrade.uz' ,'localhost'],
     },
   };
   
