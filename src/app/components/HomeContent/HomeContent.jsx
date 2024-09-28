@@ -11,7 +11,7 @@ const HomeContent = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const request = await axios.get("http://localhost:5000/api/v1/card");
+        const request = await axios.get("http://localhost:5001/api/v1/card");
         if (request.status === 200) {
           setProducts(request.data);
         } else {
@@ -33,7 +33,7 @@ const HomeContent = () => {
             {/* Product Image */}
             <div className="flex justify-center h-[200px] sm:h-[250px]">
               <Image
-                src={`http://localhost:5000/${product.image}`} 
+                src={`http://localhost:5001/${product.image}`} 
                 alt={product.name} 
                 width={200} 
                 height={200}
