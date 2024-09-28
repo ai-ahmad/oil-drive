@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import Image from 'next/image';
-import Link from 'next/link';
+
 import { useEffect, useState } from 'react';
 
 export default function News() {
@@ -38,10 +38,10 @@ export default function News() {
             />
             <time className="text-sm text-gray-500">{item.date}</time>
             <h2 className="text-xl font-semibold mt-2 mb-2">
-              <a href={`/news/${item._id}`}>
-                <a className="text-red-600 hover:underline">{item.title}</a>
-              </a>
-            </h2>
+            <a href={`/news/${item._id}`} className="text-red-600 hover:underline">
+              {item.title}
+            </a>
+          </h2>
             <p className="text-gray-700">{item.description1}</p>
           </article>
         ))}
