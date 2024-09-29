@@ -1,11 +1,23 @@
-// app/page.js
-
-import HomeContent from "./components/HomeContent/HomeContent";
+import Image from "next/image";
+import Navigation from "./components/Navigations/Header";
+import Sidebar from "./components/Sidebar";
+import News from "./components/News/News";
 
 export default function Home() {
   return (
-    <div>
-      <HomeContent />
-    </div>
+    <>
+      <header>
+        <Navigation />
+      </header>
+
+
+      <main>
+        <Sidebar />
+      </main>
+
+      <footer>
+        <News />
+      </footer>
+    </>
   );
 }
