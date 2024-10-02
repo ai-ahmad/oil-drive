@@ -40,6 +40,7 @@ const HomeContent = () => {
   return (
     <div className="container mx-auto p-4 sm:p-6 md:p-8 lg:p-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
+        
         {products.map((product) => (
           <div
             key={product._id}
@@ -65,9 +66,10 @@ const HomeContent = () => {
                 <span className="font-bold text-lg sm:text-xl md:text-2xl">{product.price ? `${product.price} сум` : "- сум."}</span>
               </div>
               <div className="flex items-center justify-between mt-2">
-                <span className="text-sm sm:text-base flex items-center">
-                  <FaTint className="mr-1" /> {product.volume[0]} л
-                </span>
+              <span className="text-sm sm:text-base flex items-center">
+  <FaTint className="mr-1" /> {product.volume?.[0] ? `${product.volume[0]} л` : "Объем не указан"}
+</span>
+
                 <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center">
                   <FaInfoCircle className="mr-2" /> Подробнее
                 </button>

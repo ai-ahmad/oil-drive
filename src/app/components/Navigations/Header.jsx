@@ -31,7 +31,6 @@ const Navigation = () => {
           />
         </div>
 
-        {/* Contact Information for Desktop */}
         <address className="hidden lg:flex items-center space-x-6 not-italic">
           <div className="text-black">
             <p className="text-sm">
