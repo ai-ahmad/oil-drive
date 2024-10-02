@@ -89,7 +89,7 @@ const Navigation = () => {
           <div className="container mx-auto flex flex-col items-center space-y-2">
             <a href="/" className="hover:text-gray-400 text-sm">Главная</a>
             <a href="/news" className="hover:text-gray-400 text-sm">Новости</a>
-            <a href="/aboutshop" className="hover:text-gray-400 text-sm">О магазине</a>
+            <a href="/about" className="hover:text-gray-400 text-sm">О магазине</a>
             <a href="/payment" className="hover:text-gray-400 text-sm">Оплата и заказ</a>
             <a href="/delivery" className="hover:text-gray-400 text-sm">Доставка</a>
             <a href="/contact" className="hover:text-gray-400 text-sm">Контакты</a>
@@ -102,7 +102,7 @@ const Navigation = () => {
         <div className="container mx-auto flex justify-center space-x-6 py-4">
           <a href="/" className="hover:text-gray-400 text-sm">Главная</a>
           <a href="/news" className="hover:text-gray-400 text-sm">Новости</a>
-          <a href="/aboutshop" className="hover:text-gray-400 text-sm">О магазине</a>
+          <a href="/about" className="hover:text-gray-400 text-sm">О магазине</a>
           <a href="/payment" className="hover:text-gray-400 text-sm">Оплата и заказ</a>
           <a href="/delivery" className="hover:text-gray-400 text-sm">Доставка</a>
           <a href="/contact" className="hover:text-gray-400 text-sm">Контакты</a>
