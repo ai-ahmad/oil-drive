@@ -7,7 +7,6 @@ const Cattegory = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-
     const fetchCategories = async () => {
         try {
             const response = await fetch('http://localhost:5000/api/v1/category/');
@@ -23,12 +22,13 @@ const Cattegory = () => {
         }
     };
 
-    // UseEffect to call fetchCategories on component mount
     useEffect(() => {
         fetchCategories();
     }, []);
-
-
+    
+    const handleCategoryClick = (categoryName) => {
+            localStorage.setItem('category', JSON.stringify(categoryName));
+    }; 
     if (loading) {
         return <div className="text-center">Loading categories...</div>;
     }
@@ -40,7 +40,6 @@ const Cattegory = () => {
     return (
         <div className="w-1/5 min-w-[200px]">
             <div className="w-full bg-[#E0111A] text-white flex items-center p-2">
-                <img src='' alt="Menu" className="mr-2" />
                 <p className="font-bold">Категории</p>
             </div>
 
@@ -48,6 +47,7 @@ const Cattegory = () => {
             <ul className="w-full border border-gray-300">
                 {categories.map((category) => (
                     <li
+                        onClick={() => handleCategoryClick(category.category_name)}
                         key={category._id}
                         className="border-b border-gray-300 p-2 hover:bg-gray-200 cursor-pointer"
                     >
