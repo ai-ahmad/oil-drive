@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-const Cattegory = () => {
+const Category = () => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -27,8 +27,10 @@ const Cattegory = () => {
     }, []);
     
     const handleCategoryClick = (categoryName) => {
-            localStorage.setItem('category', JSON.stringify(categoryName));
+        localStorage.setItem('category', categoryName);  // Update category in localStorage
+        window.dispatchEvent(new Event("storage"));  // Force dispatch of the storage event in the same tab
     }; 
+    
     if (loading) {
         return <div className="text-center">Loading categories...</div>;
     }
@@ -59,4 +61,4 @@ const Cattegory = () => {
     );
 };
 
-export default Cattegory;
+export default Category;

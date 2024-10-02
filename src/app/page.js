@@ -1,3 +1,6 @@
+"use client"
+
+import { useEffect } from "react";
 import Image from "next/image";
 import Navigation from "./components/Navigations/Header";
 import News from "./components/News/News";
@@ -12,10 +15,10 @@ export default function Home() {
         <Navigation />
       </header>
 
-      <main className="flex container">
-        <div>
+      <main className="flex container mx-auto">
+        <aside>
           <Sidebar />
-        </div>
+        </aside>
         <div className="flex-1">
           <HomeContent />
           <News />
