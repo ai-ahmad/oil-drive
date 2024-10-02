@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import { CiStar, CiShoppingTag } from "react-icons/ci";
-import { FaCheck, FaInfoCircle, FaTint } from "react-icons/fa";
+import { FaInfoCircle, FaTint } from "react-icons/fa";
+import { CiShoppingTag } from "react-icons/ci";
 
 const HomeContent = () => {
   const [products, setProducts] = useState([]);
@@ -39,12 +39,12 @@ const HomeContent = () => {
 
   return (
     <div className="container mx-auto p-4 sm:p-6 md:p-8 lg:p-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
         {products.map((product) => (
           <div
             key={product._id}
-            className="bg-white shadow-md rounded-lg overflow-hidden p-4 sm:p-6 md:p-8 flex flex-col justify-between min-h-[400px]"
-            onClick={() => handleCardClick(product)} // Обработчик клика
+            className="bg-white shadow-md rounded-lg overflow-hidden p-4 flex flex-col justify-between min-h-[400px]"
+            onClick={() => handleCardClick(product)}
           >
             <div className="flex justify-center h-[200px] sm:h-[250px]">
               <Image
@@ -77,15 +77,11 @@ const HomeContent = () => {
         ))}
       </div>
 
-      {/* Модальное окно */}
       {isModalOpen && selectedProduct && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg p-6 max-w-[800px] w-full mx-auto shadow-lg relative">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-bold">{selectedProduct.name}</h2>
-              <div className="text-sm text-green-600 flex items-center">
-            
-              </div>
             </div>
             <div className="flex flex-col md:flex-row mt-4">
               <Image
@@ -97,21 +93,11 @@ const HomeContent = () => {
               />
               <div className="ml-0 md:ml-6">
                 <p className="text-gray-700 mb-2">{selectedProduct.description}</p>
-                <p className="font-bold text-lg mb-2">
-                  Артикул: <span className="font-normal">{selectedProduct.article}</span>
-                </p>
-                <p className="font-bold text-lg mb-2">
-                  Объем: <span className="font-normal">{selectedProduct.volume[0]} л</span>
-                </p>
-                <p className="font-bold text-lg mb-2">
-                  Бренд: <span className="font-normal">{selectedProduct.brand}</span>
-                </p>
-                <p className="font-bold text-lg mb-2">
-                  Страна производителя: <span className="font-normal">{selectedProduct.country}</span>
-                </p>
-                <p className="font-bold text-2xl text-red-500">
-                  {selectedProduct.price ? `${selectedProduct.price} сум` : "- сум."}
-                </p>
+                <p className="font-bold text-lg mb-2">Артикул: <span className="font-normal">{selectedProduct.article}</span></p>
+                <p className="font-bold text-lg mb-2">Объем: <span className="font-normal">{selectedProduct.volume[0]} л</span></p>
+                <p className="font-bold text-lg mb-2">Бренд: <span className="font-normal">{selectedProduct.brand}</span></p>
+                <p className="font-bold text-lg mb-2">Страна производителя: <span className="font-normal">{selectedProduct.country}</span></p>
+                <p className="font-bold text-2xl text-red-500">{selectedProduct.price ? `${selectedProduct.price} сум` : "- сум."}</p>
               </div>
             </div>
             <div className="flex justify-end mt-4">

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Navigation from '@/app/components/Navigations/Header';
 
 // Dynamic import for Leaflet components to avoid SSR issues
 const DynamicMap = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
@@ -32,7 +33,10 @@ const Contact = () => {
   }, []);
 
   return (
-    <div className='max-w-3xl mx-auto p-6'>
+   
+   <>
+   <Navigation/>
+     <div className='max-w-3xl mx-auto p-6'>
       <h1 className="text-3xl font-bold mb-6">Контактные данные магазина</h1>
 
       <p className="mb-4">У Вас появились вопросы? Или хотите сотрудничать?</p>
@@ -72,6 +76,7 @@ const Contact = () => {
         />
       </div>
     </div>
+   </>
   );
 };
 

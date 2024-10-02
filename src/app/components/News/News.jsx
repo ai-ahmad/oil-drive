@@ -1,5 +1,4 @@
 "use client";
-
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
@@ -16,9 +15,6 @@ const News = () => {
         throw new Error('Ошибка загрузки данных: ' + response.statusText);
       }
       const data = await response.json();
-      if (data.length === 0) {
-        console.log("Нет новостей в ответе");
-      }
       const formattedNews = data.map(item => ({
         id: item._id,
         title: item.title,
@@ -29,7 +25,6 @@ const News = () => {
 
       setNewsData(formattedNews);
     } catch (error) {
-      console.error('Ошибка при получении новостей:', error);
       setError(error.message);
     } finally {
       setLoading(false);
@@ -53,7 +48,7 @@ const News = () => {
   }
 
   return (
-    <div className="flex justify-center items-center p-4">
+    <div className="container mx-auto p-4">
       <div className="relative border border-gray-300 bg-white shadow-lg w-full max-w-screen-xl p-6">
         <h2 className="text-black text-2xl font-semibold mb-4">Новости:</h2>
 

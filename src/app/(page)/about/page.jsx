@@ -1,9 +1,12 @@
 "use client"
+import Navigation from '@/app/components/Navigations/Header'
 import React from 'react'
 
 const Page = () => {
   return (
-    <div className="max-w-3xl mx-auto p-6">
+  <>
+  <Navigation/>
+      <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">О магазине</h1>
       
       <section className="space-y-4">
@@ -74,6 +77,7 @@ const Page = () => {
         </ul>
       </section>
     </div>
+  </>
   )
 }
 

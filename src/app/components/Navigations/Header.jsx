@@ -11,6 +11,11 @@ const Navigation = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
+  const searchProducs = () => {
+    //  Seach input in products
+
+  }
+
   return (
     <header className="bg-white">
       <div className="container mx-auto flex justify-between items-center py-3 px-6">
@@ -63,6 +68,7 @@ const Navigation = () => {
         <div className="hidden lg:flex items-center gap-5">
           <div className="relative">
             <input
+            onChange={() => searchProducs}
               type="text"
               placeholder="Поиск..."
               className="border rounded-l-full px-4 py-2 text-sm focus:outline-none"
