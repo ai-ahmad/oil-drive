@@ -78,7 +78,7 @@ const HomeContent = () => {
       </div>
 
       {isModalOpen && selectedProduct && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0  z-[9999] flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg p-6 max-w-[800px] w-full mx-auto shadow-lg relative">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-bold">{selectedProduct.name}</h2>

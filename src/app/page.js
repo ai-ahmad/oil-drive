@@ -5,14 +5,14 @@ import HomeContent from "./components/HomeContent/HomeContent";
 import Sidebar from "./components/SideBar/Sidebar";
 
 export default function Home() {
+
   return (
     <>
       <header>
         <Navigation />
       </header>
 
-      <main className="flex">
-        {/* Sidebar */}
+      <main className="flex container">
         <div>
           <Sidebar />
         </div>
