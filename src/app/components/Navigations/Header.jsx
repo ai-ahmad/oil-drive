@@ -11,6 +11,11 @@ const Navigation = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
+  const searchProducs = () => {
+    //  Seach input in products
+
+  }
+
   return (
     <header className="bg-white">
       <div className="container mx-auto flex justify-between items-center py-3 px-6">
@@ -63,6 +68,7 @@ const Navigation = () => {
         <div className="hidden lg:flex items-center gap-5">
           <div className="relative">
             <input
+            onChange={() => searchProducs}
               type="text"
               placeholder="Поиск..."
               className="border rounded-l-full px-4 py-2 text-sm focus:outline-none"
@@ -89,7 +95,7 @@ const Navigation = () => {
           <div className="container mx-auto flex flex-col items-center space-y-2">
             <a href="/" className="hover:text-gray-400 text-sm">Главная</a>
             <a href="/news" className="hover:text-gray-400 text-sm">Новости</a>
-            <a href="/aboutshop" className="hover:text-gray-400 text-sm">О магазине</a>
+            <a href="/about" className="hover:text-gray-400 text-sm">О магазине</a>
             <a href="/payment" className="hover:text-gray-400 text-sm">Оплата и заказ</a>
             <a href="/delivery" className="hover:text-gray-400 text-sm">Доставка</a>
             <a href="/contact" className="hover:text-gray-400 text-sm">Контакты</a>
@@ -102,7 +108,7 @@ const Navigation = () => {
         <div className="container mx-auto flex justify-center space-x-6 py-4">
           <a href="/" className="hover:text-gray-400 text-sm">Главная</a>
           <a href="/news" className="hover:text-gray-400 text-sm">Новости</a>
-          <a href="/aboutshop" className="hover:text-gray-400 text-sm">О магазине</a>
+          <a href="/about" className="hover:text-gray-400 text-sm">О магазине</a>
           <a href="/payment" className="hover:text-gray-400 text-sm">Оплата и заказ</a>
           <a href="/delivery" className="hover:text-gray-400 text-sm">Доставка</a>
           <a href="/contact" className="hover:text-gray-400 text-sm">Контакты</a>

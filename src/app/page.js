@@ -1,11 +1,26 @@
-// app/page.js
-
+import Image from "next/image";
+import Navigation from "./components/Navigations/Header";
+import News from "./components/News/News";
 import HomeContent from "./components/HomeContent/HomeContent";
+import Sidebar from "./components/SideBar/Sidebar";
 
 export default function Home() {
+
   return (
-    <div>
-      <HomeContent />
-    </div>
+    <>
+      <header>
+        <Navigation />
+      </header>
+
+      <main className="flex container">
+        <div>
+          <Sidebar />
+        </div>
+        <div className="flex-1">
+          <HomeContent />
+          <News />
+        </div>
+      </main>
+    </>
   );
 }

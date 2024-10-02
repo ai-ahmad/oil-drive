@@ -1,9 +1,12 @@
+import Navigation from '@/app/components/Navigations/Header'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Component() {
   return (
-    <div className="max-w-3xl mx-auto p-6">
+   <>
+   <Navigation/>
+     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-4">Доставка товара</h1>
       
       <p className="mb-2">Доставка товара происходит после фактической оплаты. Магазин "OIL TRADE" работает по всему Узбекистану.</p>
@@ -27,5 +30,6 @@ export default function Component() {
         />
       </div>
     </div>
+   </>
   )
 }

@@ -1,8 +1,11 @@
+import Navigation from '@/app/components/Navigations/Header'
 import Image from 'next/image'
 
 export default function Payment() {
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <>
+    <Navigation/>
+      <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Оплата и заказ товара</h1>
       
       <p>
@@ -56,5 +59,6 @@ export default function Payment() {
         />
       </div>
     </div>
+    </>
   )
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Navigation from '@/app/components/Navigations/Header';
 import axios from 'axios';
 import Image from 'next/image';
 
@@ -23,7 +24,9 @@ export default function News() {
   }, []);
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+   <>
+   <Navigation/>
+     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">Новости:</h1>
 
       <div className="space-y-8">
@@ -48,5 +51,6 @@ export default function News() {
         ))}
       </div>
     </div>
+   </>
   );
 }
