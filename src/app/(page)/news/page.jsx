@@ -18,7 +18,7 @@ export default function News() {
         console.error('Error fetching news:', error);
       }
     };
-    
+
     getNews();
   }, []);
 
@@ -35,13 +35,14 @@ export default function News() {
               width={400}
               height={200}
               className="w-full h-auto mb-4"
+              priority={true}
             />
             <time className="text-sm text-gray-500">{item.date}</time>
             <h2 className="text-xl font-semibold mt-2 mb-2">
-            <a href={`/news/${item._id}`} className="text-red-600 hover:underline">
-              {item.title}
-            </a>
-          </h2>
+              <a href={`/news/${item._id}`} className="text-red-600 hover:underline">
+                {item.title}
+              </a>
+            </h2>
             <p className="text-gray-700">{item.description1}</p>
           </article>
         ))}
