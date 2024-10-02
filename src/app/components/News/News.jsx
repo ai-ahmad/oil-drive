@@ -9,7 +9,7 @@ const News = () => {
 
   const fetchNewsData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/v1/news/');
+      const response = await fetch('http://localhost:5000/api/v1/news/create');
       console.log("Статус ответа:", response.status);
       if (!response.ok) {
         throw new Error('Ошибка загрузки данных: ' + response.statusText);
