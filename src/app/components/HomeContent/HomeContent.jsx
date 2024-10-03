@@ -27,8 +27,8 @@ const HomeContent = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+    <div className="container mx-auto p-4 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((product) => (
           <Link key={product._id} href={`/card/${product._id}`}>
             <div className="bg-white shadow-md rounded-lg overflow-hidden p-4 flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-300">
@@ -58,11 +58,11 @@ const HomeContent = () => {
                   </span>
               
                 </div>
-                <div className="flex items-center justify-between mt-2">
-                  <span className="text-sm sm:text-base flex items-center">
-                    <FaTint className="mr-1 text-adaptive-sm" /> {product.volume[0]} л
+                <div className="flex items-center justify-between mt-2  sm:flex-col  lg:flex-row">
+                  <span className="text-sm sm:text-base flex items-center"> 
+                    <FaTint className="mr-1 text-adaptive-sm " /> {product.volume[0]} л
                   </span>
-                  <Link href={`/card/${product._id}`} className="text-blue-500 text-sm sm:text-base">
+                  <Link href={`/card/${product._id}`} className="text-blue-500 text-sm sm:text-base sm:flex-none">
                     Подробнее
                   </Link>
                 </div>
