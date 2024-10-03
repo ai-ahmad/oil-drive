@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Navigation from '@/app/components/Navigations/Header';
 import Sidebar from '@/app/components/SideBar/Sidebar';
+import Loading from '@/app/components/Loading/Loading';
 
 const NewsItem = ({ params }) => {
   const { id } = params;
@@ -37,7 +38,7 @@ const NewsItem = ({ params }) => {
   }, [id]);
 
   if (loading) {
-    return <div className="text-center text-lg">Loading...</div>;
+    return <Loading/>;
   }
 
   if (error) {

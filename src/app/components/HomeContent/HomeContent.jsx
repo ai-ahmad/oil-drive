@@ -1,11 +1,12 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { FaTint } from "react-icons/fa";
 import { CiShoppingTag } from "react-icons/ci";
 
+// Динамическая загрузка компонента
 const HomeContent = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -16,24 +17,24 @@ const HomeContent = () => {
         const request = await axios.get("http://localhost:5000/api/v1/card");
         if (request.status === 200) {
           setProducts(request.data);
-          applyFilter(request.data); // Apply the filter after data is fetched
+          applyFilter(request.data); // Применение фильтра после получения данных
         } else {
-          console.error("Error fetching products", request.statusText);
+          console.error("Ошибка при получении продуктов", request.statusText);
         }
       } catch (error) {
-        console.error("Error fetching products", error);
+        console.error("Ошибка при получении продуктов", error);
       }
     };
 
     fetchProducts();
   }, []);
 
-  // Apply category filter
+  // Применение фильтрации по категории
   const applyFilter = (products) => {
     const selectedCategory = localStorage.getItem("category") || "Прочее";
 
     if (selectedCategory === "Прочее") {
-      setFilteredProducts(products);  // Show all products if no specific category is selected
+      setFilteredProducts(products); // Показать все продукты, если категория не выбрана
     } else {
       const filtered = products.filter((product) =>
         product.category.includes(selectedCategory)
@@ -46,10 +47,10 @@ const HomeContent = () => {
     applyFilter(products);
   }, [products]);
 
-  // Listen to storage changes and reapply the filter when category changes
+  // Прослушивание изменений в localStorage и повторное применение фильтра при изменении категории
   useEffect(() => {
     const handleStorageChange = () => {
-      applyFilter(products);  // Reapply filter if localStorage is updated
+      applyFilter(products); // Повторное применение фильтра при обновлении localStorage
     };
     window.addEventListener("storage", handleStorageChange);
     return () => {
@@ -59,7 +60,7 @@ const HomeContent = () => {
 
   return (
     <div className="container mx-auto p-4">
-      {/* Check if filteredProducts is empty and display "Product not found" */}
+      {/* Проверка, если filteredProducts пуст, и вывод сообщения "Product not found" */}
       {filteredProducts.length === 0 ? (
         <div className="text-center text-gray-500 text-xl">Product not found</div>
       ) : (
@@ -109,5 +110,6 @@ const HomeContent = () => {
     </div>
   );
 };
+
 
 export default HomeContent;

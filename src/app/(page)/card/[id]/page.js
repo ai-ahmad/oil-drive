@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { FaStar, FaDownload } from "react-icons/fa"; // Icons for rating and download
 import { CiShoppingTag } from "react-icons/ci"; // Icon for shopping tag
 import axios from 'axios';
+import Loading from '@/app/components/Loading/Loading';
 
 const ProductItem = ({ params }) => {
   const { id } = params;
@@ -34,7 +35,7 @@ const ProductItem = ({ params }) => {
   }, [id]);
 
   if (loading) {
-    return <div className="text-center text-lg">Loading...</div>;
+    return <Loading/>;
   }
 
   if (error) {
