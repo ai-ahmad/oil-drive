@@ -11,11 +11,6 @@ const Navigation = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  const searchProducs = () => {
-    //  Seach input in products
-
-  }
-
   return (
     <header className="bg-white">
       <div className="container mx-auto flex justify-between items-center py-3 px-6">
@@ -31,7 +26,6 @@ const Navigation = () => {
           />
         </div>
 
-        {/* Contact Information for Desktop */}
         <address className="hidden lg:flex items-center space-x-6 not-italic">
           <div className="text-black">
             <p className="text-sm">
