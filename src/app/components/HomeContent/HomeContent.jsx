@@ -13,7 +13,7 @@ const HomeContent = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const request = await axios.get("http://localhost:5000/api/v1/card");
+        const request = await axios.get(`http://localhost:5000/api/v1/card`);
         if (request.status === 200) {
           setProducts(request.data);
           applyFilter(request.data); // Apply the filter after data is fetched
@@ -93,9 +93,10 @@ const HomeContent = () => {
                     </span>
                   </div>
                   <div className="flex items-center justify-between mt-2">
-                    <span className="text-sm sm:text-base flex items-center">
-                      <FaTint className="mr-1 text-adaptive-sm" /> {product.volume[0]} л
-                    </span>
+                  <span className="text-sm sm:text-base flex items-center">
+  <FaTint className="mr-1 text-adaptive-sm" /> {product.volume?.[0] ? `${product.volume[0]} л` : "Не указано"}
+</span>
+
                     <Link href={`/card/${product._id}`} className="text-blue-500 text-sm sm:text-base">
                       Подробнее
                     </Link>
