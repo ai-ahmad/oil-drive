@@ -2,21 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
-
-// Динамическая загрузка иконок
-const FaPhoneAlt = dynamic(() => import("react-icons/fa").then(mod => mod.FaPhoneAlt), {
-  loading: () => <span>📞</span>, // Плейсхолдер, пока загружается иконка
-  ssr: false, // Отключить серверный рендеринг для этих иконок
-});
-const FaBars = dynamic(() => import("react-icons/fa").then(mod => mod.FaBars), {
-  loading: () => <span>☰</span>,
-  ssr: false,
-});
-const FaTimes = dynamic(() => import("react-icons/fa").then(mod => mod.FaTimes), {
-  loading: () => <span>×</span>,
-  ssr: false,
-});
 import { FaPhoneAlt, FaBars, FaTimes } from "react-icons/fa";
 import axios from 'axios';
 
@@ -63,7 +48,7 @@ const Navigation = () => {
   return (
     <header className="bg-white">
       <div className="container mx-auto flex justify-between items-center py-3 px-6">
-        {/* logo */}
+  
         <div>
           <Image
             src={'https://oiltrade.uz/templates/oiltrade/images/logo1.png'}
