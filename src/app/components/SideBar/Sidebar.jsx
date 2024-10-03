@@ -4,7 +4,7 @@ import PopularProducts from './PopularProduct'
 
 export const Sidebar = () => {
     return (
-        <div className='flex flex-col gap-[30px]'>
+        <div className='flex flex-col gap-7 '>
             <Cattegory />
         </div>
     )
