@@ -22,7 +22,7 @@ export default function Home() {
           <Sidebar />
         </aside>
         <div className="flex-1">
-          <Baner />
+        <Baner/>
           <HomeContent />
           <News />
         </div>
