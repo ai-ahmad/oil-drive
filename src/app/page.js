@@ -9,6 +9,7 @@ import Baner from "./components/Banner/Baner";
 import Loading from "./components/Loading/Loading";
 import dynamic from "next/dynamic";
 import HomeContent from "./components/HomeContent/HomeContent";
+import Footer from "./components/Footer/Footer";
 
 export default function Home() {
  
@@ -37,9 +38,14 @@ export default function Home() {
         <div className="flex-1">
           <Baner />
           <HomeContent />
+          
           <News />
         </div>
       </main>
+
+      <footer>
+      <Footer/>
+      </footer>
     </>
   );
 }

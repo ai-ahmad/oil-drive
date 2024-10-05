@@ -14,7 +14,7 @@ const HomeContent = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const request = await axios.get(`http://localhost:5000/api/v1/card`);
+        const request = await axios.get("http://localhost:5000/api/v1/card");
         if (request.status === 200) {
           setProducts(request.data);
           applyFilter(request.data); // Применение фильтра после получения данных
@@ -94,10 +94,9 @@ const HomeContent = () => {
                     </span>
                   </div>
                   <div className="flex items-center justify-between mt-2">
-                  <span className="text-sm sm:text-base flex items-center">
-  <FaTint className="mr-1 text-adaptive-sm" /> {product.volume?.[0] ? `${product.volume[0]} л` : "Не указано"}
-</span>
-
+                    <span className="text-sm sm:text-base flex items-center">
+                      <FaTint className="mr-1 text-adaptive-sm" /> {product.volume[0]} л
+                    </span>
                     <Link href={`/card/${product._id}`} className="text-blue-500 text-sm sm:text-base">
                       Подробнее
                     </Link>
@@ -108,6 +107,12 @@ const HomeContent = () => {
           ))}
         </div>
       )}
+      <div className="join flex justify-center items-center mt-5">
+  <button className="join-item btn">1</button>
+  <button className="join-item btn btn-active">2</button>
+  <button className="join-item btn">3</button>
+  <button className="join-item btn">4</button>
+</div>
     </div>
   );
 };

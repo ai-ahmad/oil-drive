@@ -52,7 +52,7 @@ const NewsItem = ({ params }) => {
   return (
     <>
       <Navigation />
-      <div className="flex">
+      <div className="flex container">
         <Sidebar />
         <div className="flex justify-center items-center w-full bg-gray-100 min-h-screen">
           <div className="bg-white shadow-md p-6 max-w-7xl w-full mx-4 my-8">

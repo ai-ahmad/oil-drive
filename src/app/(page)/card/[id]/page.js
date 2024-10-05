@@ -5,6 +5,8 @@ import { FaStar, FaDownload } from "react-icons/fa"; // Icons for rating and dow
 import { CiShoppingTag } from "react-icons/ci"; // Icon for shopping tag
 import axios from 'axios';
 import Loading from '@/app/components/Loading/Loading';
+import Navigation from '@/app/components/Navigations/Header';
+import Sidebar from '@/app/components/SideBar/Sidebar';
 
 const ProductItem = ({ params }) => {
   const { id } = params;
@@ -35,7 +37,7 @@ const ProductItem = ({ params }) => {
   }, [id]);
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   if (error) {
@@ -48,44 +50,46 @@ const ProductItem = ({ params }) => {
 
   return (
     <>
-    <div className="flex flex-col md:flex-row bg-white p-5 rounded-lg shadow-lg w-full md:max-w-4xl mx-auto">
-    {/* Product Image */}
-    <div className="md:w-1/3 flex justify-center">
-    <Image
-          src={`http://localhost:5000/${product.image}`} // dynamically use product image
-          alt={product.name}
-          width={200}
-          height={300}
-          className="object-contain"
-          />
-      </div>
-      
-      {/* Product Details */}
-      <div className="md:w-2/3 p-4 space-y-4">
-      <h2 className="text-xl font-bold">{product.name}</h2>
-      {/* Product Specs */}
-      <div className="space-y-2">
-      <p><strong>Артикул:</strong> {product.article}</p>
-          <p><strong>Объем:</strong> {product.volume[0]} л</p>
-          <p><strong>Бренд:</strong> {product.brand}</p>
-          <p><strong>Страна производитель:</strong> {product.country}</p>
-          <p><strong>Категория:</strong> <CiShoppingTag className="inline-block mr-1" /> {product.category}</p>
+      <Navigation />
+      <div className="flex flex-row mt-4 container">
+        <Sidebar />
+
+        <div className="flex flex-col md:flex-row bg-white p-5 rounded-lg shadow-lg w-full md:max-w-3xl mx-auto mt-12 justify-around items-center">
+          {/* Product Image */}
+          <div className="md:w-1/3 flex justify-center items-center mb-4 md:mb-0"> {/* Centering image on both axes */}
+            <Image
+              src={`http://localhost:5000/${product.image}`} // dynamically use product image
+              alt={product.name}
+              width={200}
+              height={300}
+              className="object-contain"
+            />
           </div>
-          
-          <div className="mt-4">
-          <span className="font-bold text-lg">
-          {product.price ? `${product.price} сум` : "- сум."}
-          </span>
-          </div>
-          </div>
-          
-          </div>
-          <p className="text-gray-700 text-xs sm:text-sm">
-          {product.description}
-        </p>
-          </>
-    
-    
+
+          {/* Product Details */}
+          <div className="md:w-2/3 p-4 space-y-4">
+            <h2 className="text-2xl font-bold text-gray-800">{product.name}</h2>
+            {/* Product Specs */}
+            <div className="space-y-2 text-gray-600">
+              <p><strong>Артикул:</strong> {product.article}</p>
+              <p><strong>Объем:</strong> {product.volume[0]} л</p>
+              <p><strong>Бренд:</strong> {product.brand}</p>
+              <p><strong>Страна производитель:</strong> {product.country}</p>
+              <p><strong>Категория:</strong> <CiShoppingTag className="inline-block mr-1" /> {product.category}</p>
+            </div>
+
+            <div className="mt-4">
+              <span className="font-bold text-xl text-gray-800">
+                {product.price ? `${product.price} сум` : "- сум."}
+              </span>
+            </div>
+            </div>
+            </div>
+            </div>
+            <p className='flex justify-center mt-11  flex-col md:flex-row bg-white p-5 rounded-lg shadow-lg w-full md:max-w-3xl mx-auto  '>
+            {product.description}
+            </p>
+            </>
   );
 };
 
