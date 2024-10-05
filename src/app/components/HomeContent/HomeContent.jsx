@@ -6,10 +6,11 @@ import Link from "next/link";
 import { FaTint } from "react-icons/fa";
 import { CiShoppingTag } from "react-icons/ci";
 
-// Динамическая загрузка компонента
 const HomeContent = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(6); // Number of products to show per page
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -17,24 +18,23 @@ const HomeContent = () => {
         const request = await axios.get("http://localhost:5000/api/v1/card");
         if (request.status === 200) {
           setProducts(request.data);
-          applyFilter(request.data); // Применение фильтра после получения данных
+          applyFilter(request.data); // Apply filter after getting data
         } else {
-          console.error("Ошибка при получении продуктов", request.statusText);
+          console.error("Error fetching products", request.statusText);
         }
       } catch (error) {
-        console.error("Ошибка при получении продуктов", error);
+        console.error("Error fetching products", error);
       }
     };
 
     fetchProducts();
   }, []);
 
-  // Применение фильтрации по категории
   const applyFilter = (products) => {
     const selectedCategory = localStorage.getItem("category") || "Прочее";
 
     if (selectedCategory === "Прочее") {
-      setFilteredProducts(products); // Показать все продукты, если категория не выбрана
+      setFilteredProducts(products); // Show all products if no category selected
     } else {
       const filtered = products.filter((product) =>
         product.category.includes(selectedCategory)
@@ -47,10 +47,9 @@ const HomeContent = () => {
     applyFilter(products);
   }, [products]);
 
-  // Прослушивание изменений в localStorage и повторное применение фильтра при изменении категории
   useEffect(() => {
     const handleStorageChange = () => {
-      applyFilter(products); // Повторное применение фильтра при обновлении localStorage
+      applyFilter(products); // Reapply filter when localStorage changes
     };
     window.addEventListener("storage", handleStorageChange);
     return () => {
@@ -58,14 +57,24 @@ const HomeContent = () => {
     };
   }, [products]);
 
+  // Calculate the products to display based on the current page
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  // Handle page change
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="container mx-auto p-4">
-      {/* Проверка, если filteredProducts пуст, и вывод сообщения "Product not found" */}
-      {filteredProducts.length === 0 ? (
+      {currentProducts.length === 0 ? (
         <div className="text-center text-gray-500 text-xl">Product not found</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
+          {currentProducts.map((product) => (
             <Link key={product._id} href={`/card/${product._id}`}>
               <div className="bg-white shadow-md rounded-lg overflow-hidden p-4 flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-300">
                 <div className="flex justify-center h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72">
@@ -97,7 +106,10 @@ const HomeContent = () => {
                     <span className="text-sm sm:text-base flex items-center">
                       <FaTint className="mr-1 text-adaptive-sm" /> {product.volume[0]} л
                     </span>
-                    <Link href={`/card/${product._id}`} className="text-blue-500 text-sm sm:text-base">
+                    <Link
+                      href={`/card/${product._id}`}
+                      className="text-blue-500 text-sm sm:text-base"
+                    >
                       Подробнее
                     </Link>
                   </div>
@@ -107,15 +119,49 @@ const HomeContent = () => {
           ))}
         </div>
       )}
-      <div className="join flex justify-center items-center mt-5">
-  <button className="join-item btn">1</button>
-  <button className="join-item btn btn-active">2</button>
-  <button className="join-item btn">3</button>
-  <button className="join-item btn">4</button>
-</div>
+      {/* Conditionally render pagination if there are products */}
+      {filteredProducts.length > 0 && (
+        <div className="flex justify-center items-center mt-5 space-x-2">
+          <button
+            className={`px-4 py-2 rounded-lg border transition-colors duration-300 
+            ${currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-white border-gray-300 hover:bg-gray-100"}`}
+            onClick={() => paginate(currentPage > 1 ? currentPage - 1 : 1)}
+            disabled={currentPage === 1}
+          >
+            Prev
+          </button>
+          {[...Array(Math.ceil(filteredProducts.length / productsPerPage))].map(
+            (_, index) => (
+              <button
+                key={index}
+                className={`px-4 py-2 rounded-lg border transition-colors duration-300 
+                ${currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-white border-gray-300 hover:bg-gray-100"}`}
+                onClick={() => paginate(index + 1)}
+              >
+                {index + 1}
+              </button>
+            )
+          )}
+          <button
+            className={`px-4 py-2 rounded-lg border transition-colors duration-300 
+            ${currentPage === Math.ceil(filteredProducts.length / productsPerPage) ? "bg-gray-300 cursor-not-allowed" : "bg-white border-gray-300 hover:bg-gray-100"}`}
+            onClick={() =>
+              paginate(
+                currentPage < Math.ceil(filteredProducts.length / productsPerPage)
+                  ? currentPage + 1
+                  : currentPage
+              )
+            }
+            disabled={
+              currentPage === Math.ceil(filteredProducts.length / productsPerPage)
+            }
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };
-
 
 export default HomeContent;
