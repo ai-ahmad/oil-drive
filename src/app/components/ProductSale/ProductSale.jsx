@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Loading from '../Loading/Loading';
 
 const ProductsOnSale = () => {
     const [products, setProducts] = useState([]);
@@ -23,7 +24,7 @@ const ProductsOnSale = () => {
     }, []);
 
     if (loading) {
-        return <p>Загрузка...</p>;
+        return <p><Loading/>    </p>;
     }
 
     return (

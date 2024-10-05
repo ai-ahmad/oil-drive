@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import LoadingError from '../Loading/LoadingError';
 
 const Category = () => {
     const [categories, setCategories] = useState([]);
@@ -32,7 +33,7 @@ const Category = () => {
     }; 
     
     if (loading) {
-        return <div className="text-center">Loading categories...</div>;
+        return ;
     }
 
     if (error) {
@@ -40,7 +41,7 @@ const Category = () => {
     }
 
     return (
-        <div className="w-1/5 min-w-[200px]">
+        <div className="w-1/5 min-w-[300px]">
             <div className="w-full bg-[#E0111A] text-white flex items-center p-2">
                 <p className="font-bold">Категории</p>
             </div>

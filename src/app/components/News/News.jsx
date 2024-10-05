@@ -1,6 +1,7 @@
 "use client";
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import Loading from '../Loading/Loading';
 
 const News = () => {
   const [newsData, setNewsData] = useState([]);
@@ -36,7 +37,7 @@ const News = () => {
   }, []);
 
   if (loading) {
-    return <div className="text-center text-lg">Загрузка...</div>;
+    return <Loading/>;
   }
 
   if (error) {

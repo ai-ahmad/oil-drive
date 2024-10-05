@@ -11,6 +11,7 @@ const ProductDetail = ({ params }) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isFullscreen, setIsFullscreen] = useState(false); // Состояние полноэкранного режима
   const imageRef = useRef(null); // Ссылка на изображение
 
   useEffect(() => {
@@ -36,6 +37,19 @@ const ProductDetail = ({ params }) => {
 
     fetchProduct();
   }, [id]);
+
+  // Добавляем обработчик события для отслеживания полноэкранного режима
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
 
   if (loading) {
     return <div className="text-center text-lg">Загрузка...</div>;
@@ -75,56 +89,73 @@ const ProductDetail = ({ params }) => {
     }
   };
 
+  // Функция для выхода из полноэкранного режима
+  const exitFullscreen = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    }
+  };
+
   return (
     <>
       <Navigation />
       <div className="flex">
         <Sidebar />
-        <div className="flex justify-start w-full bg-gray-100 min-h-screen">
-          <div className="bg-white shadow-md p-6 max-w-7xl w-full mx-4 my-8 flex flex-col items-start relative">
-            {/* Название продукта */}
-            <h1 className="text-4xl font-semibold mb-4 text-left ml-10">
-              {product.name}
-            </h1>
-
+        <div className="flex justify-center items-center w-full bg-gray-100 min-h-screen">
+          <div className="bg-white shadow-md p-6 max-w-6xl mx-auto my-8 flex flex-col items-center relative">
             {/* Контейнер для изображения и карточки информации */}
-            <div className="flex w-full">
+            <div className="flex w-full space-x-6 items-start">
               {/* Изображение товара */}
-              <div className="relative flex items-start">
-                <div className="relative">
-                  <Image
-                    ref={imageRef} // Ссылка на изображение
-                    src={`http://localhost:5000/${product.image}`}
-                    alt={product.name}
-                    layout="intrinsic"
-                    objectFit="cover"
-                    width={400}
-                    height={350}
-                    className="max-w-full max-h-full cursor-pointer transition-all duration-300"
-                    onClick={handleImageClick} // Добавляем обработчик клика
-                  />
-                </div>
+              <div className="relative">
+                
+              <h1 className="text-5xl font-bold mb-4 ml-10" >{product.name}</h1>
+                <Image
+                  ref={imageRef} // Ссылка на изображение
+                  src={`http://localhost:5000/${product.image}`}
+                  alt={product.name}
+                  layout="intrinsic"
+                  objectFit="cover"
+                  width={400} // Размер изображения
+                  height={350} // Размер изображения
+                  className="cursor-pointer transition-all duration-300"
+                  onClick={handleImageClick} // Открытие на полный экран по клику
+                />
+                {!isFullscreen ? (
+                  <button 
+                    onClick={handleImageClick} 
+                    className="absolute top-2 right-2 p-2 bg-gray-700 text-white rounded-full focus:outline-none z-50">
+                    <FaExpand />
+                  </button>
+                ) : (
+                  <button 
+                    onClick={exitFullscreen} 
+                    className="absolute top-2 right-2 p-2 bg-gray-700 text-white rounded-full focus:outline-none z-50">
+                    <FaCompress />
+                  </button>
+                )}
               </div>
 
               {/* Карточка с информацией о товаре */}
-              <div className="w-[430px] h-[100px] bg-white border border-gray-300 rounded-lg shadow-sm p-4 ml-4 overflow-hidden">
-                <div className="flex items-center mb-2 ml-10">
-                  <p className="text-2xl font-bold text-red-500 line-through mr-2">{product.price} сум</p>
-                  <p className="text-2xl font-bold text-green-500 ml-10">{product.discount_price} сум</p>
+              <div className="w-[400px] bg-white border border-gray-300 rounded-lg shadow-sm p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-3xl font-bold text-red-500 line-through">{product.price} сум</p>
+                  <p className="text-3xl font-bold text-green-500">{product.discount_price} сум</p>
                 </div>
-                <div className="flex items-center mb-4 ml-10">
-                  <div className="flex items-center mr-4 w-[50px] h-[50px]">
+                <div className="flex items-center mb-4">
+                  <div className="flex items-center text-2xl mr-4">
                     {renderStars(product.rating)}
                   </div>
-                  <span className="text-lg ml-20 font-semibold">На складе: {product.stock}</span>
+                  <span className="text-2xl font-semibold">На складе: {product.stock}</span>
                 </div>
+                <p className="text-2xl text-gray-700 mb-4">Объём: {product.volume}</p>
               </div>
             </div>
 
-            {/* Информация о объёме товара, расположенная ниже карточки */}
-            <div className="text-left w-full mt-4">
-              <p className="text-lg text-gray-700 mb-4">Объём: {product.volume}</p>
-              <p className="text-lg text-gray-700 mb-4">{product.description}</p>
+            {/* Описание продукта ниже под кнопкой */}
+            <div className="w-full mt-6 text-left">
+              <div className="mt-4">
+                <p className="text-lg text-gray-700">{product.description}</p>
+              </div>
             </div>
           </div>
         </div>
