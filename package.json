@@ -20,6 +20,7 @@
     "swiper": "^11.1.14"
   },
   "devDependencies": {
+    "daisyui": "^4.12.11",
     "postcss": "^8",
     "tailwindcss": "^3.4.1"
   }
