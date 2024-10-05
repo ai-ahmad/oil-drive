@@ -7,6 +7,7 @@ import News from "./components/News/News";
 import HomeContent from "./components/HomeContent/HomeContent";
 import Sidebar from "./components/SideBar/Sidebar";
 import Baner from "./components/Banner/Baner";
+import ProductsOnSale from "./components/ProductSale/ProductSale";
 
 export default function Home() {
 
@@ -25,6 +26,7 @@ export default function Home() {
         <Baner/>
           <HomeContent />
           <News />
+          <ProductsOnSale />
         </div>
       </main>
     </>
