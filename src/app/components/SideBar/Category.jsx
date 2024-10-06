@@ -56,7 +56,7 @@ const Category = () => {
                         key={category._id}
                         className="border-b border-gray-300 p-2 hover:bg-gray-200 cursor-pointer"
                     >
-                        {category.category_name}
+                       <a href="/">{category.category_name}</a>
                     </li>
                 ))}
             </ul>
