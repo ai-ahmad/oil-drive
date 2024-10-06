@@ -10,12 +10,13 @@ const NewsItem = ({ params }) => {
   const [newsItem, setNewsItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API
+  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API
   const fetchNewsItem = async () => {
     if (!id) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/news/${id}`);
+      const response = await fetch(`${apiUrl}/news/${id}`);
       if (!response.ok) {
         if (response.status === 404) {
           setError('News item not found.');
@@ -58,7 +59,7 @@ const NewsItem = ({ params }) => {
           <div className="bg-white shadow-md p-6 max-w-7xl w-full mx-4 my-8">
             <h1 className="text-3xl font-bold mb-4 text-gray-800">{newsItem.title}</h1>
             <Image
-              src={`http://localhost:5000${newsItem.images[0]}`}
+              src={`${imgUrl}${newsItem.images[0]}`}
               alt={newsItem.title}
               width={700}
               height={100}

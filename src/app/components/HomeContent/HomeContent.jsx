@@ -11,11 +11,12 @@ const HomeContent = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(6); // Number of products to show per page
-
+  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API
+  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const request = await axios.get("http://localhost:5000/api/v1/card");
+        const request = await axios.get(`${apiUrl}/card`);
         if (request.status === 200) {
           setProducts(request.data);
           applyFilter(request.data); // Apply filter after getting data
@@ -79,7 +80,7 @@ const HomeContent = () => {
               <div className="bg-white shadow-md rounded-lg overflow-hidden p-4 flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-300">
                 <div className="flex justify-center h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72">
                   <Image
-                    src={`http://localhost:5000/${product.image}`}
+                    src={`${imgUrl}${product.image}`}
                     alt={product.name}
                     width={150}
                     height={150}

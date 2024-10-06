@@ -7,10 +7,11 @@ const News = () => {
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API
+  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API
   const fetchNewsData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/v1/news');
+      const response = await fetch(`${apiUrl}/news`);
       console.log("Статус ответа:", response.status);
       if (!response.ok) {
         throw new Error('Ошибка загрузки данных: ' + response.statusText);
@@ -61,7 +62,7 @@ const News = () => {
               className="border border-gray-300 bg-white shadow-lg transition-transform duration-200 flex flex-col p-4 mb-4 hover:scale-105 hover:shadow-2xl"
             >
               <Image
-                src={`http://localhost:5000${news.image}`}
+                src={`${imgUrl}${news.image}`}
                 alt={news.title}
                 width={190}
                 height={70} 

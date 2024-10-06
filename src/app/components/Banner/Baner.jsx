@@ -7,10 +7,11 @@ const Baner = () => {
   const [currentSlide, setCurrentSlide] = useState(0); 
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false); 
   const [isImageVisible, setIsImageVisible] = useState(true); 
-
+  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API
+  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API
   const fetchSlides = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/v1/banner');
+      const response = await fetch(`${apiUrl}/banner`);
       const data = await response.json();
       setSlides(data); 
     } catch (error) {
@@ -62,7 +63,7 @@ const Baner = () => {
     <div className="p-7 relative w-[1000px] h-[350px] mx-auto overflow-hidden">
       {slides.length > 0 && (
         <img
-          src={`http://localhost:5000${slides[currentSlide].image_url}`} 
+          src={`${imgUrl}${slides[currentSlide].image_url}`} 
           alt={`Слайд ${slides[currentSlide].id}`}
           className={`w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
             isImageVisible ? 'opacity-100' : 'opacity-0'
