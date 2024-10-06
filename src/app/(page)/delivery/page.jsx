@@ -16,7 +16,7 @@ export default function Component() {
       <p className="mb-6">
         Уточняйте данную информацию у менеджера интернет магазина в разделе:{' '}
         <Link href="/contact" legacyBehavior>
-          <a className="text-blue-600 hover:underline">контакты.</a>
+          <a className="text-blue-600 hover:underline font-montserrat">контакты.</a>
         </Link>
       </p>
       
