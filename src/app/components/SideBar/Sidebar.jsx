@@ -3,6 +3,8 @@ import Cattegory from './Category'
 import PopularProducts from './PopularProduct'
 import Anons from './Anons'
 import NewsList from './NewsList'
+import Feedback from './Feedback'
+import Statistic from './Statistic'
 
 
 
@@ -13,6 +15,8 @@ export const Sidebar = () => {
             <PopularProducts />
             <Anons />
             <NewsList />
+            <Feedback />
+            <Statistic />
         </div>
     )
 }

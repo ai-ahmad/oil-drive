@@ -3,12 +3,10 @@ import React from 'react';
 const NewsItem = ({ newsItem }) => {
     const { title, description1, date, images } = newsItem;
 
-    // Ensure the image path is properly formatted
     const imageUrl = images && images.length > 0 ? `http://localhost:5000${encodeURI(images[0])}` : null;
 
     return (
         <div className="bg-white shadow-md mb-4 p-4">
-            {/* Image */}
             {imageUrl && (
                 <div className="mb-4">
                     <img
@@ -19,16 +17,12 @@ const NewsItem = ({ newsItem }) => {
                 </div>
             )}
 
-            {/* Date */}
             <p className="text-xs text-gray-500 mb-2">{date}</p>
 
-            {/* Title */}
             <h3 className="text-lg font-bold text-red-600 mb-2">{title}</h3>
 
-            {/* Description */}
             <p className="text-sm text-gray-700 mb-4">{description1.substring(0, 100)}...</p>
 
-            {/* Link to full news (Optional if required) */}
             <a href="#" className="text-blue-600 text-sm font-semibold">
                 Подробнее
             </a>

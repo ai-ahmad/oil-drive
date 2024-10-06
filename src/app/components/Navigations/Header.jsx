@@ -15,6 +15,8 @@ const Navigation = () => {
     phone: '',
     comment: ''
   });
+  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API
+  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -32,7 +34,7 @@ const Navigation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/v1/zayavka/create', formData);
+      const response = await axios.post(`${apiUrl}/zayavka/create`, formData);
       if (response.status === 200) {
         alert('Заявка успешно отправлена!');
       }
@@ -48,7 +50,7 @@ const Navigation = () => {
   return (
     <header className="bg-white">
       <div className="container mx-auto flex justify-between items-center py-3 px-6">
-        {/* logo */}
+  
         <div>
           <Image
             src={'https://oiltrade.uz/templates/oiltrade/images/logo1.png'}
@@ -59,6 +61,7 @@ const Navigation = () => {
           />
         </div>
 
+        {/* Контактная информация */}
         <address className="hidden lg:flex items-center space-x-6 not-italic">
           <div className="text-black">
             <p className="text-sm">
@@ -84,14 +87,14 @@ const Navigation = () => {
           </div>
         </address>
 
-        {/* Mobile Menu Button */}
+        {/* Кнопка для открытия мобильного меню */}
         <div className="lg:hidden flex items-center">
           <button onClick={toggleMenu} className="text-red-600">
             {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </button>
         </div>
 
-        {/* Search Box and CTA button */}
+        {/* Поле поиска и кнопка вызова */}
         <div className="hidden lg:flex items-center gap-5">
           <div className="relative">
             <input
@@ -202,7 +205,7 @@ const Navigation = () => {
         </div>
       </nav>
 
-      {/* Navigation Links for Tablet and Laptop */}
+      {/* Навигационные ссылки для планшетов и ноутбуков */}
       <nav className="hidden lg:block bg-gray-900 text-white">
         <div className="container mx-auto flex justify-center space-x-6 py-4">
           <a href="/" className="hover:text-gray-400 text-sm">Главная</a>

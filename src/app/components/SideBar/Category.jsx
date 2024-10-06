@@ -1,15 +1,19 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import LoadingError from '../Loading/LoadingError';
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Category = () => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API
+    const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API
 
     const fetchCategories = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/v1/category/');
+            const response = await fetch(`${apiUrl}/category/`);
             if (!response.ok) {
                 throw new Error('Failed to fetch categories');
             }
@@ -32,7 +36,7 @@ const Category = () => {
     };
 
     if (loading) {
-        return <div className="text-center">Loading categories...</div>;
+        return;
     }
 
     if (error) {
@@ -41,7 +45,8 @@ const Category = () => {
 
     return (
         <div className="w-1/5 min-w-[250px]">
-            <div className="w-full bg-[#E0111A] text-white flex items-center p-2">
+            <div className="w-full bg-[#E0111A] text-white flex gap-2 items-center p-2 rounded-t-lg">
+                <GiHamburgerMenu />
                 <p className="font-bold">Категории</p>
             </div>
 
@@ -53,7 +58,7 @@ const Category = () => {
                         key={category._id}
                         className="border-b border-gray-300 p-2 hover:bg-gray-200 cursor-pointer"
                     >
-                        {category.category_name}
+                        <a href="/">{category.category_name}</a>
                     </li>
                 ))}
             </ul>
