@@ -13,12 +13,13 @@ const ProductItem = ({ params }) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API
+  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API
   const fetchProduct = async () => {
     if (!id) return;
 
     try {
-      const response = await axios.get(`http://localhost:5000/api/v1/card/${id}`);
+      const response = await axios.get(`${apiUrl}/card/${id}`);
       if (response.status === 200) {
         setProduct(response.data);
       } else {
@@ -58,7 +59,7 @@ const ProductItem = ({ params }) => {
           {/* Product Image */}
           <div className="md:w-1/3 flex justify-center items-center mb-4 md:mb-0"> {/* Centering image on both axes */}
             <Image
-              src={`http://localhost:5000/${product.image}`} // dynamically use product image
+              src={`${imgUrl}${product.image}`} // dynamically use product image
               alt={product.name}
               width={200}
               height={300}
@@ -86,9 +87,12 @@ const ProductItem = ({ params }) => {
             </div>
             </div>
             </div>
-            <p className='flex justify-center mt-11  flex-col md:flex-row bg-white p-5 rounded-lg shadow-lg w-full md:max-w-3xl mx-auto  '>
-            {product.description}
+            <div className="bg-white p-6 rounded-xl shadow-lg w-full md:max-w-5xl mx-auto mt-8">
+            <h3 className="text-xl font-bold mb-4 text-gray-800">Описание</h3>
+            <p className="text-gray-700 leading-relaxed">
+              {product.description}
             </p>
+          </div>
             </>
   );
 };

@@ -18,6 +18,12 @@ module.exports = {
         'adaptive-xl': 'clamp(1.25rem, 3.5vw, 2.25rem)',
         'adaptive-xxl': 'clamp(1.5rem, 4vw, 2.5rem)',
       },
+      fontFamily: {
+       
+        montserrat: ['Montserrat'],
+        alegreya: ['Alegreya Sans SC'],
+        nato : ['Noto Sans']
+      },
     
     
    

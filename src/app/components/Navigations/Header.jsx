@@ -15,6 +15,8 @@ const Navigation = () => {
     phone: '',
     comment: ''
   });
+  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API
+  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -32,7 +34,7 @@ const Navigation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/v1/zayavka/create', formData);
+      const response = await axios.post(`${apiUrl}/zayavka/create`, formData);
       if (response.status === 200) {
         alert('Заявка успешно отправлена!');
       }
