@@ -18,11 +18,11 @@ export default function Home() {
       </header>
 
       <main className="flex container mx-auto">
-        <aside>
+        <aside className="mt-6">
           <Sidebar />
         </aside>
         <div className="flex-1">
-        <Baner/>
+          <Baner />
           <HomeContent />
           <News />
         </div>

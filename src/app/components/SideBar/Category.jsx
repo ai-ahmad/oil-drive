@@ -25,12 +25,12 @@ const Category = () => {
     useEffect(() => {
         fetchCategories();
     }, []);
-    
+
     const handleCategoryClick = (categoryName) => {
         localStorage.setItem('category', categoryName);  // Update category in localStorage
         window.dispatchEvent(new Event("storage"));  // Force dispatch of the storage event in the same tab
-    }; 
-    
+    };
+
     if (loading) {
         return <div className="text-center">Loading categories...</div>;
     }
@@ -40,7 +40,7 @@ const Category = () => {
     }
 
     return (
-        <div className="w-1/5 min-w-[200px]">
+        <div className="w-1/5 min-w-[250px]">
             <div className="w-full bg-[#E0111A] text-white flex items-center p-2">
                 <p className="font-bold">Категории</p>
             </div>
