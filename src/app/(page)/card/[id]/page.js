@@ -83,8 +83,6 @@ const ProductItem = ({ params }) => {
           {product.description}
         </p>
           </>
-    
-    
   );
 };
 

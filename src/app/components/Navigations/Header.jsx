@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { FaPhoneAlt, FaBars, FaTimes } from "react-icons/fa";
 import axios from 'axios';
-
+import Category from '../SideBar/Category';
+import { SlOptionsVertical } from "react-icons/sl";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,6 +30,12 @@ const Navigation = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleCloseMenu = () => {
+    if (isMenuOpen && window.innerWidth <= 1220) {
+      setIsMenuOpen(false); // Close the sidebar by toggling the menu state
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -40,20 +47,44 @@ const Navigation = () => {
       console.error('Ошибка отправки заявки:', error);
       alert('Ошибка при отправке заявки.');
     } finally {
-      setIsModalOpen(false); // Закрыть модальное окно после нажатия кнопки "Отправить", даже если отправка не удалась
+      setIsModalOpen(false); // Close the modal after submission, regardless of success
     }
   };
-  
+
+  // Close the sidebar when resizing below 1220px
+  useEffect(() => {
+    const handleResize = () => {
+      handleCloseMenu();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMenuOpen]);
 
   return (
     <header className="bg-white">
       <div className="container mx-auto flex justify-between items-center py-3 px-6">
-        {/* logo */}
+        <div className="">
+          <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+          <div>
+            <label className="text-red-600" htmlFor="my-drawer" aria-label="open sidebar">
+              <FaBars size={24} />
+            </label>
+          </div>
+          <div className="drawer-side">
+            <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay bg-white"></label>
+            <Category />
+          </div>
+        </div>
+
         <div>
           <Image
             src={'https://oiltrade.uz/templates/oiltrade/images/logo1.png'}
             alt="OilTrade Logo"
-            width={160}
+            width={160} 
             height={64}
             className="h-16"
           />
@@ -87,7 +118,7 @@ const Navigation = () => {
         {/* Mobile Menu Button */}
         <div className="lg:hidden flex items-center">
           <button onClick={toggleMenu} className="text-red-600">
-            {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            {isMenuOpen ? <FaTimes size={24} /> : <SlOptionsVertical size={24} />}
           </button>
         </div>
 
@@ -105,9 +136,9 @@ const Navigation = () => {
             </button>
           </div>
           <div>
-            <button 
+            <button
               onClick={toggleModal} // Открытие модального окна
-              className=" w-[200px] h-[50px] bg-red-600 text-white py-2 px-4 rounded-full hover:bg-red-500 text-sm"
+              className="w-[200px] h-[50px] bg-red-600 text-white py-2 px-4 rounded-full hover:bg-red-500 text-sm"
             >
               Оставить заявку
             </button>
@@ -199,18 +230,6 @@ const Navigation = () => {
             <a href="/delivery" className="hover:text-gray-400 text-sm">Доставка</a>
             <a href="/contact" className="hover:text-gray-400 text-sm">Контакты</a>
           </div>
-        </div>
-      </nav>
-
-      {/* Navigation Links for Tablet and Laptop */}
-      <nav className="hidden lg:block bg-gray-900 text-white">
-        <div className="container mx-auto flex justify-center space-x-6 py-4">
-          <a href="/" className="hover:text-gray-400 text-sm">Главная</a>
-          <a href="/news" className="hover:text-gray-400 text-sm">Новости</a>
-          <a href="/about" className="hover:text-gray-400 text-sm">О магазине</a>
-          <a href="/payment" className="hover:text-gray-400 text-sm">Оплата и заказ</a>
-          <a href="/delivery" className="hover:text-gray-400 text-sm">Доставка</a>
-          <a href="/contact" className="hover:text-gray-400 text-sm">Контакты</a>
         </div>
       </nav>
     </header>

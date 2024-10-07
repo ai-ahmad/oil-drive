@@ -18,7 +18,7 @@ const Category = () => {
         } catch (error) {
             setError(error.message);
         } finally {
-            setLoading(false); // Stop loading regardless of success or failure
+            setLoading(false);
         }
     };
 
@@ -40,18 +40,17 @@ const Category = () => {
     }
 
     return (
-        <div className="w-1/5 min-w-[200px]">
+        <div className="w-1/5 lg:min-w-[200px] bg-white lg:bg-transparent h-screen min-w-[70%]">
             <div className="w-full bg-[#E0111A] text-white flex items-center p-2">
-                <p className="font-bold">Категории</p>
+                <p className="font-bold py-5 lg:py-0">Категории</p>
             </div>
 
-            {/* Sidebar Categories List */}
             <ul className="w-full border border-gray-300">
                 {categories.map((category) => (
                     <li
                         onClick={() => handleCategoryClick(category.category_name)}
                         key={category._id}
-                        className="border-b border-gray-300 p-2 hover:bg-gray-200 cursor-pointer"
+                        className="border-b border-gray-300 px-2 lg:p-2 py-4  hover:bg-gray-200 cursor-pointer"
                     >
                         {category.category_name}
                     </li>
