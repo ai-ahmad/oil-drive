@@ -93,13 +93,9 @@ const Navigation = () => {
               </p>
             </div>
 
-            <button className="bg-black text-white py-3 px-4 rounded-full w-[60%]">
-              Войти в кабинет
-            </button>
-
-            <button className="bg-red-600 text-white py-3 px-4 rounded-full w-[60%]">
+            <a href="https://oiltrade.uz/" className="bg-red-600 text-center text-white py-3 px-4 rounded-full w-[60%]">
               Oiltrade.uz
-            </button>
+            </a>
           </div>
         </div>
       )}
