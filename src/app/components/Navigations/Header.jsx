@@ -55,8 +55,7 @@ const Navigation = () => {
   return (
     <header className="bg-white">
       <div className="container mx-auto flex justify-between items-center py-3 px-6">
-        {/* Mobile sidebar toggle button */}
-        <button onClick={toggleSidebar} className="text-red-600 lg:hidden" aria-label="Open sidebar">
+        <button onClick={toggleSidebar} className="text-white p-2 bg-slate-800 rounded-full lg:hidden" aria-label="Open sidebar">
           {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
 
@@ -71,29 +70,42 @@ const Navigation = () => {
           />
         </div>
 
-        {/* Contact Information (Desktop Only) */}
-        <address className="hidden lg:flex items-center space-x-6 not-italic">
-          <div className="flex items-center space-x-2">
-            <FaPhoneAlt className="text-red-600" />
-            <a href="tel:+998900000000" className="text-gray-900 hover:text-red-600 text-sm">+998 (90) 000-00-00</a>
-          </div>
-          <button
-            onClick={toggleModal}
-            className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700"
-          >
-            Оставить заявку
-          </button>
-        </address>
-
         {/* Mobile options menu toggle button */}
-        <button onClick={toggleOptionsMenu} className="text-red-600 lg:hidden" aria-label="Open options">
+        <button onClick={toggleOptionsMenu} className="text-white bg-slate-800 p-2 rounded-full lg:hidden" aria-label="Open options">
           {isOptionsOpen ? <FaTimes size={24} /> : <SlOptionsVertical size={24} />}
         </button>
       </div>
+      {isOptionsOpen && (
+        <div className="lg:hidden p-4">
+          <div className="flex flex-col items-center space-y-3">
 
+            <div className="text-center">
+              <div className="text-red-600 text-lg font-semibold">998 99</div>
+              <div className="text-2xl font-bold">797-48-77</div>
+              <p className="text-gray-500 text-sm">Время работы: с 9.00 до 17.00, сб-вс выходной</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="text-red-600 text-lg font-semibold">998 99</div>
+              <div className="text-2xl font-bold">837-25-70</div>
+              <p className="text-gray-500 text-sm">
+                Наша почта: <a href="mailto:oiltrade@mail.ru" className="text-red-600">oiltrade@mail.ru</a>, отвечаем очень быстро!
+              </p>
+            </div>
+
+            <button className="bg-black text-white py-3 px-4 rounded-full w-[60%]">
+              Войти в кабинет
+            </button>
+
+            <button className="bg-red-600 text-white py-3 px-4 rounded-full w-[60%]">
+              Oiltrade.uz
+            </button>
+          </div>
+        </div>
+      )}
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 w-4/5 h-full bg-white z-[999] shadow-lg transition-transform transform ${
+        className={`fixed overflow-y-auto top-0 left-0 w-4/5 h-full bg-white z-[999] shadow-lg transition-transform transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -105,10 +117,17 @@ const Navigation = () => {
           <FaTimes />
         </button>
         <nav className="w-full">
+          <div className="flex flex-col px-3 py-3 bg-slate-800 text-white">
+            <a href="/" className="hover:text-gray-400 text-base py-2 ">Главная</a>
+            <a href="/news" className="hover:text-gray-400 text-base py-2 ">Новости</a>
+            <a href="/about" className="hover:text-gray-400 text-base py-2 ">О магазине</a>
+            <a href="/payment" className="hover:text-gray-400 text-base py-2 ">Оплата и заказ</a>
+            <a href="/delivery" className="hover:text-gray-400 text-base py-2 ">Доставка</a>
+            <a href="/contact" className="hover:text-gray-400 text-base py-2  ">Контакты</a>
+          </div>
           <Category />
         </nav>
       </div>
-
       {/* Modal for submitting a request */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[999] bg-black bg-opacity-50 flex justify-center items-center">
