@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,14 +9,17 @@ import { CiShoppingTag } from "react-icons/ci";
 const HomeContent = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(6); // Number of products to show per page
+  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API
+  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const request = await axios.get(`http://localhost:5000/api/v1/card`);
+        const request = await axios.get(`${apiUrl}/card`);
         if (request.status === 200) {
           setProducts(request.data);
-          applyFilter(request.data); // Apply the filter after data is fetched
+          applyFilter(request.data); // Apply filter after getting data
         } else {
           console.error("Error fetching products", request.statusText);
         }
@@ -28,12 +31,11 @@ const HomeContent = () => {
     fetchProducts();
   }, []);
 
-  // Apply category filter
   const applyFilter = (products) => {
     const selectedCategory = localStorage.getItem("category") || "Прочее";
 
     if (selectedCategory === "Прочее") {
-      setFilteredProducts(products);  // Show all products if no specific category is selected
+      setFilteredProducts(products); // Show all products if no category selected
     } else {
       const filtered = products.filter((product) =>
         product.category.includes(selectedCategory)
@@ -46,10 +48,9 @@ const HomeContent = () => {
     applyFilter(products);
   }, [products]);
 
-  // Listen to storage changes and reapply the filter when category changes
   useEffect(() => {
     const handleStorageChange = () => {
-      applyFilter(products);  // Reapply filter if localStorage is updated
+      applyFilter(products); // Reapply filter when localStorage changes
     };
     window.addEventListener("storage", handleStorageChange);
     return () => {
@@ -57,19 +58,29 @@ const HomeContent = () => {
     };
   }, [products]);
 
+  // Calculate the products to display based on the current page
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  // Handle page change
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="container mx-auto p-4">
-      {/* Check if filteredProducts is empty and display "Product not found" */}
-      {filteredProducts.length === 0 ? (
+      {currentProducts.length === 0 ? (
         <div className="text-center text-gray-500 text-xl">Product not found</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
+          {currentProducts.map((product) => (
             <Link key={product._id} href={`/card/${product._id}`}>
               <div className="bg-white shadow-md rounded-lg overflow-hidden p-4 flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-300">
                 <div className="flex justify-center h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72">
                   <Image
-                    src={`http://localhost:5000/${product.image}`}
+                    src={`${imgUrl}${product.image}`}
                     alt={product.name}
                     width={150}
                     height={150}
@@ -93,11 +104,13 @@ const HomeContent = () => {
                     </span>
                   </div>
                   <div className="flex items-center justify-between mt-2">
-                  <span className="text-sm sm:text-base flex items-center">
-  <FaTint className="mr-1 text-adaptive-sm" /> {product.volume?.[0] ? `${product.volume[0]} л` : "Не указано"}
-</span>
-
-                    <Link href={`/card/${product._id}`} className="text-blue-500 text-sm sm:text-base">
+                    <span className="text-sm sm:text-base flex items-center">
+                      <FaTint className="mr-1 text-adaptive-sm" /> {product.volume[0]} л
+                    </span>
+                    <Link
+                      href={`/card/${product._id}`}
+                      className="text-blue-500 text-sm sm:text-base"
+                    >
                       Подробнее
                     </Link>
                   </div>
@@ -105,6 +118,47 @@ const HomeContent = () => {
               </div>
             </Link>
           ))}
+        </div>
+      )}
+      {/* Conditionally render pagination if there are products */}
+      {filteredProducts.length > 0 && (
+        <div className="flex justify-center items-center mt-5 space-x-2">
+          <button
+            className={`px-4 py-2 rounded-lg border transition-colors duration-300 
+            ${currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-white border-gray-300 hover:bg-gray-100"}`}
+            onClick={() => paginate(currentPage > 1 ? currentPage - 1 : 1)}
+            disabled={currentPage === 1}
+          >
+            Prev
+          </button>
+          {[...Array(Math.ceil(filteredProducts.length / productsPerPage))].map(
+            (_, index) => (
+              <button
+                key={index}
+                className={`px-4 py-2 rounded-lg border transition-colors duration-300 
+                ${currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-white border-gray-300 hover:bg-gray-100"}`}
+                onClick={() => paginate(index + 1)}
+              >
+                {index + 1}
+              </button>
+            )
+          )}
+          <button
+            className={`px-4 py-2 rounded-lg border transition-colors duration-300 
+            ${currentPage === Math.ceil(filteredProducts.length / productsPerPage) ? "bg-gray-300 cursor-not-allowed" : "bg-white border-gray-300 hover:bg-gray-100"}`}
+            onClick={() =>
+              paginate(
+                currentPage < Math.ceil(filteredProducts.length / productsPerPage)
+                  ? currentPage + 1
+                  : currentPage
+              )
+            }
+            disabled={
+              currentPage === Math.ceil(filteredProducts.length / productsPerPage)
+            }
+          >
+            Next
+          </button>
         </div>
       )}
     </div>

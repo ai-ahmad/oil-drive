@@ -1,30 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";  
 import Image from "next/image";
 import Navigation from "./components/Navigations/Header";
 import News from "./components/News/News";
-import HomeContent from "./components/HomeContent/HomeContent";
 import Sidebar from "./components/SideBar/Sidebar";
-import Baner from "./components/Banner/Baner";
+import Loading from "./components/Loading/Loading";
+import dynamic from "next/dynamic";
+import Footer from "./components/Footer/Footer";
 
 export default function Home() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 0);
+
+  const Baner = dynamic(() => import("./components/Banner/Baner"), {
+    ssr: false,
+    loading: () => <Loading />,
+  });
+  
+  const HomeContent = dynamic(() => import("./components/HomeContent/HomeContent"), {
+    ssr: false,
+    loading: () => <Loading />,
+  });
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 1220) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
+      setWindowWidth(window.innerWidth);
     };
-
-    handleResize();
 
     window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -34,17 +42,21 @@ export default function Home() {
       </header>
 
       <main className="flex container mx-auto">
-        {isVisible && (
-          <aside>
+        {windowWidth >= 1220 && (
+          <aside className="mt-6">
             <Sidebar />
           </aside>
         )}
         <div className="flex-1">
-          {isVisible && <Baner />}
+          {windowWidth >= 1220 && <Baner />}
           <HomeContent />
           <News />
         </div>
       </main>
+
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 }
