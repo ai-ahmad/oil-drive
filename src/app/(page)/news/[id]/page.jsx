@@ -74,4 +74,4 @@ const NewsItem = ({ params }) => {
   );
 };
 
-export default NewsItem;
+export default NewsItem
