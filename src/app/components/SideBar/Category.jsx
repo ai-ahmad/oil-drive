@@ -44,8 +44,8 @@ const Category = () => {
     }
 
     return (
-        <div className="lg:w-1/5 lg:min-w-[250px] min-w-[60%] h-screen">
-            <div className="w-full bg-[#E0111A] text-white flex gap-2 items-center lg:p-2 py-2 px-2 lg:rounded-t-lg">
+        <div className="xl:w-1/5 xl:min-w-[250px] h-screen">
+            <div className="w-full bg-[#E0111A] text-white flex gap-2 items-center lg:p-2 py-2 px-2 xl:rounded-t-lg">
                 <GiHamburgerMenu />
                 <p className="font-bold">Категории</p>
             </div>
@@ -55,7 +55,7 @@ const Category = () => {
                     <li
                         onClick={() => handleCategoryClick(category.category_name)}
                         key={category._id}
-                        className="border-b border-gray-300 px-2 lg:p-2 lg:py-4 py-2 hover:bg-gray-200 cursor-pointer"
+                        className="border-b border-gray-300 px-2 lg:p-2 lg:py-2 py-2 hover:bg-gray-200 cursor-pointer"
                     >
                         <a href="/">{category.category_name}</a>
                     </li>

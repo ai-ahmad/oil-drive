@@ -10,14 +10,14 @@ import Statistic from './Statistic'
 
 export const Sidebar = () => {
     return (
-        <div className='flex flex-col gap-7 '>
+        <aside className='flex flex-col gap-7 xl:max-w-[250px] md:max-w-[40%] w-full '>
             <Cattegory />
             <PopularProducts />
             <Anons />
             <NewsList />
             <Feedback />
             <Statistic />
-        </div>
+        </aside>
     )
 }
 

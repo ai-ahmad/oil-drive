@@ -9,6 +9,7 @@ const Baner = () => {
   const [isImageVisible, setIsImageVisible] = useState(true); 
   const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API;
   const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
+  const [isloading, setIsLoading] = useState()
 
   const fetchSlides = async () => {
     try {
@@ -61,7 +62,7 @@ const Baner = () => {
   };
 
   return (
-    <div className="p-7 relative w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] max-w-7xl mx-auto overflow-hidden">
+    <div className="px-7 relative w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] max-w-7xl mx-auto overflow-hidden">
       {slides.length > 0 && (
         <img
           src={`${imgUrl}${slides[currentSlide].image_url}`} 

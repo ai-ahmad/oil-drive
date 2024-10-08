@@ -1,9 +1,6 @@
 
 import "./globals.css";
 
-
-
-
 export const metadata = {
   title: "oiltradeuz ",
   description: "Это описание главной страницы вашего приложения.",
@@ -25,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`font-nato`}
+        className={""}
       >
         {children}
       </body>

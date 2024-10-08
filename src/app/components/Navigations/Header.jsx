@@ -55,7 +55,7 @@ const Navigation = () => {
   return (
     <header className="bg-white">
       <div className="container mx-auto flex justify-between items-center py-3 px-6">
-        <button onClick={toggleSidebar} className="text-white p-2 bg-slate-800 rounded-full lg:hidden" aria-label="Open sidebar">
+        <button onClick={toggleSidebar} className="text-white p-2 bg-slate-800 rounded-full xl:hidden" aria-label="Open sidebar">
           {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
 
@@ -71,12 +71,12 @@ const Navigation = () => {
         </div>
 
         {/* Mobile options menu toggle button */}
-        <button onClick={toggleOptionsMenu} className="text-white bg-slate-800 p-2 rounded-full lg:hidden" aria-label="Open options">
+        <button onClick={toggleOptionsMenu} className="text-white bg-slate-800 p-2 rounded-full xl:hidden" aria-label="Open options">
           {isOptionsOpen ? <FaTimes size={24} /> : <SlOptionsVertical size={24} />}
         </button>
       </div>
       {isOptionsOpen && (
-        <div className="lg:hidden p-4">
+        <div className="xl:hidden p-4">
           <div className="flex flex-col items-center space-y-3">
 
             <div className="text-center">
@@ -93,7 +93,7 @@ const Navigation = () => {
               </p>
             </div>
 
-            <a href="https://oiltrade.uz/" className="bg-red-600 text-center text-white py-3 px-4 rounded-full w-[60%]">
+            <a href="https://oiltrade.uz/" className="bg-red-600 text-center text-white py-3 px-4 rounded-full max-w-[60%]">
               Oiltrade.uz
             </a>
           </div>

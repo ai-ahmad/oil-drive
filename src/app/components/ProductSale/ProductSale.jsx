@@ -24,7 +24,7 @@ const ProductsOnSale = () => {
     }, []);
 
     if (loading) {
-        return <p><Loading/>    </p>;
+        return <Loading/>;
     }
 
     return (
@@ -46,7 +46,6 @@ const ProductsOnSale = () => {
                                 </div>
                             </div>
                         </Link>
-
                     ))}
                 </div>
             </div>
