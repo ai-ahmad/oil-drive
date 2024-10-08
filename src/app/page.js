@@ -34,7 +34,7 @@ const Sidebar = dynamic(() => import("./components/SideBar/Sidebar"), {
         <div className="skeleton h-7 w-full"></div>
         <div className="skeleton h-7 w-full"></div>
         <div className="skeleton h-7 w-full"></div>
-        <div className="skeleton h-7 w-full"></div>\
+        <div className="skeleton h-7 w-full"></div>
       </div>
       <div>
       {/* Popular Products */}
