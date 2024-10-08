@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import LoadingError from '../Loading/LoadingError';
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Category = () => {
     const [categories, setCategories] = useState([]);
@@ -21,21 +22,21 @@ const Category = () => {
         } catch (error) {
             setError(error.message);
         } finally {
-            setLoading(false); // Stop loading regardless of success or failure
+            setLoading(false);
         }
     };
 
     useEffect(() => {
         fetchCategories();
     }, []);
-    
+
     const handleCategoryClick = (categoryName) => {
         localStorage.setItem('category', categoryName);  // Update category in localStorage
         window.dispatchEvent(new Event("storage"));  // Force dispatch of the storage event in the same tab
-    }; 
-    
+    };
+
     if (loading) {
-        return ;
+        return;
     }
 
     if (error) {
@@ -43,20 +44,20 @@ const Category = () => {
     }
 
     return (
-        <div className="w-1/5 min-w-[300px]">
-            <div className="w-full bg-[#E0111A] text-white flex items-center p-2">
+        <div className="xl:w-1/5 xl:min-w-[250px] h-screen">
+            <div className="w-full bg-[#E0111A] text-white flex gap-2 items-center lg:p-2 py-2 px-2 xl:rounded-t-lg">
+                <GiHamburgerMenu />
                 <p className="font-bold">Категории</p>
             </div>
 
-            {/* Sidebar Categories List */}
             <ul className="w-full border border-gray-300">
                 {categories.map((category) => (
                     <li
                         onClick={() => handleCategoryClick(category.category_name)}
                         key={category._id}
-                        className="border-b border-gray-300 p-2 hover:bg-gray-200 cursor-pointer"
+                        className="border-b border-gray-300 px-2 lg:p-2 lg:py-2 py-2 hover:bg-gray-200 cursor-pointer"
                     >
-                       <a href="/">{category.category_name}</a>
+                        <a href="/">{category.category_name}</a>
                     </li>
                 ))}
             </ul>

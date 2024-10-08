@@ -18,7 +18,7 @@ export default function Component() {
         <Link href="/contact" legacyBehavior>
           <a className="text-blue-600 hover:underline font-montserrat">контакты.</a>
         </Link>
-      </p>
+      </p>  
       
       <div className="border p-4 inline-block">
         <Image

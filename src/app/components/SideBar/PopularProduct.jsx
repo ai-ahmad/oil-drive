@@ -1,11 +1,13 @@
 import React from 'react'
+import { SiStardock } from "react-icons/si";
 
 const PopularProducts = () => {
     return (
-        <div className="w-1/5 min-w-[200px]">
-            <div className="w-full bg-[#E0111A] text-white flex items-center p-2">
-                <img src='' alt="Menu" className="mr-2" />
-                <p className="font-bold">Категории</p>
+        <div className="w-1/5 min-w-[250px]">
+            <div className="w-full bg-[#E0111A] text-white flex gap-2 items-center p-2 rounded-t-lg">
+                <SiStardock />
+
+                <p className="font-bold">Популярные товары</p>
             </div>
 
             <div className='w-full bg-white p-[15px] flex gap-1'>
