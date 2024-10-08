@@ -44,7 +44,7 @@ const Category = () => {
     }
 
     return (
-        <div className="xl:w-1/5 xl:min-w-[250px] h-screen">
+        <div className="xl:w-1/5 xl:min-w-[250px]">
             <div className="w-full bg-[#E0111A] text-white flex gap-2 items-center lg:p-2 py-2 px-2 xl:rounded-t-lg">
                 <GiHamburgerMenu />
                 <p className="font-bold">Категории</p>
