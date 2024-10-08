@@ -37,7 +37,7 @@ const ProductsOnSale = () => {
                             <div className="border border-gray-300 bg-white shadow-lg transition-transform duration-200 flex flex-col p-4 mb-4 hover:scale-105 hover:shadow-2xl">
                                 <h1 className="ml-2 s-discount bg-[#FF8E0D] text-white text-center text-sm py-1 mb-2 w-20">Скидка</h1>
                                 <img
-                                    src={`http://localhost:5000/${product.image[0]}`}
+                                    src={`http://localhost:5000${product.image}`}
                                     alt={product.name}
                                     className="gap-2 w-full h-[120px] object-cover mb-2"
                                 />
