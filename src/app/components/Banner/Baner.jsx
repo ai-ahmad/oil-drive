@@ -65,7 +65,7 @@ const Baner = () => {
   };
 
   return (
-    <div className="container px-7 relative h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] max-w-7xl mx-auto overflow-hidden bg-red-500">
+    <div className="container px-7 relative h-[200px] sm:h-[300px] md:h-[300px] lg:h-[400px] xl:h-[500px] max-w-7xl mx-auto overflow-hidden bg-red-500 rounded-lg">
       {isLoading ? (
         <div className="flex justify-center items-center h-full">
           <p>Loading...</p>

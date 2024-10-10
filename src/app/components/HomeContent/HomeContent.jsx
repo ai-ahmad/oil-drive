@@ -1,20 +1,24 @@
 "use client";
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { FaTint } from "react-icons/fa";
 import { CiShoppingTag } from "react-icons/ci";
+import ProductItemSkeleton from "../Card/ProductItemSkeleton";
 
 const HomeContent = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(6); // Number of products to show per page
-  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API
-  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API
+  const [loading, setLoading] = useState(true); // Loading state
+  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API;
+  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
+
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true); // Start loading
       try {
         const request = await axios.get(`${apiUrl}/card`);
         if (request.status === 200) {
@@ -25,6 +29,8 @@ const HomeContent = () => {
         }
       } catch (error) {
         console.error("Error fetching products", error);
+      } finally {
+        setLoading(false); // End loading
       }
     };
 
@@ -70,8 +76,15 @@ const HomeContent = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="container mx-auto p-4">
-      {currentProducts.length === 0 ? (
+    <div className="container mx-auto py-4">
+      {loading ? (
+        // Render skeletons while loading
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+          {Array.from({ length: productsPerPage }).map((_, index) => (
+            <ProductItemSkeleton key={index} />
+          ))}
+        </div>
+      ) : currentProducts.length === 0 ? (
         <div className="text-center text-gray-500 text-xl">Product not found</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
