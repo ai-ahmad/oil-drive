@@ -1,11 +1,9 @@
-import Navigation from '@/app/components/Navigations/Header'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Component() {
   return (
    <>
-   <Navigation/>
      <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-4">Доставка товара</h1>
       
@@ -16,7 +14,7 @@ export default function Component() {
       <p className="mb-6">
         Уточняйте данную информацию у менеджера интернет магазина в разделе:{' '}
         <Link href="/contact" legacyBehavior>
-          <a className="text-blue-600 hover:underline font-montserrat">контакты.</a>
+          <p className="text-blue-600 hover:underline font-montserrat">контакты.</p>
         </Link>
       </p>  
       

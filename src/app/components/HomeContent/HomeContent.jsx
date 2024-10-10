@@ -107,12 +107,12 @@ const HomeContent = () => {
                     <span className="text-sm sm:text-base flex items-center">
                       <FaTint className="mr-1 text-adaptive-sm" /> {product.volume[0]} л
                     </span>
-                    <Link
+                    <p
                       href={`/card/${product._id}`}
                       className="text-blue-500 text-sm sm:text-base"
                     >
                       Подробнее
-                    </Link>
+                    </p>
                   </div>
                 </div>
               </div>

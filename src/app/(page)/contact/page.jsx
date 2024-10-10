@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import Navigation from "@/app/components/Navigations/Header";
 import "leaflet/dist/leaflet.css"; // Подключаем стили Leaflet
 
 // Динамический импорт компонентов Leaflet
@@ -44,7 +43,6 @@ const Contact = () => {
 
   return (
     <>
-      <Navigation />
       <Container>
         <h1 className="text-3xl font-bold mb-6">Контактные данные магазина</h1>
 

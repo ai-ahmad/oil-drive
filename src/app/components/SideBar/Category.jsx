@@ -55,8 +55,7 @@ const Category = () => {
                     <li
                         onClick={() => handleCategoryClick(category.category_name)}
                         key={category._id}
-                        className="border-b border-gray-300 px-2 lg:p-2 lg:py-2 py-2 hover:bg-gray-200 cursor-pointer"
-                    >
+                        className="border-b border-gray-300 px-2 lg:p-2 lg:py-2 py-2 hover:bg-gray-200 cursor-pointer">
                         <a href="/">{category.category_name}</a>
                     </li>
                 ))}

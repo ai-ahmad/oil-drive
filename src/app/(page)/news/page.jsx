@@ -1,7 +1,6 @@
 "use client";
 
 import Loading from '@/app/components/Loading/Loading';
-import Navigation from '@/app/components/Navigations/Header';
 import axios from 'axios';
 import Image from 'next/image';
 
@@ -33,7 +32,6 @@ export default function News() {
   }
   return (
     <>
-      <Navigation />
       <div className="flex justify-center">
         <div className="max-w-3xl mx-auto p-6 ">
           <h1 className="text-3xl  mb-6 font-montserrat">Новости:</h1>

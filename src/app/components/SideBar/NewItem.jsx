@@ -21,7 +21,7 @@ const NewsItem = ({ newsItem }) => {
 
             <h3 className="text-lg font-bold text-red-600 mb-2">{title}</h3>
 
-            <p className="text-sm text-gray-700 mb-4">{description1.substring(0, 100)}...</p>
+            <p className="text-sm text-gray-700 mb-4">{description1.substring(0, 35)}...</p>
 
             <a href="#" className="text-blue-600 text-sm font-semibold">
                 Подробнее

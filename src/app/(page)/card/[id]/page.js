@@ -5,9 +5,6 @@ import { FaStar, FaDownload } from "react-icons/fa"; // Icons for rating and dow
 import { CiShoppingTag } from "react-icons/ci"; // Icon for shopping tag
 import axios from "axios";
 import Loading from "@/app/components/Loading/Loading";
-import Navigation from "@/app/components/Navigations/Header";
-import Sidebar from "@/app/components/SideBar/Sidebar";
-import Footer from "@/app/components/Footer/Footer";
 
 const ProductItem = ({ params }) => {
   const { id } = params;
@@ -53,16 +50,12 @@ const ProductItem = ({ params }) => {
 
   return (
     <>
-      <Navigation />
       <div className="flex flex-row mt-4 container">
         <div className="hidden lg:block">
-          <Sidebar />
         </div>
 
-        {/* Flex container wrapping both card and description */}
         <div className="flex flex-col bg-white p-8 lg:p-12 rounded-lg shadow-lg w-full lg:max-w-5xl mx-auto mt-12">
 
-          {/* Product Card Section */}
           <div className="flex flex-col lg:flex-row w-full justify-around items-start">
             <div className="lg:w-1/2 flex justify-center items-center mb-6 lg:mb-0">
               <Image
@@ -92,7 +85,6 @@ const ProductItem = ({ params }) => {
             </div>
           </div>
 
-          {/* Description Section */}
           <div className="w-full mt-6">
             <h3 className="text-2xl font-bold mb-6 text-gray-800">Описание</h3>
             <p className="text-gray-700 leading-relaxed">{product.description}</p>
@@ -100,7 +92,6 @@ const ProductItem = ({ params }) => {
         </div>
       </div>
 
-      <Footer />
     </>
   );
 };

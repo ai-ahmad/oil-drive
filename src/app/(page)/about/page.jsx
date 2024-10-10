@@ -1,11 +1,9 @@
 "use client"
-import Navigation from '@/app/components/Navigations/Header'
 import React from 'react'
 
 const Page = () => {
   return (
   <>
-  <Navigation/>
       <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">О магазине</h1>
       
@@ -13,7 +11,7 @@ const Page = () => {
         <h2 className="text-2xl font-semibold">Давайте познакомимся?</h2>
         <p>
           Мы это не просто интернет магазин, мы это помощник поставщику и потребителю найти друг друга. Oil Trade - построй свою
-          любовь к экономии времени!)
+          любовь к экономии времени!
         </p>
         <p>
           Теперь благодаря нашей идеи совместить первый интернет магазин в котором вы сможете найти любой смазочный материал

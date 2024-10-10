@@ -50,7 +50,7 @@ const News = () => {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 w-full">
       <div className="border border-gray-300 bg-white shadow-lg w-full max-w-screen-xl p-6">
         <h2 className="text-black text-2xl font-montserrat mb-4">Новости:</h2>
 

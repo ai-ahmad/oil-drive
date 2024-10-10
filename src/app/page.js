@@ -2,9 +2,7 @@
 
 import React, { useEffect, useState } from "react";  
 import dynamic from "next/dynamic";
-import Navigation from "./components/Navigations/Header";
 import News from "./components/News/News";
-import Footer from "./components/Footer/Footer";
 import ProductsOnSale from "./components/ProductSale/ProductSale";
 import Loading from "./components/Loading/Loading";
 
@@ -34,7 +32,7 @@ const Sidebar = dynamic(() => import("./components/SideBar/Sidebar"), {
         <div className="skeleton h-7 w-full"></div>
         <div className="skeleton h-7 w-full"></div>
         <div className="skeleton h-7 w-full"></div>
-        <div className="skeleton h-7 w-full"></div>\
+        <div className="skeleton h-7 w-full"></div>
       </div>
       <div>
       {/* Popular Products */}
@@ -114,12 +112,7 @@ export default function Home() {
 
   return (
     <>
-      <header className="mb-10">
-        <Navigation />
-      </header>
-
       <main className="flex container mx-auto w-full">
-        {isMounted && windowWidth >= 1220 && <Sidebar />}
         
         <div className="flex-1">
           <Baner />
@@ -129,9 +122,6 @@ export default function Home() {
         </div>
       </main>
 
-      <footer>
-        <Footer />
-      </footer>
     </>
   );
 }
