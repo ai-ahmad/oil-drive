@@ -55,21 +55,49 @@ const Navigation = () => {
 
   return (
     <header className="bg-white">
-      <div className="container mx-auto flex justify-between items-center py-3 px-6">
+      <div className="container mx-auto flex justify-between items-center">
         <button onClick={toggleSidebar} className="text-white p-2 bg-slate-800 rounded-full xl:hidden" aria-label="Open sidebar">
           {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
 
         {/* Logo */}
-        <div>
-          <Image
-            src={'https://oiltrade.uz/templates/oiltrade/images/logo1.png'}
-            alt="OilTrade Logo"
-            width={160} 
-            height={64}
-            className="h-16"
+        <div className="navbar">
+      <div className="navbar-start">
+        <Image
+          src="https://oiltrade.uz/templates/oiltrade/images/logo1.png"
+          alt="OilTrade Logo"
+          width={160}
+          height={64}
+          className="h-16"
+        />
+        <div className="flex flex-col ml-4 text-sm">
+          <div className="flex items-center space-x-2">
+            <span className="text-red-600 font-semibold">998 99 797-48-77</span>
+            <span>|</span>
+            <span className="text-red-600 font-semibold">998 99 837-25-70</span>
+          </div>
+          <div className="text-gray-500">
+            Время работы: с 9.00 до 17.00, сб-вс выходной
+          </div>
+          <div className="text-gray-500">
+            Наша почта: <a href="mailto:oiltrade@mail.ru" className="text-red-600">oiltrade@mail.ru</a>
+          </div>
+        </div>
+      </div>
+
+      <div className="navbar-end flex items-center space-x-4">
+        <div className="form-control">
+          <input
+            type="text"
+            placeholder="Поиск..."
+            className="input input-bordered w-full max-w-xs"
           />
         </div>
+        <button onClick={toggleModal} className="btn bg-red-600 text-white">
+          Оставить Заявку
+        </button>
+      </div>
+    </div>
 
         {/* Mobile options menu toggle button */}
         <button onClick={toggleOptionsMenu} className="text-white bg-slate-800 p-2 rounded-full xl:hidden" aria-label="Open options">
@@ -127,74 +155,74 @@ const Navigation = () => {
       </div>
       {/* Modal for submitting a request */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[999] bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-md w-full max-w-md">
-            <h2 className="text-lg font-bold mb-4">Оставить заявку</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label htmlFor="name" className="block mb-2 text-sm font-medium">Имя</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block mb-2 text-sm font-medium">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="phone" className="block mb-2 text-sm font-medium">Телефон</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="comment" className="block mb-2 text-sm font-medium">Комментарий</label>
-                <textarea
-                  id="comment"
-                  name="comment"
-                  value={formData.comment}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded-md"
-                />
-              </div>
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  onClick={toggleModal}
-                  className="bg-gray-300 text-black py-2 px-4 rounded-md mr-2"
-                >
-                  Отмена
-                </button>
-                <button
-                  type="submit"
-                  className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700"
-                >
-                  Отправить
-                </button>
-              </div>
-            </form>
-          </div>
+        <div className="modal modal-open">
+        <div className="modal-box w-full max-w-md">
+          <h2 className="text-lg font-bold mb-4">Оставить заявку</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="name" className="block mb-2 text-sm font-medium">Имя</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="email" className="block mb-2 text-sm font-medium">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="phone" className="block mb-2 text-sm font-medium">Телефон</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                className="input input-bordered w-full"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="comment" className="block mb-2 text-sm font-medium">Комментарий</label>
+              <textarea
+                id="comment"
+                name="comment"
+                value={formData.comment}
+                onChange={handleInputChange}
+                className="textarea textarea-bordered w-full"
+              />
+            </div>
+            <div className="modal-action">
+              <button
+                type="button"
+                onClick={toggleModal}
+                className="btn btn-ghost"
+              >
+                Отмена
+              </button>
+              <button
+                type="submit"
+                className="btn bg-red-600 text-white"
+              >
+                Отправить
+              </button>
+            </div>
+          </form>
         </div>
+      </div>
       )}
 
       {/* Desktop Navigation Links */}
