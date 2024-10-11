@@ -62,12 +62,12 @@ const News = () => {
               className="border border-gray-300 bg-white shadow-lg transition-transform duration-200 flex flex-col p-4 mb-4 hover:scale-105 hover:shadow-2xl"
             >
               <Image
-                src={`${imgUrl}${news.image}`}
-                alt={news.title}
-                width={190}
-                height={70} 
-                className="w-full h-[120px] object-cover mb-2"  
-              />
+  src={news.image ? `http://localhost:5000${news.image}` : '/placeholder-image.jpg'}
+  alt={news.title}
+  width={190}
+  height={70} 
+  className="w-full h-[120px] object-cover mb-2"  
+/>
               <div className="p-2 text-center">
                 <h3 className="text-lg font-semibold text-gray-800 mb-1">{news.title}</h3>
               </div>

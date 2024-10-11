@@ -44,7 +44,7 @@ const Feedback = () => {
 
             {feedbacks.map((feedback) => (
                 <div key={feedback._id} className="chat chat-end flex flex-col gap-2 mt-3 mr-4">
-                    <div className="chat-bubble bg-slate-300 text-black">
+                    <div className="chat-bubble bg-slate-300 text-black ">
                         {feedback.comment}
                     </div>
                     <div>

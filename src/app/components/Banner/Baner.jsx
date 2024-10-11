@@ -65,7 +65,7 @@ const Baner = () => {
     <div className="px-7 relative w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] max-w-7xl mx-auto overflow-hidden">
       {slides.length > 0 && (
         <img
-          src={`${imgUrl}${slides[currentSlide].image_url}`} 
+        src={`http://localhost:5000${slides[currentSlide].image_url}`}
           alt={`Слайд ${slides[currentSlide].id}`}
           className={`w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
             isImageVisible ? 'opacity-100' : 'opacity-0'
