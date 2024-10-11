@@ -50,7 +50,7 @@ const ProductItem = ({ params }) => {
   }
 
   return (
-    <>
+    <>  
       <Navigation />
       <div className="flex flex-row mt-4 container">
         <Sidebar />
