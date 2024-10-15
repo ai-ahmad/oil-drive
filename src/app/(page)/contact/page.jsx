@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import "leaflet/dist/leaflet.css"; // Подключаем стили Leaflet
+import axios from "axios";
+import "leaflet/dist/leaflet.css";
 
-// Динамический импорт компонентов Leaflet
+// Dynamic imports for Leaflet map
 const DynamicMap = dynamic(
   () => import("react-leaflet").then((mod) => mod.MapContainer),
   { ssr: false }
@@ -29,93 +30,76 @@ const Container = ({ children, className }) => {
 };
 
 const Contact = () => {
-  const [viewState, setViewState] = useState({
-    longitude: 69.2401,
-    latitude: 41.2995,
-    zoom: 13,
-  });
-
+  const [contacts, setContacts] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
+
+    const fetchContacts = async () => {
+      try {
+        const response = await axios.get("http://localhost:5009/api/v1/contact");
+        setContacts(response.data); 
+      } catch (error) {
+        console.error("Error fetching contacts:", error);
+      }
+    };
+
+    fetchContacts();
   }, []);
 
   return (
-    <>
-      <Container>
-        <h1 className="text-3xl font-bold mb-6">Контактные данные магазина</h1>
+    <Container>
+      <h1 className="text-3xl font-bold mb-6">Контактные данные</h1>
 
-        <p className="mb-4">
-          У Вас появились вопросы? Или хотите сотрудничать?
-        </p>
-        <p className="mb-4">
-          Обращайтесь по указанным данным ниже, мы обязательно с Вами все
-          обсудим.
-        </p>
-        <p className="mb-6">
-          Либо закажите обратный звонок в правом верхнем углу сайта, мы
-          обязательно Вам перезвоним.
-        </p>
+      {contacts.length > 0 ? (
+        contacts.map((contact) => (
+          <div key={contact._id} className="mb-8">
+            <p className="text-lg">
+              <strong>Имя:</strong> {contact.name}
+            </p>
+            <p className="text-lg">
+              <strong>Описание:</strong> {contact.description}
+            </p>
 
-        <div className="space-y-2 mb-6">
-          <p>
-            <strong>Наш адрес:</strong> Узбекистан, г.Ташкент, Ул. Полевая
-            (Ориентир Аэропорт)
-          </p>
-          <p>
-            <strong>Телефон/Telegram:</strong> +998 99 797 48 77 (Руководитель
-            отдела продаж) Джексанбаев Арслан Русланович
-          </p>
-          <p>
-            <strong>Телефон/Telegram:</strong> +998 90 324 45 56 (Менеджер по
-            вопросам закупок) Чоудри Али Сергеевич
-          </p>
-          <p>
-            <strong>Телефон/Telegram:</strong> +998 99 837-25-70 (Директор по
-            развитию) Владлена
-          </p>
-          <p>
-            <strong>Телефон/Telegram:</strong> +998 90 000 00 00 (Заведующий
-            складом) А.А
-          </p>
-          <p>
-            <strong>Email:</strong> oiltrade.uz@mail.ru
-          </p>
-        </div>
-
-        {/* Рендер карты только после монтирования компонента */}
-        {isMounted && (
-          <div className="w-full h-96 mt-6">
-            {" "}
-            {/* Измените высоту здесь */}
-            <DynamicMap
-              center={[viewState.latitude, viewState.longitude]}
-              zoom={viewState.zoom}
-              style={{ height: "100%", width: "100%" }}
-            >
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              />
-              <Marker position={[41.2995, 69.2401]}>
-                <Popup>Tashkent, Uzbekistan</Popup>
-              </Marker>
-            </DynamicMap>
+            {contact.images.length > 0 ? (
+              contact.images.map((image, index) => (
+                <div key={index} className="mt-4">
+                  <Image// Adjust the image path as needed
+                    alt={`Image of ${contact.name}`}
+                    width={400}
+                    height={250}
+                    className="rounded-lg mx-auto"
+                  />
+                </div>
+              ))
+            ) : (
+              <p>No images available for this contact.</p>
+            )}
           </div>
-        )}
+        ))
+      ) : (
+        <p>Loading contact information...</p>
+      )}
 
-        <div className="mt-6">
-          <Image
-            src="https://oiltrade.uz/uploads/posts/2020-02/medium/1582641343_flv_watermark.png"
-            alt="oiltrade.img"
-            width={400}
-            height={250}
-            className="rounded-lg"
-          />
+      {isMounted && (
+        <div className="w-full h-96 mt-6">
+          <DynamicMap
+            center={[41.2995, 69.2401]}
+            zoom={13}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <Marker position={[41.2995, 69.2401]}>
+              <Popup>Tashkent, Uzbekistan</Popup>
+            </Marker>
+          </DynamicMap>
         </div>
-      </Container>
-    </>
+      )}
+    </Container>
   );
 };
 
