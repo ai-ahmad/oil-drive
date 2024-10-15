@@ -3,8 +3,6 @@
 import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { FaExpand, FaCompress } from 'react-icons/fa';
-import Navigation from '@/app/components/Navigations/Header';
-import Sidebar from '@/app/components/SideBar/Sidebar';
 
 const ProductDetail = ({ params }) => {
   const { id } = params;
@@ -38,7 +36,6 @@ const ProductDetail = ({ params }) => {
     fetchProduct();
   }, [id]);
 
-  // Добавляем обработчик события для отслеживания полноэкранного режима
   useEffect(() => {
     const handleFullscreenChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
@@ -63,7 +60,6 @@ const ProductDetail = ({ params }) => {
     return <div className="text-center">Товар не найден</div>;
   }
 
-  // Функция для отображения звездочек
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -76,7 +72,6 @@ const ProductDetail = ({ params }) => {
     return stars;
   };
 
-  // Функция для обработки клика на изображение
   const handleImageClick = () => {
     if (imageRef.current) {
       if (!document.fullscreenElement) {
@@ -89,7 +84,6 @@ const ProductDetail = ({ params }) => {
     }
   };
 
-  // Функция для выхода из полноэкранного режима
   const exitFullscreen = () => {
     if (document.fullscreenElement) {
       document.exitFullscreen();
@@ -98,14 +92,10 @@ const ProductDetail = ({ params }) => {
 
   return (
     <>
-      <Navigation />
       <div className="flex">
-        <Sidebar />
         <div className="flex justify-center items-center w-full bg-gray-100 min-h-screen">
           <div className="bg-white shadow-md p-6 max-w-6xl mx-auto my-8 flex flex-col items-center relative">
-            {/* Контейнер для изображения и карточки информации */}
             <div className="flex w-full space-x-6 items-start">
-              {/* Изображение товара */}
               <div className="relative">
                 
               <h1 className="text-5xl font-bold mb-4 ml-10" >{product.name}</h1>
@@ -135,7 +125,6 @@ const ProductDetail = ({ params }) => {
                 )}
               </div>
 
-              {/* Карточка с информацией о товаре */}
               <div className="w-[400px] bg-white border border-gray-300 rounded-lg shadow-sm p-6">
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-3xl font-bold text-red-500 line-through">{product.price} сум</p>
@@ -151,7 +140,6 @@ const ProductDetail = ({ params }) => {
               </div>
             </div>
 
-            {/* Описание продукта ниже под кнопкой */}
             <div className="w-full mt-6 text-left">
               <div className="mt-4">
                 <p className="text-lg text-gray-700">{product.description}</p>

@@ -3,7 +3,7 @@ import { FaChevronDown } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#262f38] text-gray-400 py-8 px-4 md:px-20">
+    <footer className="bg-[#262f38] text-gray-400 py-8 px-4 md:px-20 font-montserrat">
       <div className="container mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-start">
           <div>
@@ -12,12 +12,12 @@ const Footer = () => {
             </h4>
             <ul>
               <li className="mb-2">
-                <a href="#" className="hover:text-white text-[14px]">
+                <a href="#" className="hover:text-white text-adaptive-sm">
                   Галерея
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white text-[14px]">
+                <a href="#" className="hover:text-white text-adaptive-sm">
                   Информация
                 </a>
               </li>
@@ -30,12 +30,12 @@ const Footer = () => {
             </h4>
             <ul>
               <li className="mb-2">
-                <a href="#" className="hover:text-white text-[14px]">
+                <a href="#" className="hover:text-white text-adaptive-sm">
                   Правила и соглашения
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white text-[14px]">
+                <a href="#" className="hover:text-white text-adaptive-sm">
                   Отзывы/Комментарии
                 </a>
               </li>
@@ -48,12 +48,12 @@ const Footer = () => {
             </h4>
             <ul>
               <li className="mb-2">
-                <a href="#" className="hover:text-white text-[14px]">
+                <a href="#" className="hover:text-white text-adaptive-sm">
                   Реклама и сотрудничество
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white text-[14px]">
+                <a href="#" className="hover:text-white text-adaptive-sm">
                   Партнёры
                 </a>
               </li>
@@ -66,12 +66,12 @@ const Footer = () => {
             </h4>
             <ul>
               <li className="mb-2">
-                <a href="#" className="hover:text-white text-[14px]">
+                <a href="#" className="hover:text-white text-adaptive-sm">
                   Бренды
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white text-[14px]">
+                <a href="#" className="hover:text-white text-adaptive-sm">
                   Под заказ
                 </a>
               </li>
@@ -84,12 +84,12 @@ const Footer = () => {
             </h4>
             <ul>
               <li className="mb-2">
-                <a href="#" className="hover:text-white text-[14px]">
+                <a href="#" className="hover:text-white text-adaptive-sm">
                   Архив товаров
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white text-[14px]">
+                <a href="#" className="hover:text-white text-adaptive-sm">
                   О нас
                 </a>
               </li>

@@ -2,14 +2,13 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Navigation from '../../components/Navigations/Header'; 
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
   }
-
+  
   static getDerivedStateFromError(error) {
     return { hasError: true };
   }
@@ -20,7 +19,7 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <h1>Что-то пошло не так.</h1>; // Fallback UI
+      return <h1>Что-то пошло не так.</h1>;
     }
 
     return this.props.children;
@@ -30,7 +29,6 @@ class ErrorBoundary extends React.Component {
 export default function Payment() {
   return (
     <ErrorBoundary>
-      <Navigation />
       <div className="max-w-3xl mx-auto p-6">
         <h1 className="text-3xl font-bold mb-6">Оплата и заказ товара</h1>
         
@@ -65,7 +63,7 @@ export default function Payment() {
           Товар без оплаты - не поставляется клиенту.
         </p>
         <p>
-          (О других возможностях оплаты или же поставки всегда можно обсудить по контактным номерам на сайте.
+          О других возможностях оплаты или же поставки всегда можно обсудить по контактным номерам на сайте.
         </p>
         
         <p className="font-semibold">
