@@ -93,7 +93,7 @@ const HomeContent = () => {
               <div className="bg-white shadow-md rounded-lg overflow-hidden p-4 flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-300">
                 <div className="flex justify-center h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72">
                   <Image
-                    src={`${imgUrl}${product.image}`}
+                    src={`${product.image}`}
                     alt={product.name}
                     width={150}
                     height={150}
