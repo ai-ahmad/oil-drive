@@ -126,11 +126,11 @@ const Navigation = () => {
 
       {/* Sidebar */}
       <div className={`fixed top-0 left-0 w-4/5 h-full bg-white z-[999] transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <button onClick={closeSidebar} className="absolute top-3 right-3 text-3xl text-slate-800" aria-label="Close sidebar">
+        <button onClick={closeSidebar} className="absolute top-3 right-3 text-3xl text-white" aria-label="Close sidebar">
           <FaTimes />
         </button>
-        <nav className="p-4">
-          <div className="flex flex-col space-y-4">
+        <nav className="">
+          <div className="flex flex-col space-y-4 p-4 bg-slate-800 text-white">
             <a href="/" className="hover:text-gray-400 text-lg">Главная</a>
             <a href="/news" className="hover:text-gray-400 text-lg">Новости</a>
             <a href="/about" className="hover:text-gray-400 text-lg">О магазине</a>

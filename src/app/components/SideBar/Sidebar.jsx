@@ -10,10 +10,8 @@ import SidebarSkeleton from './SidebarSkeleton'; // Import the skeleton componen
 const Sidebar = () => {
     const [loading, setLoading] = useState(true);
 
-    // Simulate data fetching for the sidebar components
     useEffect(() => {
         const fetchData = async () => {
-            // Simulate loading delay (replace with actual data fetching logic)
             await new Promise(resolve => setTimeout(resolve, 1000));
             setLoading(false);
         };
@@ -22,7 +20,6 @@ const Sidebar = () => {
     }, []);
 
     if (loading) {
-        // Show the sidebar skeleton while loading
         return <SidebarSkeleton />;
     }
 
