@@ -32,7 +32,7 @@ const Payment = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5009/api/v1/zakaz');
+        const response = await fetch('http://localhost:5000/api/v1/zakaz');
         const result = await response.json();
         
         // Get the second-to-last item (length - 2)
@@ -57,7 +57,7 @@ const Payment = () => {
             {data.images && data.images.length > 0 && (
               <div className="flex justify-center">
                 <Image
-                  src={`http://localhost:5009/${data.images[0]}`} 
+                  src={`http://localhost:5000/${data.images[0]}`} 
                   alt={data.name}
                   width={400}
                   height={300}

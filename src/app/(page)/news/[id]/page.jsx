@@ -55,7 +55,7 @@ const NewsItem = ({ params }) => {
           <div className="bg-white shadow-md p-6 max-w-7xl w-full mx-4 my-8">
             <h1 className="text-3xl font-bold mb-4 text-gray-800">{newsItem.title}</h1>
             <Image
-              src={`${imgUrl}${newsItem.images[0]}`}
+              src={`${imgUrl}/${newsItem.images[0]}`}
               alt={newsItem.title}
               width={700}
               height={100}

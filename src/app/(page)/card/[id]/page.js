@@ -59,7 +59,7 @@ const ProductItem = ({ params }) => {
           <div className="flex flex-col lg:flex-row w-full justify-around items-start">
             <div className="lg:w-1/2 flex justify-center items-center mb-6 lg:mb-0">
               <Image
-                src={`${imgUrl}${product.image}`}
+                src={`${imgUrl}/${product.image}`}
                 alt={product.name}
                 width={300}
                 height={400}

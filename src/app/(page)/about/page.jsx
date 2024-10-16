@@ -8,7 +8,7 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5009/api/v1/about');
+        const response = await fetch('http://localhost:5000/api/v1/about');
         const result = await response.json();
         
         // Get the last item based on the order of the returned data
@@ -33,7 +33,7 @@ const Page = () => {
             {data.images && data.images.length > 0 && (
               <div className="flex justify-center">
                 <img
-                  src={`http://localhost:5009/${data.images[0]}`} 
+                  src={`http://localhost:5000/${data.images[0]}`} 
                   alt={data.name}
                   width={400}
                   height={300}
