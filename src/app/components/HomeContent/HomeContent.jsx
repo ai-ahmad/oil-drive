@@ -92,13 +92,15 @@ const HomeContent = () => {
             <Link key={product._id} href={`/card/${product._id}`}>
               <div className="bg-white shadow-md rounded-lg overflow-hidden p-4 flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-300">
                 <div className="flex justify-center h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72">
-                  <Image
+                  {console.log(product)
+                  }
+                  {/* <Image
                     src={`${product.image}`}
                     alt={product.name}
                     width={150}
                     height={150}
                     className="object-contain max-w-full max-h-full"
-                  />
+                  /> */}
                 </div>
                 <div className="mt-4 flex flex-col justify-between h-full">
                   <p className="text-gray-800 text-sm sm:text-base md:text-lg font-semibold">

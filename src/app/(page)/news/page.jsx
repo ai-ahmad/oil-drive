@@ -40,7 +40,7 @@ export default function News() {
             {news.map((item) => (
               <article key={item._id} className="border-b pb-8">
                 <Image
-                  src={item.images && item.images.length > 0 ? `${imgUrl}/${item.images[0]}` : '/default.jpg'}
+                  src={item.images && item.images.length > 0 ? `${item.images[0]}` : '/default.jpg'}
                   alt={item.title}
                   width={400}
                   height={200}

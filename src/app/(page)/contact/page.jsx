@@ -66,7 +66,7 @@ const Contact = () => {
               contact.images.map((image, index) => (
                 <div key={index} className="mt-4">
 
-               /*   
+                  
                 <Image
                   src={image.image}// Adjust the image path as needed
                     alt={`Image of ${contact.name}`}
@@ -74,7 +74,7 @@ const Contact = () => {
                     height={250}
                     className="rounded-lg mx-auto"
                   />
-                   */
+                  
                 </div>
               ))
             ) : (
