@@ -11,6 +11,7 @@ const ProductItem = ({ params }) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [kurs, setKurs] = useState(null)
   const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API;
   const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
 
@@ -31,6 +32,28 @@ const ProductItem = ({ params }) => {
       setLoading(false);
     }
   };
+
+  const fetchKurs = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/curs`);
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch kurs data.");
+      }
+
+      const data = await response.json();
+      setKurs(data);
+    } catch (error) {
+      console.error("Error fetching kurs data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (!kurs) { // Only fetch if kurs hasn't been fetched yet
+      fetchKurs();
+    }
+  }, [kurs]); // Add kurs as a dependency to prevent unnecessary fetch calls
+
 
   useEffect(() => {
     fetchProduct();
@@ -77,11 +100,17 @@ const ProductItem = ({ params }) => {
                 <p><strong>Категория:</strong> <CiShoppingTag className="inline-block mr-1" /> {product.category}</p>
               </div>
 
-              <div className="mt-6">
+              <div className="mt-6 flex items-center gap-16">
                 <span className="font-bold text-2xl text-gray-800">
-                  {product.price ? `${product.price} сум` : "- сум."}
+                  {product.price && kurs && kurs[0]
+                    ? `${(product.price * kurs[0].kurs).toLocaleString('ru-RU')} сум`
+                    : "- сум."}
                 </span>
+                <div>
+                  <button>Скачать</button>
+                </div>
               </div>
+
             </div>
           </div>
 
