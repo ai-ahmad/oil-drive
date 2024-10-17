@@ -12,7 +12,7 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5009/api/v1/dastavka/");
+        const response = await fetch("http://localhost:5000/api/v1/dastavka/");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -49,7 +49,7 @@ const Page = () => {
               <strong>{item.name}</strong>: {item.description}
               <br />
               <img
-                src={`http://localhost:5009/${item.images[0]}`}
+                src={`http://localhost:5000/${item.images[0]}`}
                 alt={item.name}
                 style={{ width: "200px", height: "auto" }}
               />

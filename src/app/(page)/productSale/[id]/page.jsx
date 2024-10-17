@@ -101,7 +101,7 @@ const ProductDetail = ({ params }) => {
               <h1 className="text-5xl font-bold mb-4 ml-10" >{product.name}</h1>
                 <Image
                   ref={imageRef} // Ссылка на изображение
-                  src={`http://localhost:5000/${product.image}`}
+                  src={`http://localhost:5000/${product.image.main_images[0]}`}
                   alt={product.name}
                   layout="intrinsic"
                   objectFit="cover"
@@ -136,7 +136,7 @@ const ProductDetail = ({ params }) => {
                   </div>
                   <span className="text-2xl font-semibold">На складе: {product.stock}</span>
                 </div>
-                <p className="text-2xl text-gray-700 mb-4">Объём: {product.volume}</p>
+                <p className="text-2xl text-gray-700 mb-4 break-words">Объём: {product.volume}</p>
               </div>
             </div>
 

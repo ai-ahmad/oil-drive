@@ -38,7 +38,7 @@ const Contact = () => {
 
     const fetchContacts = async () => {
       try {
-        const response = await axios.get("http://localhost:5009/api/v1/contact");
+        const response = await axios.get("http://localhost:5000/api/v1/contact");
         setContacts(response.data); 
       } catch (error) {
         console.error("Error fetching contacts:", error);
@@ -63,19 +63,22 @@ const Contact = () => {
             </p>
 
             {contact.images.length > 0 ? (
-              contact.images.map((image, index) => (
-                <div key={index} className="mt-4">
-                  <Image// Adjust the image path as needed
-                    alt={`Image of ${contact.name}`}
-                    width={400}
-                    height={250}
-                    className="rounded-lg mx-auto"
-                  />
-                </div>
-              ))
-            ) : (
-              <p>No images available for this contact.</p>
-            )}
+  contact.images.map((image, index) => (
+    <div key={index} className="mt-4">
+      <Image
+        src={`http://localhost:5000/${image}`} // используем переменную image
+        alt={`Image of ${contact.name}`}
+        width={400}
+        height={250}
+        className="rounded-lg mx-auto"
+      />
+    </div>
+  ))
+) : (
+  <p>No images available for this contact.</p>
+)}
+
+
           </div>
         ))
       ) : (

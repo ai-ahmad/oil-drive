@@ -18,7 +18,8 @@ const ProductItem = ({ params }) => {
     if (!id) return;
 
     try {
-      const response = await axios.get(`${apiUrl}/card/${id}`);
+      const response = await axios.get(`http://localhost:5000/api/v1/card/${id}`);
+
       if (response.status === 200) {
         setProduct(response.data);
       } else {
@@ -58,20 +59,35 @@ const ProductItem = ({ params }) => {
 
           <div className="flex flex-col lg:flex-row w-full justify-around items-start">
             <div className="lg:w-1/2 flex justify-center items-center mb-6 lg:mb-0">
-              <Image
-                src={`${imgUrl}${product.image}`}
-                alt={product.name}
-                width={300}
-                height={400}
-                className="object-contain"
-              />
+            <Image
+  src={
+    product.image && product.image.main_images && product.image.main_images.length > 0
+      ? `http://localhost:5000/${product.image.main_images[0]}`
+      : "/placeholder-image.jpg" // Укажите путь к изображению по умолчанию
+  }
+  alt={product.name || "Product image"}
+  width={300}
+  height={400}
+  className="object-contain"
+/>
+
             </div>
 
             <div className="lg:w-1/2 p-6 space-y-6">
-              <h2 className="text-3xl font-bold text-gray-800">{product.name}</h2>
+              <h2 className="text-3xl font-bold text-gray-800 break-words">{product.name}</h2>
               <div className="space-y-4 text-gray-600">
                 <p><strong>Артикул:</strong> {product.article}</p>
-                <p><strong>Объем:</strong> {product.volume[0]} л</p>
+                <p>
+  <strong>Объем:</strong>
+  {Array.isArray(product.volume) && product.volume.length > 0 ? (
+    <span className="block break-words">
+      {product.volume.join(', ')} л
+    </span>
+  ) : (
+    "Информация отсутствует"
+  )}
+</p>
+
                 <p><strong>Бренд:</strong> {product.brand}</p>
                 <p><strong>Страна производитель:</strong> {product.country}</p>
                 <p><strong>Категория:</strong> <CiShoppingTag className="inline-block mr-1" /> {product.category}</p>

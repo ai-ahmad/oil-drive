@@ -42,8 +42,8 @@ const Navigation = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_OILDRIVE_API}/zayavka/create`, formData);
-      if (response.status === 200) {
+      const response = await axios.post('http://localhost:5000/api/v1/zayavka/create', formData);
+      if (response.status === 201) {
         alert('Заявка успешно отправлена!');
       }
     } catch (error) {
@@ -53,6 +53,8 @@ const Navigation = () => {
       setIsModalOpen(false);
     }
   };
+  
+  
 
   return (
     <header className="bg-white">

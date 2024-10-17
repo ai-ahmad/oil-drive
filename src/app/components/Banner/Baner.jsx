@@ -16,7 +16,7 @@ const Baner = () => {
   const fetchSlides = async () => {
     setIsLoading(true); // Начало загрузки
     try {
-      const response = await fetch(`${apiUrl}/banner`);
+      const response = await fetch('http://localhost:5000/api/v1/banner');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }

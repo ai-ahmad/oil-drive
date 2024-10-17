@@ -8,40 +8,42 @@ import { CiShoppingTag } from "react-icons/ci";
 import ProductItemSkeleton from "../Card/ProductItemSkeleton";
 
 const HomeContent = () => {
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(6); // Number of products to show per page
+  const [products, setProducts] = useState([]); // All products fetched from API
+  const [filteredProducts, setFilteredProducts] = useState([]); // Filtered products to display
+  const [currentPage, setCurrentPage] = useState(1); // Current page for pagination
+  const [productsPerPage] = useState(6); // Number of products per page
   const [loading, setLoading] = useState(true); // Loading state
-  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API;
-  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
 
+  // Fetch products from API
   useEffect(() => {
     const fetchProducts = async () => {
-      setLoading(true); // Start loading
+      setLoading(true); // Start loading state
       try {
-        const request = await axios.get(`${apiUrl}/card`);
-        if (request.status === 200) {
-          setProducts(request.data);
-          applyFilter(request.data); // Apply filter after getting data
+        const response = await axios.get("http://localhost:5000/api/v1/card"); // API call
+        if (response.status === 200) {
+          console.log("Fetched products: ", response.data); // Log fetched data
+          setProducts(response.data); // Set products state
+          applyFilter(response.data); // Apply filter after getting data
         } else {
-          console.error("Error fetching products", request.statusText);
+          console.error("Error fetching products", response.statusText);
         }
       } catch (error) {
         console.error("Error fetching products", error);
       } finally {
-        setLoading(false); // End loading
+        setLoading(false); // End loading state
       }
     };
-
-    fetchProducts();
+  
+    fetchProducts(); // Fetch products on component mount
   }, []);
+  
 
+  // Filter products based on category saved in localStorage
   const applyFilter = (products) => {
     const selectedCategory = localStorage.getItem("category") || "Прочее";
 
     if (selectedCategory === "Прочее") {
-      setFilteredProducts(products); // Show all products if no category selected
+      setFilteredProducts(products); // Show all products if no specific category selected
     } else {
       const filtered = products.filter((product) =>
         product.category.includes(selectedCategory)
@@ -50,10 +52,12 @@ const HomeContent = () => {
     }
   };
 
+  // Reapply filter whenever products state changes
   useEffect(() => {
     applyFilter(products);
   }, [products]);
 
+  // Listen to localStorage changes and reapply filter if category changes
   useEffect(() => {
     const handleStorageChange = () => {
       applyFilter(products); // Reapply filter when localStorage changes
@@ -64,7 +68,7 @@ const HomeContent = () => {
     };
   }, [products]);
 
-  // Calculate the products to display based on the current page
+  // Calculate the products to display on the current page
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProducts.slice(
@@ -92,13 +96,15 @@ const HomeContent = () => {
             <Link key={product._id} href={`/card/${product._id}`}>
               <div className="bg-white shadow-md rounded-lg overflow-hidden p-4 flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-300">
                 <div className="flex justify-center h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72">
-                  <Image
-                    src={`${imgUrl}${product.image}`}
-                    alt={product.name}
-                    width={150}
-                    height={150}
-                    className="object-contain max-w-full max-h-full"
-                  />
+                <Image
+  src={`http://localhost:5000/${product.image.main_images?.[0]}`}
+  alt={product.name}
+  width={150}
+  height={150}
+  className="object-contain max-w-full max-h-full"
+  unoptimized
+/>
+
                 </div>
                 <div className="mt-4 flex flex-col justify-between h-full">
                   <p className="text-gray-800 text-sm sm:text-base md:text-lg font-semibold">
@@ -109,7 +115,9 @@ const HomeContent = () => {
                   </p>
                   <div className="flex items-center py-2 mt-2">
                     <CiShoppingTag className="text-gray-600 mr-1" />
-                    <p className="text-sm sm:text-base">{product.category}</p>
+                    <p className="text-sm sm:text-base">
+                      {product.category || "Uncategorized"}
+                    </p>
                   </div>
                   <div className="flex items-center justify-between mt-4">
                     <span className="font-bold text-adaptive-sm">
@@ -118,12 +126,10 @@ const HomeContent = () => {
                   </div>
                   <div className="flex items-center justify-between mt-2">
                     <span className="text-sm sm:text-base flex items-center">
-                      <FaTint className="mr-1 text-adaptive-sm" /> {product.volume[0]} л
+                      <FaTint className="mr-1 text-adaptive-sm" />{" "}
+                      {product.volume?.[0] || "N/A"} л
                     </span>
-                    <p
-                      href={`/card/${product._id}`}
-                      className="text-blue-500 text-sm sm:text-base"
-                    >
+                    <p className="text-blue-500 text-sm sm:text-base">
                       Подробнее
                     </p>
                   </div>
