@@ -53,27 +53,25 @@ const NewsItem = ({ params }) => {
 
   return (
     <>
-      <div className="flex container">
-        <div className="flex justify-center items-center w-full bg-gray-100 min-h-screen">
-          <div className="bg-white shadow-md p-6 max-w-7xl w-full mx-4 my-8">
-            <h1 className="text-3xl font-bold mb-4 text-gray-800">{newsItem.title}</h1>
+      <div className="container mx-auto mt-8"> {/* Убираем min-h-screen и добавляем отступ сверху */}
+        <div className="bg-white shadow-md p-6 max-w-7xl mx-auto my-8">
+          <h1 className="text-3xl font-bold mb-4 text-gray-800">{newsItem.title}</h1>
 
-            {/* Проверяем наличие изображения */}
-            {newsItem.images && newsItem.images.length > 0 ? (
-              <Image
-                src={`http://localhost:5000${newsItem.images[0]}`} // Используем imgUrl для формирования пути к изображению
-                alt={newsItem.title}
-                width={700}
-                height={400}
-                className="object-cover mb-4"
-              />
-            ) : (
-              <p>Изображение для этой новости отсутствует.</p>
-            )}
+          {/* Проверяем наличие изображения */}
+          {newsItem.images && newsItem.images.length > 0 ? (
+            <Image
+              src={`http://localhost:5000${newsItem.images[0]}`} // Используем imgUrl для формирования пути к изображению
+              alt={newsItem.title}
+              width={700}
+              height={400}
+              className="object-cover mb-4"
+            />
+          ) : (
+            <p>Изображение для этой новости отсутствует.</p>
+          )}
 
-            <p className="text-lg text-gray-700 mb-4">{newsItem.description1}</p>
-            <p className="text-lg text-gray-700 mb-4">{newsItem.description2}</p>
-          </div>
+          <p className="text-lg text-gray-700 mb-4 break-words">{newsItem.description1}</p>
+          <p className="text-lg text-gray-700 mb-4 break-words">{newsItem.description2}</p>
         </div>
       </div>
     </>

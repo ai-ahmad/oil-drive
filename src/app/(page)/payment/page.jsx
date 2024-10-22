@@ -27,7 +27,7 @@ class ErrorBoundary extends React.Component {
 }
 
 const Payment = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,10 +35,8 @@ const Payment = () => {
         const response = await fetch('http://localhost:5000/api/v1/zakaz');
         const result = await response.json();
         
-        // Get the second-to-last item (length - 2)
-        if (result.length > 1) {
-          setData(result[result.length - 2]);
-        }
+        // Сохраняем все данные
+        setData(result);
       } catch (error) {
         console.error('Error fetching the data:', error);
       }
@@ -50,22 +48,24 @@ const Payment = () => {
   return (
     <ErrorBoundary>
       <div className="container mx-auto p-6">
-        {data ? (
-          <div key={data._id} className="border p-4 rounded-md shadow-md mb-4">
-            <h2 className="text-2xl font-bold mb-2">{data.name}</h2>
-            <p className="mb-4">{data.description}</p>
-            {data.images && data.images.length > 0 && (
-              <div className="flex justify-center">
-                <Image
-                  src={`http://localhost:5000/${data.images[0]}`} 
-                  alt={data.name}
-                  width={400}
-                  height={300}
-                  className="object-contain"
-                />
-              </div>
-            )}
-          </div>
+        {data.length > 0 ? (
+          data.map((item) => (
+            <div key={item._id} className="border p-4 rounded-md shadow-md mb-4">
+              <h2 className="text-2xl font-bold mb-2">{item.name}</h2>
+              <p className="mb-4 break-words">{item.description}</p>
+              {item.images && item.images.length > 0 && (
+                <div className="flex justify-center">
+                  <Image
+                    src={`http://localhost:5000/${item.images[0]}`} 
+                    alt={item.name}
+                    width={400}
+                    height={300}
+                    className="object-contain"
+                  />
+                </div>
+              )}
+            </div>
+          ))
         ) : (
           <p>Loading...</p>
         )}
