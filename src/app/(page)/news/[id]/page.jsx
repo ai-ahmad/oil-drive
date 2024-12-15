@@ -10,14 +10,14 @@ const NewsItem = ({ params }) => {
   const [error, setError] = useState(null);
 
   // Используем переменные окружения для API URL
-  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API || 'http://localhost:5000/api/v1/news';
-  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API || 'http://localhost:5000';
+  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API || 'https://admin-dash-oil-trade.onrender.com/api/v1/news';
+  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API || 'https://admin-dash-oil-trade.onrender.com/';
 
   const fetchNewsItem = async () => {
     if (!id) return;
 
     try {
-      const response = await fetch(`${'http://localhost:5000/api/v1/news'}/${id}`); // Запрос конкретной новости по id
+      const response = await fetch(`${'https://admin-dash-oil-trade.onrender.com/api/v1/news'}/${id}`); // Запрос конкретной новости по id
       if (!response.ok) {
         if (response.status === 404) {
           setError('Новость не найдена.');
@@ -59,23 +59,24 @@ const NewsItem = ({ params }) => {
 
           {/* Проверяем наличие изображения */}
           {newsItem.images && newsItem.images.length > 0 ? (
-            <Image
-              src={`http://localhost:5000${newsItem.images[0]}`} // Используем imgUrl для формирования пути к изображению
-              alt={newsItem.title}
-              width={700}
-              height={400}
-              className="object-cover mb-4"
-            />
-          ) : (
-            <p>Изображение для этой новости отсутствует.</p>
-          )}
+  <Image
+    src={`https://admin-dash-oil-trade.onrender.com/${newsItem.images[0]}`} // Используем полный путь к изображению
+    alt={newsItem.title}
+    width={700}
+    height={400}
+    className="object-cover mb-4"
+  />
+) : (
+  <p>Изображение для этой новости отсутствует.</p>
+)}
+
 
           <p className="text-lg text-gray-700 mb-4 break-words">{newsItem.description1}</p>
           <p className="text-lg text-gray-700 mb-4 break-words">{newsItem.description2}</p>
         </div>
       </div>
     </>
-  );
+  );    
 };
 
 export default NewsItem;

@@ -8,12 +8,13 @@ const Anons = () => {
 
     const fetchAnnons = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/v1/banner');
+            const response = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/banner');
             if (!response.ok) {
                 throw new Error('Failed to fetch advertisements');
             }
             const data = await response.json();
-            setAnnons(data);
+            console.log('Fetched Data:', data); // Logs full response data
+            setAnnons(data); // Set the data
         } catch (error) {
             setError(error.message);
         } finally {
@@ -41,7 +42,7 @@ const Anons = () => {
                         <div className="w-full flex flex-col items-center border p-2 shadow-lg bg-white rounded-b-lg">
                             {ad.image_url ? (
                                 <img
-                                    src={`http://localhost:5000${ad.image_url}`} // Используем правильный путь к изображению
+                                    src={`https://admin-dash-oil-trade.onrender.com${ad.image_url}`} // Ensure full URL for image
                                     alt={`Advertisement ${index}`}
                                     className="h-auto max-w-full rounded-lg"
                                 />

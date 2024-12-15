@@ -9,7 +9,7 @@ const Feedback = () => {
     // Async function to fetch feedbacks
     const fetchFeedbacks = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/v1/otziv');
+            const response = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/otziv');
             if (!response.ok) {
                 throw new Error('Failed to fetch feedbacks');
             }

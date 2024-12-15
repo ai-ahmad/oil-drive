@@ -8,7 +8,7 @@ const Page = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/v1/about');
+        const response = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/about');
         const result = await response.json();
 
         if (result.length > 0) {
@@ -48,7 +48,7 @@ const Page = () => {
             {item.images && item.images.length > 0 && (
               <div className="flex justify-center">
                 <img
-                  src={`http://localhost:5000/${item.images[0]}`} 
+                  src={`https://admin-dash-oil-trade.onrender.com/${item.images[0]}`} 
                   alt={item.name}
                   width={400}
                   height={300}

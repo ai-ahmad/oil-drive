@@ -16,7 +16,7 @@ const Baner = () => {
   const fetchSlides = async () => {
     setIsLoading(true); // Начало загрузки
     try {
-      const response = await fetch('http://localhost:5000/api/v1/banner');
+      const response = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/banner');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -83,13 +83,16 @@ const Baner = () => {
                   currentSlide === index ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <Image
-                  src={`http://localhost:5000${slide.image_url}`} // Используем правильную переменную
-                  alt={`Слайд ${slide._id}`}
-                  height={500} // Измените высоту по необходимости
-                  width={500} // Измените ширину по необходимости
-                  className="w-full h-full object-container"
-                />
+             <Image
+  src={slide.image_url ? `https://admin-dash-oil-trade.onrender.com${slide.image_url}` : '/placeholder.jpg'}
+  alt={`Слайд ${slide._id}`}
+  height={500}
+  width={500}
+  className="w-full h-full object-cover"
+/>
+
+
+
 
                 <div
                   className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 transition-opacity duration-700 ${

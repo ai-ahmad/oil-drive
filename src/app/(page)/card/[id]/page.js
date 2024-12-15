@@ -21,7 +21,7 @@ const ProductItem = ({ params }) => {
     if (!id) return;
 
     try {
-      const response = await axios.get(`http://localhost:5000/api/v1/card/${id}`);
+      const response = await axios.get(`https://admin-dash-oil-trade.onrender.com/api/v1/card/${id}`);
 
       if (response.status === 200) {
         setProduct(response.data);
@@ -39,7 +39,7 @@ const ProductItem = ({ params }) => {
 
   const FetchKurs = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/v1/curs');
+      const res = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/curs');
       const data = await res.json();
       if (data && data.kurs) {
         setKurs(data.kurs);
@@ -110,7 +110,7 @@ const ProductItem = ({ params }) => {
           product.image.all_images.map((img, index) => (
             <Image
               key={index}
-              src={`http://localhost:5000/${img}`}
+              src={`https://admin-dash-oil-trade.onrender.com/${img}`}
               alt={`${product.name} image ${index + 1}`}
               width={150}
               height={150}
@@ -125,7 +125,7 @@ const ProductItem = ({ params }) => {
           <div className="relative h-[400px] w-[350px] overflow-hidden">
             {prevImage && (
               <Image
-                src={`http://localhost:5000/${prevImage}`}
+                src={`https://admin-dash-oil-trade.onrender.com/${prevImage}`}
                 alt="Previous image"
                 width={350}
                 height={400}
@@ -137,7 +137,7 @@ const ProductItem = ({ params }) => {
 
             {activeImage && (
               <Image
-                src={`http://localhost:5000/${activeImage}`}
+                src={`hhttps://admin-dash-oil-trade.onrender.com/${activeImage}`}
                 alt="Active image"
                 width={350}
                 height={400}

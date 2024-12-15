@@ -12,7 +12,7 @@ const ProductsOnSale = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/v1/card');
+                const response = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/card');
                 const data = await response.json();
                 const productsOnSale = data.filter(product => product.discount_price);
                 setProducts(productsOnSale);
@@ -54,7 +54,7 @@ const ProductsOnSale = () => {
                                 </h1>
                                 <div className="overflow-hidden rounded-md mb-3">
                                     <img
-                                        src={`http://localhost:5000/${product.image.main_images[0]}`}
+                                        src={`https://admin-dash-oil-trade.onrender.com/${product.image.main_images[0]}`}
                                         alt={product.name}
                                         className="w-full h-40 object-cover group-hover:scale-110 transition-transform duration-300"
                                     />

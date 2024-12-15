@@ -39,7 +39,7 @@ const Contact = () => {
 
     const fetchContacts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/v1/contact");
+        const response = await axios.get("https://admin-dash-oil-trade.onrender.com/api/v1/contact");
         setContacts(response.data);
       } catch (error) {
         console.error("Error fetching contacts:", error);
@@ -88,26 +88,27 @@ const Contact = () => {
 
       {/* Изображения отображаются под картой */}
       {contacts.length > 0 && (
-        <div>
-          {contacts.map((contact) =>
-            contact.images.length > 0 ? (
-              contact.images.map((image, index) => (
-                <div key={index} className="mt-4">
-                  <Image
-                    src={`http://localhost:5000/${image}`} // используем переменную image
-                    alt={`Image of ${contact.name}`}
-                    width={400}
-                    height={250}
-                    className="rounded-lg mx-auto"
-                  />
-                </div>
-              ))
-            ) : (
-              <p key={contact._id}>No images available for this contact.</p>
-            )
-          )}
-        </div>
-      )}
+  <div>
+    {contacts.map((contact) =>
+      contact.images && contact.images.length > 0 ? (
+        contact.images.map((image, index) => (
+          <div key={index} className="mt-4">
+            <Image
+              src={`https://admin-dash-oil-trade.onrender.com/${image}`} // Используем полный URL
+              alt={`Image of ${contact.name}`}
+              width={400}
+              height={250}
+              className="rounded-lg mx-auto"
+            />
+          </div>
+        ))
+      ) : (
+        <p key={contact._id}>No images available for this contact.</p>
+      )
+    )}
+  </div>
+)}
+
     </Container>
   );
 };

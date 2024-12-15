@@ -8,7 +8,7 @@ const NewsList = () => {
 
     const fetchNews = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/v1/news');
+            const response = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/news');
             if (!response.ok) {
                 throw new Error('Failed to fetch news');
             }

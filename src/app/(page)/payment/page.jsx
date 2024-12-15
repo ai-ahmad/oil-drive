@@ -32,7 +32,7 @@ const Payment = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/v1/zakaz');
+        const response = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/zakaz');
         const result = await response.json();
         
         // Сохраняем все данные
@@ -56,7 +56,7 @@ const Payment = () => {
               {item.images && item.images.length > 0 && (
                 <div className="flex justify-center">
                   <Image
-                    src={`http://localhost:5000/${item.images[0]}`} 
+                    src={`https://admin-dash-oil-trade.onrender.com/${item.images[0]}`} 
                     alt={item.name}
                     width={400}
                     height={300}

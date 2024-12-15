@@ -8,14 +8,12 @@ import { useEffect, useState } from 'react';
 export default function News() {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API;
-  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
 
   useEffect(() => {
     const getNews = async () => {
       try {
         // Fetch news from the API
-        const response = await axios.get('http://localhost:5000/api/v1/news/');
+        const response = await axios.get('https://admin-dash-oil-trade.onrender.com/api/v1/news/');
         setNews(response.data);
       } catch (error) {
         console.error('Error fetching news:', error);
@@ -35,19 +33,23 @@ export default function News() {
     <div className="flex justify-center items-center min-h-screen bg-gray-100 ml-56">
       <div className="w-full max-w-3xl p-6 bg-white rounded-lg shadow-lg mx-auto">
         <h1 className="text-3xl mb-6 font-montserrat text-center">Новости:</h1>
-  
+
         <div className="space-y-8">
           {news.map((item) => (
             <article key={item._id} className="border-b pb-8 mx-auto text-center">
-              {item.images && item.images.length > 0 && (
+              {item.images && item.images.length > 0 ? (
                 <Image
-                  src={`http://localhost:5000${item.images[0]}`}
-                  alt={item.title}
+                  src={`https://admin-dash-oil-trade.onrender.com${item.images[0]}`}
+                  alt={item.title || 'Новость'}
                   width={400}
                   height={200}
                   className="w-full h-auto mb-4"
                   priority={true}
                 />
+              ) : (
+                <div className="w-full h-48 bg-gray-200 flex justify-center items-center">
+                  <span className="text-gray-500">Изображение отсутствует</span>
+                </div>
               )}
               <time className="text-sm text-gray-500">{item.date}</time>
               <h2 className="text-xl font-semibold mt-2 mb-2">
@@ -62,5 +64,4 @@ export default function News() {
       </div>
     </div>
   );
-  
 }

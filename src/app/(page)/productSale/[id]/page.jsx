@@ -15,7 +15,7 @@ const ProductDetail = ({ params }) => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/v1/card/${id}`);
+        const response = await fetch(`https://admin-dash-oil-trade.onrender.com/api/v1/card/${id}`);
         if (!response.ok) {
           if (response.status === 404) {
             setError('Товар не найден');
@@ -100,7 +100,7 @@ const ProductDetail = ({ params }) => {
             <h1 className="text-5xl font-bold mb-4 ml-10" >{product.name}</h1>
               <Image
                 ref={imageRef} // Ссылка на изображение
-                src={`http://localhost:5000/${product.image.main_images[0]}`}
+                src={`https://admin-dash-oil-trade.onrender.com/${product.image.main_images[0]}`}
                 alt={product.name}
                 layout="intrinsic"
                 objectFit="cover"

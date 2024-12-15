@@ -1,8 +1,5 @@
-// next.config.mjs
-
 export default {
-    images: {
-      domains: ['oiltrade.uz' ,'localhost'],
-    },
-  };
-  
+  images: {
+    domains: ['oiltrade.uz', 'admin-dash-oil-trade.onrender.com'],
+  },
+}
