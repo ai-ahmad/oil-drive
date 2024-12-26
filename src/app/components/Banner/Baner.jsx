@@ -14,7 +14,7 @@ const Baner = () => {
   const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
 
   const fetchSlides = async () => {
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
     try {
       const response = await fetch(`http://localhost:5000/api/v1/banner`);
       const data = await response.json();

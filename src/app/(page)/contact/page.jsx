@@ -5,8 +5,8 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
+import Loading from "@/app/components/Loading/Loading";
 
-// Dynamic imports for Leaflet map
 const DynamicMap = dynamic(
   () => import("react-leaflet").then((mod) => mod.MapContainer),
   { ssr: false }
@@ -39,7 +39,7 @@ const Contact = () => {
     const fetchContacts = async () => {
       try {
         const response = await axios.get("http://localhost:5000/api/v1/contact");
-        setContacts(response.data); 
+        setContacts(response.data);
       } catch (error) {
         console.error("Error fetching contacts:", error);
       }
@@ -49,61 +49,70 @@ const Contact = () => {
   }, []);
 
   return (
-    <Container>
-      <h1 className="text-3xl font-bold mb-6">Контактные данные</h1>
-
+    <>
       {contacts.length > 0 ? (
-        contacts.map((contact) => (
-          <div key={contact._id} className="mb-8">
-            <p className="text-lg">
-              <strong>Имя:</strong> {contact.name}
-            </p>
-            <p className="text-lg">
-              <strong>Описание:</strong> {contact.description}
-            </p>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-14">
+          <h1 className="text-3xl font-bold mb-6 text-center sm:text-left">
+            Контактные данные
+          </h1>
+          <div className="flex flex-col gap-8">
+            {contacts.map((contact) => (
+              <div
+                key={contact._id}
+                className="border border-gray-300 rounded-lg p-4 shadow-md"
+              >
+                <p className="text-lg sm:text-xl mb-2">
+                  <strong>Имя:</strong> {contact.name}
+                </p>
+                <p className="text-lg sm:text-xl mb-4">
+                  <strong>Описание:</strong> {contact.description}
+                </p>
 
-            {contact.images.length > 0 ? (
-              contact.images.map((image, index) => (
-                <div key={index} className="mt-4">
-
-                  
-                <Image
-                  src={image.image}// Adjust the image path as needed
-                    alt={`Image of ${contact.name}`}
-                    width={400}
-                    height={250}
-                    className="rounded-lg mx-auto"
-                  />
-                  
-                </div>
-              ))
-            ) : (
-              <p>No images available for this contact.</p>
-            )}
+                {contact.images.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {contact.images.map((image, index) => (
+                      <div
+                        key={index}
+                        className="overflow-hidden rounded-lg border"
+                      >
+                        <Image
+                          src={image.image}
+                          alt={`Image of ${contact.name}`}
+                          width={400}
+                          height={250}
+                          className="rounded-lg object-cover w-full"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p>No images available for this contact.</p>
+                )}
+              </div>
+            ))}
           </div>
-        ))
-      ) : (
-        <p>Loading contact information...</p>
-      )}
-
-      {isMounted && (
-        <div className="w-full h-96 mt-6">
-          <DynamicMap
-            center={[41.2995, 69.2401]}
-            zoom={13}
-            style={{ height: "100%", width: "100%" }}
-          >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            />
-            <Marker position={[41.2995, 69.2401]}>
-              <Popup>Tashkent, Uzbekistan</Popup>
-            </Marker>
-          </DynamicMap>
+          {isMounted && (
+            <div className="w-full h-80 sm:h-96 mt-6">
+              <DynamicMap
+                center={[41.2995, 69.2401]}
+                zoom={13}
+                style={{ height: "100%", width: "100%" }}
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                <Marker position={[41.2995, 69.2401]}>
+                  <Popup>Tashkent, Uzbekistan</Popup>
+                </Marker>
+              </DynamicMap>
+            </div>
+          )}
         </div>
+      ) : (
+        <Loading />
       )}
-    </Container>
+    </>
   );
 };
 

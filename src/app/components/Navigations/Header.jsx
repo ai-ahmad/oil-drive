@@ -55,7 +55,7 @@ const Navigation = () => {
 
   return (
     <header className="bg-white">
-      <div className="container mx-auto flex justify-between items-center p-4 font-montserrat">
+      <div className="container mx-auto flex justify-between items-center py-4 font-montserrat">
         {/* Mobile Sidebar Toggle Button */}
         <button onClick={toggleSidebar} className="text-white p-2 bg-slate-800 rounded-full lg:hidden" aria-label="Open sidebar">
           {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
@@ -64,21 +64,19 @@ const Navigation = () => {
         {/* Logo */}
         <div className="flex items-center">
           <Image
-            src="https://oiltrade.uz/templates/oiltrade/images/logo1.png"
+            src="/assets/img/oildrive-red.png"
             alt="OilTrade Logo"
-            width={160}
-            height={64}
-            className="h-16"
+            width={230}
+            height={56}
+            className="h-12"
           />
           <div className="hidden lg:flex flex-col ml-4 gap-2 text-sm">
             <div className="flex items-center space-x-2">
-              <span className="text-red-600 font-semibold text-adaptive-md">998 99 797-48-77</span>
-              <span>|</span>
-              <span className="text-red-600 font-semibold text-adaptive-md">998 99 837-25-70</span>
+              <span className="text-red-600 font-semibold text-adaptive-md">+998 99 999-99-99</span>
             </div>
             <div className="text-gray-500 flex gap-6">
               <p>Время работы: с 9.00 до 17.00, сб-вс выходной</p>
-              <p>Наша почта: <a href="mailto:oiltrade@mail.ru" className="text-red-600">oiltrade@mail.ru</a></p>
+              <p>Наша почта: <a href="mailto:oiltrade@mail.ru" className="text-red-600">oildrive@gmail.com</a></p>
             </div>
           </div>
         </div>

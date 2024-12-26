@@ -1,14 +1,13 @@
 'use client';  // This makes the component a Client Component
 
+import Loading from "@/app/components/Loading/Loading";
 import React, { useState, useEffect } from "react";
 
 const Page = () => {
-  // State to hold the fetched data
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch data when the component mounts
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -17,47 +16,59 @@ const Page = () => {
           throw new Error("Failed to fetch data");
         }
         const result = await response.json();
-        setData(result); // Save the fetched data in the state
+        setData(result);
       } catch (error) {
-        setError(error.message); // Handle errors
+        setError(error.message);
       } finally {
-        setLoading(false); // Stop loading when the request is done
+        setLoading(false);
       }
     };
 
-    fetchData(); // Call the fetchData function
+    fetchData();
   }, []);
 
-  // Handle the loading state
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
-  // Handle the error state
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <div className="container mx-auto px-4 py-6 text-center text-red-600">
+        Ошибка: {error}
+      </div>
+    );
   }
 
-  // Render the fetched data
   return (
-    <div>
-      <h1>Dastavka Data</h1>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-14">
+      <h1 className="text-3xl font-bold text-center sm:text-left mb-6">
+        Доставка
+      </h1>
       {data && data.length > 0 ? (
-        <ul>
+        <ul className="space-y-6">
           {data.map((item, index) => (
-            <li key={index}>
-              <strong>{item.name}</strong>: {item.description}
-              <br />
-              <img
-                src={`http://localhost:5000/${item.images[0]}`}
-                alt={item.name}
-                style={{ width: "200px", height: "auto" }}
-              />
+            <li
+              key={index}
+              className="border border-gray-200 rounded-lg p-6 shadow-md bg-white"
+            >
+              <h2 className="text-xl font-semibold mb-4 text-gray-800">
+                {item.name}
+              </h2>
+              <p className="text-gray-700 mb-4">{item.description}</p>
+              {item.images && item.images.length > 0 && (
+                <div className="flex justify-center sm:justify-start">
+                  <img
+                    src={`http://localhost:5000/${item.images[0]}`}
+                    alt={item.name}
+                    className="w-full max-w-xs rounded-lg shadow-md"
+                  />
+                </div>
+              )}
             </li>
           ))}
         </ul>
       ) : (
-        <p>No data available</p>
+        <p className="text-gray-500 text-center">Нет данных для отображения</p>
       )}
     </div>
   );
