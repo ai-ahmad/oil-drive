@@ -4,7 +4,7 @@ import Navigation from "./components/Navigations/Header";
 import "./globals.css";
 
 export const metadata = {
-  title: "oiltradeuz ",
+  title: "oildriveuz ",
   description: "Это описание главной страницы вашего приложения.",
   keywords: "Next.js, SEO, оптимизация",
   robots: "index, follow",
@@ -16,7 +16,7 @@ export const metadata = {
     description: "Описание страницы с SEO оптимизацией.",
     site_name: "Пример сайта",
   },
-  title: "OilTrade.Uz",
+  title: "OilDrive.Uz",
   description: `Oil" "Delkor "Башнефть", "Роснефть", "Q8oils", "ТАТНЕФТЬ". Работая с нами ... Моторное масло 10w40 Multigаз GNV OIL`,
 };
 

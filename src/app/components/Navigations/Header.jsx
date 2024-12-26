@@ -65,7 +65,7 @@ const Navigation = () => {
         <div className="flex items-center">
           <Image
             src="/assets/img/oildrive-red.png"
-            alt="OilTrade Logo"
+            alt="OilDrive Logo"
             width={230}
             height={56}
             className="h-12"
@@ -76,7 +76,7 @@ const Navigation = () => {
             </div>
             <div className="text-gray-500 flex gap-6">
               <p>Время работы: с 9.00 до 17.00, сб-вс выходной</p>
-              <p>Наша почта: <a href="mailto:oiltrade@mail.ru" className="text-red-600">oildrive@gmail.com</a></p>
+              <p>Наша почта: <a href="mailto:oildrive@gmail.com" className="text-red-600">oildrive@gmail.com</a></p>
             </div>
           </div>
         </div>
@@ -112,11 +112,11 @@ const Navigation = () => {
               <div className="text-red-600 text-lg font-semibold">998 99</div>
               <div className="text-2xl font-bold">837-25-70</div>
               <p className="text-gray-500 text-sm">
-                Наша почта: <a href="mailto:oiltrade@mail.ru" className="text-red-600">oiltrade@mail.ru</a>
+                Наша почта: <a href="mailto:oildrive@gmail.com" className="text-red-600">oildrive@gmail.com</a>
               </p>
             </div>
-            <a href="https://oiltrade.uz/" className="bg-red-600 text-center text-white py-3 px-4 rounded-full">
-              Oiltrade.uz
+            <a href="https://oildrive.uz/" className="bg-red-600 text-center text-white py-3 px-4 rounded-full">
+              OilDrive.uz
             </a>
           </div>
         </div>
