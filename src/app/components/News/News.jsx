@@ -8,44 +8,44 @@ const News = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchNewsData = async () => {
-    try {
-      const response = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/news/');
-      console.log("Статус ответа:", response.status);
-
-      if (!response.ok) {
-        throw new Error("Ошибка загрузки данных: " + response.statusText);
-      }
-
-      const data = await response.json();
-      console.log("Данные из API:", data); // Добавим лог для проверки
-
-      const formattedNews = data.map((item) => {
-        // Проверим, что у item есть поле images и что это массив
-        const image = item.images && Array.isArray(item.images) && item.images.length > 0
-          ? `https://admin-dash-oil-trade.onrender.com${item.images[0]}` // Используем первое изображение
-          : '/path/to/default-image.jpg'; // Если изображений нет, используем заглушку
-
-        return {
-          id: item._id,
-          title: item.title || "Без названия",
-          description: item.description1 || "Описание отсутствует",
-          date: item.date || "Дата не указана",
-          image, // Добавляем путь к изображению
-        };
-      });
-
-      setNewsData(formattedNews);
-      console.log("Форматированные данные новостей:", formattedNews); // Лог для проверки отформатированных данных
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Static news data instead of fetching from an API
+  const staticNewsData = [
+    {
+      id: "1",
+      title: "Новость 1",
+      description: "Описание новости 1",
+      date: "01/01/2024",
+      image: "https://oiltrade.uz/uploads/posts/2020-03/thumbs/1583766028_delkor.png",
+    },
+    {
+      id: "2",
+      title: "Новость 2",
+      description: "Описание новости 2",
+      date: "02/01/2024",
+      image: "https://oiltrade.uz/uploads/posts/2020-03/thumbs/1583766028_delkor.png"
+    },
+    {
+      id: "3",
+      title: "Новость 3",
+      description: "Описание новости 3",
+      date: "03/01/2024",
+      image: "https://oiltrade.uz/uploads/posts/2020-03/thumbs/1583766028_delkor.png",
+    },
+    {
+      id: "4",
+      title: "Новость 4",
+      description: "Описание новости 4",
+      date: "04/01/2024",
+      image: "https://oiltrade.uz/uploads/posts/2020-03/thumbs/1583766028_delkor.png",
+    },
+  ];
 
   useEffect(() => {
-    fetchNewsData();
+    // Simulate loading
+    setTimeout(() => {
+      setNewsData(staticNewsData); // Set static data after a delay
+      setLoading(false);
+    }, 1000); // Simulate delay for loading
   }, []);
 
   if (loading) {
@@ -83,7 +83,7 @@ const News = () => {
               className="border border-gray-300 bg-white shadow-lg transition-transform duration-200 flex flex-col p-4 mb-4 hover:scale-105 hover:shadow-2xl rounded-md"
             >
               <Image
-                src={`${news.image}`}
+                src={news.image}
                 alt={news.title}
                 width={190}
                 height={120}
