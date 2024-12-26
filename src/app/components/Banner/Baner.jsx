@@ -15,7 +15,7 @@ const Baner = () => {
       image_url: "https://oiltrade.uz/templates/oiltrade/images/1.jpg",
       description: "Tebeoil"
     },
-    {
+    { 
       _id: "3",
       image_url: "https://oiltrade.uz/templates/oiltrade/images/2.jpg",
       description: "SHELL"
@@ -30,7 +30,7 @@ const Baner = () => {
   const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
 
   const fetchSlides = async () => {
-    setIsLoading(true); // Начало загрузки
+    setIsLoading(true);
     try {
       const response = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/banner');
       if (!response.ok) {

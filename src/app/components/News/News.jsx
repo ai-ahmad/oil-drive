@@ -83,7 +83,7 @@ const News = () => {
               className="border border-gray-300 bg-white shadow-lg transition-transform duration-200 flex flex-col p-4 mb-4 hover:scale-105 hover:shadow-2xl rounded-md"
             >
               <Image
-                src={news.image} // Загружаем изображение или заглушку
+                src={`${news.image}`}
                 alt={news.title}
                 width={190}
                 height={120}

@@ -7,7 +7,7 @@ import { FaTint } from "react-icons/fa";
 import { CiShoppingTag } from "react-icons/ci";
 import ProductItemSkeleton from "../Card/ProductItemSkeleton";
 
-// Static product data
+// Статичные данные о продуктах
 const productsData = [
   {
     _id: "1",
@@ -16,7 +16,7 @@ const productsData = [
     category: "Category 1",
     price: 1000,
     volume: [1],
-    image: { main_images: [] }
+    image: { main_images: [] },
   },
   {
     _id: "2",
@@ -25,45 +25,34 @@ const productsData = [
     category: "Category 2",
     price: 1500,
     volume: [2],
-    image: { main_images: [] }
+    image: { main_images: [] },
   },
   {
     _id: "3",
     name: "Product 3",
-    description: "Description of Product 3",
-    category: "Category 3",
-    price: 2000,
-    volume: [3],
-    image: { main_images: [] }
-  },
-  {
+    description: "Description of Product 2",
+    category: "Category 2",
+    price: 1500,
+    volume: [2],
+    image: { main_images: [] },
+  },{
     _id: "4",
     name: "Product 4",
-    description: "Description of Product 4",
-    category: "Category 4",
-    price: 2500,
-    volume: [4],
-    image: { main_images: [] }
-  },
-  {
+    description: "Description of Product 2",
+    category: "Category 2",
+    price: 1500,
+    volume: [2],
+    image: { main_images: [] },
+  },{
     _id: "5",
     name: "Product 5",
-    description: "Description of Product 5",
-    category: "Category 5",
-    price: 3000,
-    volume: [5],
-    image: { main_images: [] }
+    description: "Description of Product 2",
+    category: "Category 2",
+    price: 1500,
+    volume: [2],
+    image: { main_images: [] },
   },
-  {
-    _id: "6",
-    name: "Product 6",
-    description: "Description of Product 6",
-    category: "Category 6",
-    price: 3500,
-    volume: [6],
-    image: { main_images: [] }
-  },
-  // Add more products as needed
+  // Добавьте больше продуктов по необходимости
 ];
 
 const DEFAULT_IMAGE =
@@ -133,20 +122,37 @@ const Pagination = ({ productsPerPage, totalProducts, paginate, currentPage }) =
 };
 
 const HomeContent = () => {
-  const [products, setProducts] = useState(productsData); // Use static data
+  const [products, setProducts] = useState(productsData);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(6);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [kurs, setKurs] = useState(null);
+  const [error, setError] = useState(""); // Добавляем состояние ошибки
+
+  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API;
+
+  const fetchKurs = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/curs`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch kurs data.");
+      }
+      const data = await response.json();
+      setKurs(data);
+    } catch (err) {
+      // console.error("Error fetching kurs data:", err);
+      // setError("Произошла ошибка при загрузке данных. Попробуйте позже.");
+    }
+  };
+
+  useEffect(() => {
+    fetchKurs();
+  }, []);
 
   useEffect(() => {
     const applyFilter = (products) => {
-      const selectedCategory =
-        typeof window !== "undefined"
-          ? localStorage.getItem("category") || "Прочее"
-          : "Прочее";
-
+      const selectedCategory = localStorage.getItem("category") || "Прочее";
       if (selectedCategory === "Прочее") {
         setFilteredProducts(products);
       } else {
@@ -158,6 +164,7 @@ const HomeContent = () => {
     };
 
     applyFilter(products);
+    setLoading(false); // Устанавливаем загрузку в false после фильтрации
   }, [products]);
 
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -171,10 +178,8 @@ const HomeContent = () => {
 
   return (
     <div className="container mx-auto py-4">
-      {/* Banner */}
-      <div className="mb-6">
-        
-      </div>
+      <div className="mb-6"></div>
+      {/* Отображение сообщения об ошибке */}
       {error && <div className="text-red-500 text-center">{error}</div>}
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -183,7 +188,7 @@ const HomeContent = () => {
           ))}
         </div>
       ) : currentProducts.length === 0 ? (
-        <div className="text-center text-gray-500 text-xl">Product not found</div>
+        <div className="text-center text-gray-500 text-xl">Продукты не найдены</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {currentProducts.map((product) => (

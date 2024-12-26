@@ -12,10 +12,9 @@ const ProductItem = ({ params }) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeImage, setActiveImage] = useState(null);
-  const [prevImage, setPrevImage] = useState(null);
-  const [animating, setAnimating] = useState(false);
-  const [kurs, setKurs] = useState(1);
+  const [kurs, setKurs] = useState(null)
+  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API;
+  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
 
   const fetchProduct = async () => {
     if (!id) return;
@@ -37,23 +36,27 @@ const ProductItem = ({ params }) => {
     }
   };
 
-  const FetchKurs = async () => {
+  const fetchKurs = async () => {
     try {
-      const res = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/curs');
-      const data = await res.json();
-      if (data && data.kurs) {
-        setKurs(data.kurs);
-      } else {
-        setKurs(1);
+      const response = await fetch(`${apiUrl}/curs`);
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch kurs data.");
       }
+
+      const data = await response.json();
+      setKurs(data);
     } catch (error) {
-      setKurs(1);
+      console.error("Error fetching kurs data:", error);
     }
   };
 
   useEffect(() => {
-    FetchKurs();
-  }, []);
+    if (!kurs) { // Only fetch if kurs hasn't been fetched yet
+      fetchKurs();
+    }
+  }, [kurs]); // Add kurs as a dependency to prevent unnecessary fetch calls
+
 
   useEffect(() => {
     fetchProduct();
@@ -192,9 +195,47 @@ const ProductItem = ({ params }) => {
           </div>
         </div>
 
-        <div className="w-full mt-6">
-          <h3 className="text-3xl font-bold mb-4 text-gray-900">Описание</h3>
-          <p className="text-gray-700 leading-relaxed text-lg break-words">{product.description}</p>
+        <div className="flex flex-col bg-white p-8 lg:p-12 rounded-lg shadow-lg w-full lg:max-w-5xl mx-auto mt-12">
+
+          <div className="flex flex-col lg:flex-row w-full justify-around items-start">
+            <div className="lg:w-1/2 flex justify-center items-center mb-6 lg:mb-0">
+              <Image
+                src={`${imgUrl}/${product.image}`}
+                alt={product.name}
+                width={300}
+                height={400}
+                className="object-contain"
+              />
+            </div>
+
+            <div className="lg:w-1/2 p-6 space-y-6">
+              <h2 className="text-3xl font-bold text-gray-800">{product.name}</h2>
+              <div className="space-y-4 text-gray-600">
+                <p><strong>Артикул:</strong> {product.article}</p>
+                <p><strong>Объем:</strong> {product.volume[0]} л</p>
+                <p><strong>Бренд:</strong> {product.brand}</p>
+                <p><strong>Страна производитель:</strong> {product.country}</p>
+                <p><strong>Категория:</strong> <CiShoppingTag className="inline-block mr-1" /> {product.category}</p>
+              </div>
+
+              <div className="mt-6 flex items-center gap-16">
+                <span className="font-bold text-2xl text-gray-800">
+                  {product.price && kurs && kurs[0]
+                    ? `${(product.price * kurs[0].kurs).toLocaleString('ru-RU')} сум`
+                    : "- сум."}
+                </span>
+                <div>
+                  <button>Скачать</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="w-full mt-6">
+            <h3 className="text-2xl font-bold mb-6 text-gray-800">Описание</h3>
+            <p className="text-gray-700 leading-relaxed">{product.description}</p>
+          </div>
         </div>
       </div>
     </div>

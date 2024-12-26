@@ -58,7 +58,7 @@ const Navigation = () => {
 
   return (
     <header className="bg-white">
-      <div className="container mx-auto flex justify-between items-center p-4 font-montserrat">
+      <div className="container mx-auto flex justify-between items-center py-4 font-montserrat">
         {/* Mobile Sidebar Toggle Button */}
         <button onClick={toggleSidebar} className="text-white p-2 bg-slate-800 rounded-full lg:hidden" aria-label="Open sidebar">
           {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
@@ -67,21 +67,19 @@ const Navigation = () => {
         {/* Logo */}
         <div className="flex items-center">
           <Image
-            src="https://oiltrade.uz/templates/oiltrade/images/logo1.png"
-            alt="OilTrade Logo"
-            width={160}
-            height={64}
-            className="h-16"
+            src="/assets/img/oildrive-red.png"
+            alt="OilDrive Logo"
+            width={230}
+            height={56}
+            className="h-12"
           />
           <div className="hidden lg:flex flex-col ml-4 gap-2 text-sm">
             <div className="flex items-center space-x-2">
-              <span className="text-red-600 font-semibold text-adaptive-md">998 99 797-48-77</span>
-              <span>|</span>
-              <span className="text-red-600 font-semibold text-adaptive-md">998 99 837-25-70</span>
+              <span className="text-red-600 font-semibold text-adaptive-md">+998 99 999-99-99</span>
             </div>
             <div className="text-gray-500 flex gap-6">
               <p>Время работы: с 9.00 до 17.00, сб-вс выходной</p>
-              <p>Наша почта: <a href="mailto:oiltrade@mail.ru" className="text-red-600">oiltrade@mail.ru</a></p>
+              <p>Наша почта: <a href="mailto:oildrive@gmail.com" className="text-red-600">oildrive@gmail.com</a></p>
             </div>
           </div>
         </div>
@@ -117,11 +115,11 @@ const Navigation = () => {
               <div className="text-red-600 text-lg font-semibold">998 99</div>
               <div className="text-2xl font-bold">837-25-70</div>
               <p className="text-gray-500 text-sm">
-                Наша почта: <a href="mailto:oiltrade@mail.ru" className="text-red-600">oiltrade@mail.ru</a>
+                Наша почта: <a href="mailto:oildrive@gmail.com" className="text-red-600">oildrive@gmail.com</a>
               </p>
             </div>
-            <a href="https://oiltrade.uz/" className="bg-red-600 text-center text-white py-3 px-4 rounded-full">
-              Oiltrade.uz
+            <a href="https://oildrive.uz/" className="bg-red-600 text-center text-white py-3 px-4 rounded-full">
+              OilDrive.uz
             </a>
           </div>
         </div>
@@ -129,11 +127,11 @@ const Navigation = () => {
 
       {/* Sidebar */}
       <div className={`fixed top-0 left-0 w-4/5 h-full bg-white z-[999] transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <button onClick={closeSidebar} className="absolute top-3 right-3 text-3xl text-slate-800" aria-label="Close sidebar">
+        <button onClick={closeSidebar} className="absolute top-3 right-3 text-3xl text-white" aria-label="Close sidebar">
           <FaTimes />
         </button>
-        <nav className="p-4">
-          <div className="flex flex-col space-y-4">
+        <nav className="">
+          <div className="flex flex-col space-y-4 p-4 bg-slate-800 text-white">
             <a href="/" className="hover:text-gray-400 text-lg">Главная</a>
             <a href="/news" className="hover:text-gray-400 text-lg">Новости</a>
             <a href="/about" className="hover:text-gray-400 text-lg">О магазине</a>

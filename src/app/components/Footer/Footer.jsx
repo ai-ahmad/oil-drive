@@ -118,7 +118,7 @@ const Footer = () => {
         <div className="mt-8 border-t border-gray-700 pt-6 flex justify-between items-center">
           <div className="text-center md:text-left">
             <p className="text-gray-400">
-              © 2020 - 2022. OilTrade.Uz - Всё идёт как по маслу.
+              © 2020 - 2022. OilDrive.Uz - Всё идёт как по маслу.
             </p>
           </div>
         </div>
