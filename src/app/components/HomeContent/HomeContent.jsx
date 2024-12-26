@@ -1,25 +1,80 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { FaTint } from "react-icons/fa";
 import { CiShoppingTag } from "react-icons/ci";
 import ProductItemSkeleton from "../Card/ProductItemSkeleton";
 
-const DEFAULT_IMAGE = "/default-image.jpg";
+// Static product data
+const productsData = [
+  {
+    _id: "1",
+    name: "Product 1",
+    description: "Description of Product 1",
+    category: "Category 1",
+    price: 1000,
+    volume: [1],
+    image: { main_images: [] }
+  },
+  {
+    _id: "2",
+    name: "Product 2",
+    description: "Description of Product 2",
+    category: "Category 2",
+    price: 1500,
+    volume: [2],
+    image: { main_images: [] }
+  },
+  {
+    _id: "3",
+    name: "Product 3",
+    description: "Description of Product 3",
+    category: "Category 3",
+    price: 2000,
+    volume: [3],
+    image: { main_images: [] }
+  },
+  {
+    _id: "4",
+    name: "Product 4",
+    description: "Description of Product 4",
+    category: "Category 4",
+    price: 2500,
+    volume: [4],
+    image: { main_images: [] }
+  },
+  {
+    _id: "5",
+    name: "Product 5",
+    description: "Description of Product 5",
+    category: "Category 5",
+    price: 3000,
+    volume: [5],
+    image: { main_images: [] }
+  },
+  {
+    _id: "6",
+    name: "Product 6",
+    description: "Description of Product 6",
+    category: "Category 6",
+    price: 3500,
+    volume: [6],
+    image: { main_images: [] }
+  },
+  // Add more products as needed
+];
+
+const DEFAULT_IMAGE =
+  "https://oiltrade.uz/uploads/posts/2024-11/1732016139_maslo-motornoe-lukojl-m8d_pr47945_1000x1000f.jpg";
 
 const ProductCard = ({ product }) => (
   <Link href={`/card/${product._id}`}>
     <div className="bg-white shadow-md rounded-lg overflow-hidden p-4 flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow duration-300">
       <div className="flex justify-center h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72">
         <Image
-          src={
-            product.image.main_images?.length > 0
-              ? `https://admin-dash-oil-trade.onrender.com/${product.image.main_images[0].replace(/\\/g, '/')}`
-              : DEFAULT_IMAGE
-          }
+          src={DEFAULT_IMAGE}
           alt={product.name}
           width={150}
           height={150}
@@ -78,65 +133,31 @@ const Pagination = ({ productsPerPage, totalProducts, paginate, currentPage }) =
 };
 
 const HomeContent = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(productsData); // Use static data
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(6);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await axios.get(
-          "https://admin-dash-oil-trade.onrender.com/api/v1/card"
+    const applyFilter = (products) => {
+      const selectedCategory =
+        typeof window !== "undefined"
+          ? localStorage.getItem("category") || "Прочее"
+          : "Прочее";
+
+      if (selectedCategory === "Прочее") {
+        setFilteredProducts(products);
+      } else {
+        const filtered = products.filter((product) =>
+          product.category.includes(selectedCategory)
         );
-        if (response.status === 200) {
-          setProducts(response.data);
-          applyFilter(response.data);
-        } else {
-          throw new Error(response.statusText);
-        }
-      } catch (error) {
-        setError("Failed to fetch products. Please try again later.");
-      } finally {
-        setLoading(false);
+        setFilteredProducts(filtered);
       }
     };
 
-    fetchProducts();
-  }, []);
-
-  const applyFilter = (products) => {
-    const selectedCategory =
-      typeof window !== "undefined"
-        ? localStorage.getItem("category") || "Прочее"
-        : "Прочее";
-
-    if (selectedCategory === "Прочее") {
-      setFilteredProducts(products);
-    } else {
-      const filtered = products.filter((product) =>
-        product.category.includes(selectedCategory)
-      );
-      setFilteredProducts(filtered);
-    }
-  };
-
-  useEffect(() => {
     applyFilter(products);
-  }, [products]);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      applyFilter(products);
-    };
-    window.addEventListener("storage", handleStorageChange);
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
   }, [products]);
 
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -150,9 +171,13 @@ const HomeContent = () => {
 
   return (
     <div className="container mx-auto py-4">
+      {/* Banner */}
+      <div className="mb-6">
+        
+      </div>
       {error && <div className="text-red-500 text-center">{error}</div>}
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {Array.from({ length: productsPerPage }).map((_, index) => (
             <ProductItemSkeleton key={index} />
           ))}
@@ -160,20 +185,18 @@ const HomeContent = () => {
       ) : currentProducts.length === 0 ? (
         <div className="text-center text-gray-500 text-xl">Product not found</div>
       ) : (
-        <div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-            {currentProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-          </div>
-          <Pagination
-            productsPerPage={productsPerPage}
-            totalProducts={filteredProducts.length}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {currentProducts.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
         </div>
       )}
+      <Pagination
+        productsPerPage={productsPerPage}
+        totalProducts={filteredProducts.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
   );
 };

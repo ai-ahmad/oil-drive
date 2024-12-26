@@ -4,7 +4,23 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 const Baner = () => {
-  const [slides, setSlides] = useState([]);
+  const [slides, setSlides] = useState([
+    {
+      _id: "1",
+      image_url: "https://oiltrade.uz/templates/oiltrade/images/3.jpg",
+      description:"GNV"
+    },
+    {
+      _id: "2",
+      image_url: "https://oiltrade.uz/templates/oiltrade/images/1.jpg",
+      description: "Tebeoil"
+    },
+    {
+      _id: "3",
+      image_url: "https://oiltrade.uz/templates/oiltrade/images/2.jpg",
+      description: "SHELL"
+    }
+  ]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
   const [isImageVisible, setIsImageVisible] = useState(true);
@@ -21,7 +37,7 @@ const Baner = () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      setSlides(data);
+      // setSlides(data);
     } catch (error) {
       console.error('Ошибка при загрузке данных:', error);
     } finally {
@@ -68,7 +84,7 @@ const Baner = () => {
   };
 
   return (
-    <div className="container px-7 relative h-[200px] sm:h-[300px] md:h-[300px] lg:h-[400px] xl:h-[500px] max-w-7xl mx-auto overflow-hidden bg-blue-600 rounded-lg"> {/* Установите синий фон */}
+    <div className="container relative h-[200px] sm:h-[300px] md:h-[300px] lg:h-[400px] xl:h-[500px] max-w-7xl mx-auto overflow-hidden bg-blue-600 rounded-lg"> {/* Установите синий фон */}
       {isLoading ? (
         <div className="flex justify-center items-center h-full">
           <p>Загрузка...</p>
@@ -79,25 +95,23 @@ const Baner = () => {
             {slides.map((slide, index) => (
               <div
                 key={slide._id} // Используем уникальный идентификатор для ключа
-                className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-                  currentSlide === index ? 'opacity-100' : 'opacity-0'
-                }`}
+                className={`absolute top-0 left-0 w-full  h-full transition-opacity duration-1000 ease-in-out ${currentSlide === index ? 'opacity-100' : 'opacity-0'
+                  }`}
               >
-             <Image
-  src={slide.image_url ? `https://admin-dash-oil-trade.onrender.com${slide.image_url}` : '/placeholder.jpg'}
-  alt={`Слайд ${slide._id}`}
-  height={500}
-  width={500}
-  className="w-full h-full object-cover"
-/>
+                <Image
+                  src={slide.image_url ? `${slide.image_url}` : '/placeholder.jpg'}
+                  alt={`Слайд ${slide._id}`}
+                  height={500}
+                  width={500}
+                  className="w-full h-full "
+                />
 
 
 
 
                 <div
-                  className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 transition-opacity duration-700 ${
-                    currentSlide === index && isDescriptionVisible ? 'opacity-100' : 'opacity-0'
-                  } bg-red-500 text-white p-4 md:p-6 rounded text-xs sm:text-sm md:text-lg w-[250px] sm:w-[300px] lg:w-[400px] h-[50px] sm:h-[70px] lg:h-[90px]`}
+                  className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 transition-opacity duration-700 ${currentSlide === index && isDescriptionVisible ? 'opacity-100' : 'opacity-0'
+                    } bg-red-500 text-white p-4 md:p-6 rounded text-xs sm:text-sm md:text-lg w-[250px] sm:w-[300px] lg:w-[400px] h-[50px] sm:h-[70px] lg:h-[90px]`}
                   style={{
                     opacity: 0.7,
                   }}
