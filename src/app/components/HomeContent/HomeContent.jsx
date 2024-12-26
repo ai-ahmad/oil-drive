@@ -13,6 +13,7 @@ const HomeContent = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(6); // Number of products to show per page
   const [loading, setLoading] = useState(true); // Loading state
+  const [kurs, setKurs] = useState(null)
   const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API;
   const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
 
@@ -36,6 +37,28 @@ const HomeContent = () => {
 
     fetchProducts();
   }, []);
+
+  const fetchKurs = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/curs`);
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch kurs data.");
+      }
+
+      const data = await response.json();
+      setKurs(data);
+    } catch (error) {
+      console.error("Error fetching kurs data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (!kurs) { // Only fetch if kurs hasn't been fetched yet
+      fetchKurs();
+    }
+  }, [kurs]); // Add kurs as a dependency to prevent unnecessary fetch calls
+
 
   const applyFilter = (products) => {
     const selectedCategory = localStorage.getItem("category") || "Прочее";
@@ -94,13 +117,13 @@ const HomeContent = () => {
                 <div className="flex justify-center h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72">
                   {console.log(product)
                   }
-                  {/* <Image
-                    src={`${product.image}`}
+                  <Image
+                    src={`/${product.image.main_images[0].replace(/\\/g, "/")}`}
                     alt={product.name}
                     width={150}
                     height={150}
                     className="object-contain max-w-full max-h-full"
-                  /> */}
+                  />
                 </div>
                 <div className="mt-4 flex flex-col justify-between h-full">
                   <p className="text-gray-800 text-sm sm:text-base md:text-lg font-semibold">
@@ -115,9 +138,13 @@ const HomeContent = () => {
                   </div>
                   <div className="flex items-center justify-between mt-4">
                     <span className="font-bold text-adaptive-sm">
-                      {product.price ? `${product.price} сум` : "- сум."}
+                      {product.price && kurs && kurs[0]
+                        ? `${(product.price * kurs[0].kurs).toLocaleString('ru-RU')} сум`
+                        : "- сум."}
                     </span>
                   </div>
+
+
                   <div className="flex items-center justify-between mt-2">
                     <span className="text-sm sm:text-base flex items-center">
                       <FaTint className="mr-1 text-adaptive-sm" /> {product.volume[0]} л
