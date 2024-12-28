@@ -1,147 +1,84 @@
 "use client";
 
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import Image from "next/image";
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const Baner = () => {
-  const [slides, setSlides] = useState([
+  const slides = [
     {
       _id: "1",
       image_url: "https://oiltrade.uz/templates/oiltrade/images/3.jpg",
-      description:"GNV"
+      description: "GNV",
     },
     {
       _id: "2",
       image_url: "https://oiltrade.uz/templates/oiltrade/images/1.jpg",
-      description: "Tebeoil"
+      description: "Tebeoil",
     },
-    { 
+    {
       _id: "3",
       image_url: "https://oiltrade.uz/templates/oiltrade/images/2.jpg",
-      description: "SHELL"
-    }
-  ]);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
-  const [isImageVisible, setIsImageVisible] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API;
-  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
-
-  const fetchSlides = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/banner');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      // setSlides(data);
-    } catch (error) {
-      console.error('Ошибка при загрузке данных:', error);
-    } finally {
-      setIsLoading(false); // Завершение загрузки
-    }
-  };
-
-  useEffect(() => {
-    fetchSlides();
-
-    const timer = setInterval(() => {
-      setIsDescriptionVisible(true);
-      setIsImageVisible(true);
-
-      setTimeout(() => {
-        setIsDescriptionVisible(false);
-        setTimeout(() => {
-          setIsImageVisible(false);
-          setTimeout(() => {
-            setCurrentSlide((prev) => (prev + 1) % slides.length);
-            setIsImageVisible(true);
-          }, 500);
-        }, 500);
-      }, 4000);
-    }, 6000);
-
-    return () => clearInterval(timer);
-  }, [slides.length]);
-
-  const handlePrevSlide = () => {
-    setIsImageVisible(false);
-    setTimeout(() => {
-      setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-      setIsImageVisible(true);
-    }, 500);
-  };
-
-  const handleNextSlide = () => {
-    setIsImageVisible(false);
-    setTimeout(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-      setIsImageVisible(true);
-    }, 500);
-  };
+      description: "SHELL",
+    },
+  ];
 
   return (
-    <div className="container relative h-[200px] sm:h-[300px] md:h-[300px] lg:h-[400px] xl:h-[500px] max-w-7xl mx-auto overflow-hidden bg-blue-600 rounded-lg"> {/* Установите синий фон */}
-      {isLoading ? (
-        <div className="flex justify-center items-center h-full">
-          <p>Загрузка...</p>
-        </div>
-      ) : (
-        slides.length > 0 && (
-          <div className="relative w-full h-full">
-            {slides.map((slide, index) => (
-              <div
-                key={slide._id} // Используем уникальный идентификатор для ключа
-                className={`absolute top-0 left-0 w-full  h-full transition-opacity duration-1000 ease-in-out ${currentSlide === index ? 'opacity-100' : 'opacity-0'
-                  }`}
-              >
-                <Image
-                  src={slide.image_url ? `${slide.image_url}` : '/placeholder.jpg'}
-                  alt={`Слайд ${slide._id}`}
-                  height={500}
-                  width={500}
-                  className="w-full h-full "
-                />
-
-
-
-
-                <div
-                  className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 transition-opacity duration-700 ${currentSlide === index && isDescriptionVisible ? 'opacity-100' : 'opacity-0'
-                    } bg-red-500 text-white p-4 md:p-6 rounded text-xs sm:text-sm md:text-lg w-[250px] sm:w-[300px] lg:w-[400px] h-[50px] sm:h-[70px] lg:h-[90px]`}
-                  style={{
-                    opacity: 0.7,
-                  }}
-                >
-                  <div className="border-y-cyan-50 border-l-stone-50">
-                    {slide.description}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )
-      )}
-
-      <button
-        onClick={handlePrevSlide}
-        className="absolute left-3 sm:left-5 top-1/2 transform -translate-y-1/2 p-0 rounded-full transition duration-300"
+    <div className="relative container w-full h-56 sm:h-72 md:h-96 lg:h-[450px] xl:h-128 2xl:h-144 max-w-7xl  overflow-hidden rounded-lg">
+      <Swiper
+        modules={[Navigation, Autoplay, Pagination]}
+        navigation={true}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 4000 }}
+        loop={true}
+        className="w-full h-full"
       >
-        <span className="m-3 sm:m-5 text-2xl sm:text-4xl text-black hover:text-white">
-          &#10094;
-        </span>
-      </button>
-      <button
-        onClick={handleNextSlide}
-        className="absolute right-3 sm:right-5 top-1/2 transform -translate-y-1/2 p-0 rounded-full transition duration-300"
-      >
-        <span className="m-3 sm:m-5 text-2xl sm:text-4xl text-black hover:text-white">
-          &#10095;
-        </span>
-      </button>
+        {slides.map((slide) => (
+          <SwiperSlide key={slide._id}>
+            <Image
+              src={slide.image_url}
+              alt={slide.description}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <style jsx global>{`
+        .swiper-button-next,
+        .swiper-button-prev {
+          background-color: #ffffff; /* Red-500 */
+          color: #ef4444; /* White */
+          border-radius: 9999px; /* Fully rounded */
+          padding: 1.05rem 1.3rem; /* p-5 */
+          width: auto; /* Maintain aspect ratio for padding */
+          height: auto;
+        }
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+          font-size: 1.2rem; /* Adjust arrow size */
+        }
+        .swiper-pagination-bullet {
+          background-color: #ffffff; /* White */
+          opacity: 0.7;
+        }
+        .swiper-pagination-bullet-active {
+          background-color: #ef4444; /* Red-500 */
+          opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+          .swiper-button-next,
+          .swiper-button-prev {
+            display: none; /* Hide navigation arrows on mobile */
+          }
+        }
+      `}</style>
     </div>
   );
 };

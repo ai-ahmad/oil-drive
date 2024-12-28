@@ -7,7 +7,7 @@ import ProductsOnSale from "./components/ProductSale/ProductSale";
 import BannerSkeleton from "./components/Banner/BannerSkeleton";
 import HomeContent from "./components/HomeContent/HomeContent";
 
-const Baner = dynamic(() => import("./components/Banner/Baner"), {
+const Banner = dynamic(() => import("./components/Banner/Baner"), {
   ssr: false,
   loading: () => <BannerSkeleton/>
 });
@@ -35,10 +35,10 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex container mx-auto w-full">
+      <main className="flex mx-auto w-full">
         
         <div className="flex-1">
-          <Baner />
+          <Banner />
           <HomeContent />
           <News />
           <ProductsOnSale />

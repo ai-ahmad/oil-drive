@@ -59,7 +59,7 @@ const ProductsOnSale = () => {
         return (
             <div className="container mx-auto py-4 w-full">
                 <div className="border border-gray-300 bg-white shadow-lg w-full max-w-screen-xl p-6 rounded-lg">
-                    <h2 className="text-black text-2xl font-montserrat mb-4">Новости:</h2>
+                    <h2 className="text-black text-2xl mb-4">Новости:</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         {Array.from({ length: 3 }).map((_, index) => (
                             <NewsSkeleton key={index} />

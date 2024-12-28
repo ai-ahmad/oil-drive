@@ -33,7 +33,7 @@ export default function News() {
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-14">
-      <h1 className="text-3xl font-semibold mb-6 font-montserrat text-center sm:text-left">
+      <h1 className="text-3xl font-semibold mb-6 text-center sm:text-left">
         Новости:
       </h1>
 

@@ -45,10 +45,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={""}>
         <Navigation />
-        <main className="flex container font-montserrat">
-          <div className="hidden lg:block">
-            <Sidebar />
-          </div>
+        <main className="flex">
           {children}
         </main>
         <Footer />
