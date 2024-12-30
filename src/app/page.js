@@ -6,6 +6,7 @@ import News from "./components/News/News";
 import ProductsOnSale from "./components/ProductSale/ProductSale";
 import BannerSkeleton from "./components/Banner/BannerSkeleton";
 import HomeContent from "./components/HomeContent/HomeContent";
+import OilCategory from "./components/OilCategory/OilCategory";
 
 const Banner = dynamic(() => import("./components/Banner/Baner"), {
   ssr: false,
@@ -39,7 +40,7 @@ export default function Home() {
         
         <div className="flex-1">
           <Banner />
-          <HomeContent />
+          <OilCategory/>
           <News />
           <ProductsOnSale />
         </div>
