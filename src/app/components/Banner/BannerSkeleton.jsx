@@ -4,7 +4,7 @@ import React from 'react';
 
 const BannerSkeleton = () => {
   return (
-    <div className="container px-7 relative h-[200px] sm:h-[300px] md:h-[300px] lg:h-[400px] xl:h-[500px] max-w-7xl mx-auto overflow-hidden rounded-lg">
+    <div className="container px-7 relative h-[200px] sm:h-[300px] md:h-[300px] lg:h-[400px] xl:h-[500px]  mx-auto overflow-hidden rounded-lg">
       <div className="absolute inset-0 flex justify-center items-center">
         <div className="skeleton w-full h-full"></div>
       </div>

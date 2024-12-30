@@ -132,19 +132,16 @@ const Navigation = () => {
               </div>
               <span className="text-xs">Подбор масла</span>
             </li>
-            <li className="flex flex-col gap-1 justify-center items-center">
-            <div className="p-2 rounded-full">
-            <FaRegHeart/>
-              </div>    
-              <span className="text-xs">Избранное</span>
-            </li>
-            <li className="flex flex-col gap-1 justify-center items-center">
-            <div className=" p-2 rounded-full">
-            <FiShoppingCart />
-              </div>    
-              <span className="text-xs">Корзина</span>
-
-            </li>
+            <div className="hidden lg:flex space-x-4 items-center">
+          <button
+            onClick={toggleModal}
+            className="btn bg-red-600 px-8 text-white"
+          >
+            <FaBars />
+            Оставить заявку
+          </button>
+         
+        </div>
           </ul>
         </div>
 
