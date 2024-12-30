@@ -10,7 +10,7 @@ const ProductsOnSale = () => {
 
     return (
         <div
-            className="relative w-full max-w-6xl h-[250px] md:h-[400px] flex items-center bg-cover bg-center mx-auto rounded-lg"
+            className="relative container w-full max-w-6xl h-[250px] md:h-[400px] flex items-center bg-cover bg-center mx-auto rounded-lg"
             style={{ backgroundImage: `url(${backgroundUrl})` }}
         >
             {/* Dark overlay */}

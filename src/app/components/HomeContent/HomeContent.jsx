@@ -30,9 +30,7 @@ const ProductCard = ({ product }) => (
           <p className="text-gray-800 text-sm sm:text-base md:text-lg font-semibold">
             {product.name}
           </p>
-          <p className="text-gray-700 text-xs sm:text-sm md:text-base">
-            {product.description}
-          </p>
+         
           <div className="flex items-center py-2 mt-2">
             <CiShoppingTag className="text-gray-600 mr-1" />
             <p className="text-sm sm:text-base">{product.category || "Uncategorized"}</p>
