@@ -79,15 +79,15 @@ const News = () => {
               className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex"
             >
               <div className="flex-1 p-6 text-left flex flex-col justify-center">
-                <h1 className="text-4xl font-bold text-gray-800 mb-4">{news.title}</h1>
+                <h1 className="text-xl md:text-4xl font-bold text-gray-800 mb-4">{news.title}</h1>
                 <div className="text-gray-400 text-sm flex items-center gap-4 mt-auto">
                   <span className="text-lg font-medium"></span>
                   <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-300">
-                    <FaArrowRight  className="text-gray-800 text-2xl" />
+                    <FaArrowRight  className="text-gray-800 text-lg md:text-2xl" />
                   </div>
                 </div>
               </div>
-              <div className="relative w-64 h-64">
+              <div className="relative flex items-center justify-center md:size-64 size-32 my-auto">
                 <Image
                   src={news.image}
                   alt={news.title}

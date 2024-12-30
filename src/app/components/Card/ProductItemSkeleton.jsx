@@ -20,6 +20,10 @@ const ProductItemSkeleton = () => {
           <div className="h-4 w-1/4 bg-gray-200 skeleton rounded"></div>
           <div className="h-4 w-1/3 bg-gray-200 skeleton rounded"></div>
         </div>
+        <div className="flex items-center justify-between mt-2">
+          <div className="h-4 w-1/4 bg-gray-200 skeleton rounded"></div>
+          <div className="h-4 w-1/3 bg-gray-200 skeleton rounded"></div>
+        </div>
       </div>
     </div>
   );
