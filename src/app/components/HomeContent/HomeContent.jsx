@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import ProductItemSkeleton from "../Card/ProductItemSkeleton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import "swiper/css/pagination"; // Import the pagination styles
+import { Pagination } from "swiper/modules"; // Import the Pagination module
 import ProductCard from "../ProductCard/ProductCard";
 
 const HomeContent = () => {
@@ -49,14 +51,13 @@ const HomeContent = () => {
 
   return (
     <div className="container mx-auto">
-      <div className="mb-6"></div>
-      <h1 className="text-2xl lg:text-3xl font-bold mb-6">Выгодное предложение</h1>
+      <h1 className="text-2xl lg:text-3xl font-bold mt-10">Выгодное предложение</h1>
 
       {error && <div className="text-red-500 text-center">{error}</div>}
 
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {Array.from({ length: productsPerPage }).map((_, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {Array.from({ length: 4 }).map((_, index) => (
             <ProductItemSkeleton key={index} />
           ))}
         </div>
@@ -75,6 +76,11 @@ const HomeContent = () => {
               slidesPerView: 4, // 4 slides for desktop
             },
           }}
+          pagination={{
+            clickable: true, // Make the pagination dots clickable
+            type: "bullets", // You can also use 'fraction' or 'progressbar'
+          }}
+          modules={[Pagination]} // Enable the Pagination module
         >
           <div className="mt-10">
             {currentProducts.map((product) => (

@@ -9,6 +9,7 @@ import HomeContent from "./components/HomeContent/HomeContent";
 import About from "./components/About/About";
 import AbouUs from "./components/AboutUs/AbouUs";
 import OilCategory from "./components/OilCategory/OilCategory";
+import Statya from "./components/Statya/Statya";
 
 const Banner = dynamic(() => import("./components/Banner/Baner"), {
   ssr: false,
@@ -44,6 +45,7 @@ export default function Home() {
           <Banner />
           <OilCategory/>
           <HomeContent />
+          <Statya />
           <ProductsOnSale />
           <News />
           <About />

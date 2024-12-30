@@ -8,8 +8,8 @@ const Footer = () => {
         {/* Social Media and Newsletter Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="font-bold text-lg mb-4">Следите за нами в социальных сетях</h4>
-            <p className="text-sm mb-4">Конкурсы, подарки и интересные посты ждут вас</p>
+            <h4 className="font-bold md:text-3xl text-xl mb-4">Следите за нами в социальных сетях</h4>
+            <p className="md:text-xl text-lg mb-4">Конкурсы, подарки и интересные посты ждут вас</p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-600 hover:text-red-600 text-2xl">
                 <FaVk />
@@ -24,7 +24,7 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="font-bold text-lg mb-4">Подпишитесь на рассылку и будьте в курсе новостей</h4>
+            <h4 className="font-bold md:text-3xl text-xl mb-4">Подпишитесь на рассылку и будьте в курсе новостей</h4>
             <div className="flex w-full max-w-sm">
               <input
                 type="email"
@@ -35,7 +35,7 @@ const Footer = () => {
                 ➔
               </button>
             </div>
-            <p className="text-xs mt-2 text-gray-500">
+            <p className="md:text-md text-sm  mt-2 text-gray-500">
               Подписываясь на рассылку, я даю согласие на получение рекламных сообщений
               и обработку персональных данных.
             </p>
