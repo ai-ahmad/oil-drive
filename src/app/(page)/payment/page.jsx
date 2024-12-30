@@ -68,7 +68,7 @@ const Payment = () => {
             {data.images && data.images.length > 0 && (
               <div className="flex justify-center">
                 <Image
-                  src={`https://oildrive-wtc-backend-1.onrender.com/${data.images[0]}`}
+                  src={`https://admin-dash-oil-trade.onrender.com/${data.images[0]}`}
                   alt={data.name}
                   width={400}
                   height={300}

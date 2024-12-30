@@ -1,10 +1,11 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { CiShoppingTag } from "react-icons/ci"; 
-import { FaDownload, FaStar } from "react-icons/fa"; // Иконки загрузки и звездочки
+import { FaDownload, FaStar } from "react-icons/fa"; 
 import axios from "axios";
-import { jsPDF } from "jspdf"; // Импорт jsPDF для создания PDF
+import { jsPDF } from "jspdf"; 
 import Loading from "@/app/components/Loading/Loading";
 
 const ProductItem = ({ params }) => {
@@ -12,7 +13,10 @@ const ProductItem = ({ params }) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [kurs, setKurs] = useState(null)
+  const [kurs, setKurs] = useState(null);
+  const [activeImage, setActiveImage] = useState(null); 
+  const [prevImage, setPrevImage] = useState(null); 
+  const [animating, setAnimating] = useState(false); 
   const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API;
   const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
 
@@ -24,7 +28,7 @@ const ProductItem = ({ params }) => {
 
       if (response.status === 200) {
         setProduct(response.data);
-        setActiveImage(response.data.image.all_images[0]);
+        setActiveImage(response.data.image.all_images[0]); 
       } else {
         setError("Product not found.");
       }
@@ -52,11 +56,10 @@ const ProductItem = ({ params }) => {
   };
 
   useEffect(() => {
-    if (!kurs) { // Only fetch if kurs hasn't been fetched yet
-      fetchKurs();
+    if (!kurs) {
+      fetchKurs(); 
     }
-  }, [kurs]); // Add kurs as a dependency to prevent unnecessary fetch calls
-
+  }, [kurs]);
 
   useEffect(() => {
     fetchProduct();
@@ -103,35 +106,33 @@ const ProductItem = ({ params }) => {
 
   return (
     <div className="flex flex-col lg:flex-row mt-4 container space-x-6">
-      
-
       <div className="lg:w-full bg-white p-12 rounded-lg shadow-lg flex flex-col space-y-6">
         <div className="flex lg:flex-row flex-col w-full">
 
-        <div className="flex flex-col items-start space-y-6 lg:w-1/4 lg:ml-12">
-        {product.image && product.image.all_images.length > 0 && (
-          product.image.all_images.map((img, index) => (
-            <Image
-              key={index}
-              src={`https://admin-dash-oil-trade.onrender.com/${img}`}
-              alt={`${product.name} image ${index + 1}`}
-              width={150}
-              height={150}
-              className={`object-cover cursor-pointer rounded-lg border-4 transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl transform ${
-                activeImage === img ? 'border-red-500 scale-105' : 'border-gray-300 hover:scale-110'
-              }`}
-              onClick={() => handleImageChange(img)}
-            />
-          ))
-        )}
-      </div> 
-          <div className="relative h-[400px] w-[350px] overflow-hidden">
+          <div className="flex flex-col items-start space-y-6 lg:w-1/4 lg:ml-12">
+            {product.image && product.image.all_images.length > 0 &&
+              product.image.all_images.map((img, index) => (
+                <Image
+                  key={index}
+                  src={`https://admin-dash-oil-trade.onrender.com/${img}`}
+                  alt={`${product.name} image ${index + 1}`}
+                  width={180}  // Увеличиваем размер изображения
+                  height={180}
+                  className={`object-cover cursor-pointer rounded-lg border-4 transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl transform ${
+                    activeImage === img ? 'border-red-500 scale-105' : 'border-gray-300 hover:scale-110'
+                  }`}
+                  onClick={() => handleImageChange(img)}
+                />
+              ))}
+          </div>
+
+          <div className="relative h-[450px] w-[400px] overflow-hidden ml-8"> {/* Увеличиваем размеры области для изображения */}
             {prevImage && (
               <Image
                 src={`https://admin-dash-oil-trade.onrender.com/${prevImage}`}
                 alt="Previous image"
-                width={350}
-                height={400}
+                width={400}  // Увеличиваем размер изображения
+                height={450}
                 className={`absolute top-0 left-0 object-cover rounded-lg shadow-md transition-transform duration-500 ease-in-out opacity-0 ${
                   animating ? 'translate-x-full' : 'translate-x-0'
                 }`}
@@ -140,10 +141,10 @@ const ProductItem = ({ params }) => {
 
             {activeImage && (
               <Image
-                src={`hhttps://admin-dash-oil-trade.onrender.com/${activeImage}`}
+                src={`https://admin-dash-oil-trade.onrender.com/${activeImage}`}
                 alt="Active image"
-                width={350}
-                height={400}
+                width={400}  // Увеличиваем размер изображения
+                height={450}
                 className={`absolute top-0 left-0 object-cover rounded-lg shadow-md transition-transform duration-500 ease-in-out opacity-100 ${
                   animating ? '-translate-x-full' : 'translate-x-0'
                 }`}
@@ -151,11 +152,9 @@ const ProductItem = ({ params }) => {
             )}
           </div>
 
-          <div className="flex flex-col space-y-4 lg:ml-8 w-full lg:w-1/2">
+          <div className="flex flex-col space-y-4 lg:ml-16 w-full lg:w-1/2"> {/* Сдвигаем текст вправо, увеличив отступ */}
             <h2 className="text-3xl font-bold text-gray-900">{product.name}</h2>
-            
 
-            {/* Рейтинг продукта */}
             <div className="flex items-center">
               <p className="text-gray-700 text-lg"><strong>Рейтинг:</strong></p>
               <div className="ml-2 flex items-center">
@@ -167,27 +166,20 @@ const ProductItem = ({ params }) => {
               <span className="ml-2 text-lg text-gray-700">({product.rating})</span>
             </div>
 
-            {/* Запас продукта */}
             <p className="text-gray-700 text-lg">
               <strong>Запас:</strong> {product.stock > 0 ? `${product.stock} единиц` : 'Нет в наличии'}
             </p>
             <p className="text-gray-700 text-lg">
               <strong>Объем:</strong> {product.volume.join(', ')} л
             </p>
-            <p className="text-gray-700 text-lg"><strong>Бренд:</strong> {product.brand}</p>
-            <p className="text-gray-700 text-lg"><strong>Страна производитель:</strong> {product.country}</p>
-            <p className="text-gray-700 text-lg flex items-center">
-              <strong>Категория:</strong>
-              <CiShoppingTag className="inline-block mr-1 text-2xl text-gray-500" /> {product.category}
-            </p>
-            <div className="mt-4 flex gap-5 items-center">
-              <span className="font-bold text-xl text-gray-800">
-                {product.price ? `${(product.price * kurs).toFixed(2)} сум` : "N/A сум"}
-              </span>
-              <button
-                onClick={handleDownload}
-                className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
-              >
+            <p className="text-gray-700 text-lg"><strong>Категория:</strong> {product.category}</p>
+            <p className="text-gray-700 text-lg"><strong>Штук:</strong> {product.stock}</p>
+            <p className="text-gray-700 text-lg"><strong>Стоимость: </strong> {product.price}</p>
+            
+            <p className="text-gray-700 text-lg"><strong>Скидочная цена: </strong> {product.discount_price}</p>
+
+            <div className="flex items-center space-x-4 mt-4">
+              <button onClick={handleDownload} className="btn btn-primary flex items-center space-x-2">
                 <FaDownload />
                 <span>Скачать PDF</span>
               </button>
@@ -195,48 +187,11 @@ const ProductItem = ({ params }) => {
           </div>
         </div>
 
-        <div className="flex flex-col bg-white p-8 lg:p-12 rounded-lg shadow-lg w-full lg:max-w-5xl mx-auto mt-12">
-
-          <div className="flex flex-col lg:flex-row w-full justify-around items-start">
-            <div className="lg:w-1/2 flex justify-center items-center mb-6 lg:mb-0">
-              <Image
-                src={`${imgUrl}/${product.image}`}
-                alt={product.name}
-                width={300}
-                height={400}
-                className="object-contain"
-              />
-            </div>
-
-            <div className="lg:w-1/2 p-6 space-y-6">
-              <h2 className="text-3xl font-bold text-gray-800">{product.name}</h2>
-              <div className="space-y-4 text-gray-600">
-                <p><strong>Артикул:</strong> {product.article}</p>
-                <p><strong>Объем:</strong> {product.volume[0]} л</p>
-                <p><strong>Бренд:</strong> {product.brand}</p>
-                <p><strong>Страна производитель:</strong> {product.country}</p>
-                <p><strong>Категория:</strong> <CiShoppingTag className="inline-block mr-1" /> {product.category}</p>
-              </div>
-
-              <div className="mt-6 flex items-center gap-16">
-                <span className="font-bold text-2xl text-gray-800">
-                  {product.price && kurs && kurs[0]
-                    ? `${(product.price * kurs[0].kurs).toLocaleString('ru-RU')} сум`
-                    : "- сум."}
-                </span>
-                <div>
-                  <button>Скачать</button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <div className="w-full mt-6">
-            <h3 className="text-2xl font-bold mb-6 text-gray-800">Описание</h3>
-            <p className="text-gray-700 leading-relaxed">{product.description}</p>
-          </div>
+        <div className="mt-6 lg:mt-0 lg:w-1/4 lg:ml-8">
+          <h3 className="text-xl font-semibold text-gray-900">Описание</h3>
+          <p className="text-gray-700 text-lg">{product.description}</p>
         </div>
+
       </div>
     </div>
   );

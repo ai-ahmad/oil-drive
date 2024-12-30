@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Loading from "@/app/components/Loading/Loading";
 import axios from "axios";
@@ -10,12 +10,14 @@ export default function News() {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API;
-  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;  // Базовый URL для изображений
+  const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
 
   useEffect(() => {
     const getNews = async () => {
       try {
+        console.log("Fetching news from:", apiUrl);  // Для отладки
         const response = await axios.get(`${apiUrl}/news`);
+        console.log("Fetched news:", response.data);  // Для отладки
         setNews(response.data);
       } catch (error) {
         console.error("Error fetching news:", error);
@@ -25,7 +27,7 @@ export default function News() {
     };
 
     getNews();
-  }, []);
+  }, [apiUrl]);
 
   if (loading) {
     return <Loading />;
@@ -46,7 +48,7 @@ export default function News() {
               <Image
                 src={
                   item.images && item.images.length > 0
-                    ? `${imgUrl}${item.images[0]}` // Формируем полный URL для изображения
+                    ? `${imgUrl}${item.images[0]}`
                     : "/default.jpg"
                 }
                 alt={item.title}

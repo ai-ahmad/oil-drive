@@ -58,7 +58,7 @@ const Page = () => {
               {item.images && item.images.length > 0 && (
                 <div className="flex justify-center sm:justify-start">
                   <img
-                    src={`https://oildrive-wtc-backend-1.onrender.com/${item.images[0]}`}
+                    src={`https://admin-dash-oil-trade.onrender.com/${item.images[0].replace(/\\/g, '/')}`}
                     alt={item.name}
                     className="w-full max-w-xs rounded-lg shadow-md"
                   />
@@ -66,10 +66,7 @@ const Page = () => {
               )}
             </li>
           ))}
-          
-        
         </ul>
-        
       ) : (
         <p className="text-gray-500 text-center">Нет данных для отображения</p>
       )}

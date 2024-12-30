@@ -1,51 +1,49 @@
-"use client";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import NewsSkeleton from "./NewsSkeleton";
+import { FaArrowRight } from "react-icons/fa6";
 
 const News = () => {
   const [newsData, setNewsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Static news data instead of fetching from an API
   const staticNewsData = [
     {
       id: "1",
-      title: "Новость 1",
-      description: "Описание новости 1",
+      title: "Моторные масла",
+      description: "Описание моторных масел и их характеристик.",
       date: "01/01/2024",
-      image: "https://oiltrade.uz/uploads/posts/2020-03/thumbs/1583766028_delkor.png",
+      image: "https://ru.lukoil-shop.com/_next/image/?url=%2Fimages%2Fpng%2FmainCatalog%2Foil1v2.png&w=384&q=75",
     },
     {
       id: "2",
-      title: "Новость 2",
-      description: "Описание новости 2",
+      title: "Трансмиссионные масла",
+      description: "Информация о трансмиссионных маслах.",
       date: "02/01/2024",
-      image: "https://oiltrade.uz/uploads/posts/2020-03/thumbs/1583766028_delkor.png"
+      image: "https://ru.lukoil-shop.com/_next/image/?url=%2Fimages%2Fpng%2FmainCatalog%2Foil2v2.png&w=384&q=75",
     },
     {
       id: "3",
-      title: "Новость 3",
-      description: "Описание новости 3",
+      title: "Охлаждающие жидкости",
+      description: "Описание охлаждающих жидкостей и их преимущества.",
       date: "03/01/2024",
-      image: "https://oiltrade.uz/uploads/posts/2020-03/thumbs/1583766028_delkor.png",
+      image: "https://ru.lukoil-shop.com/_next/image/?url=%2Fimages%2Fpng%2FmainCatalog%2Foil3v2.png&w=384&q=75",
     },
     {
       id: "4",
-      title: "Новость 4",
-      description: "Описание новости 4",
+      title: "Тормозные жидкости",
+      description: "Особенности тормозных жидкостей.",
       date: "04/01/2024",
-      image: "https://oiltrade.uz/uploads/posts/2020-03/thumbs/1583766028_delkor.png",
+      image: "https://ru.lukoil-shop.com/_next/image/?url=%2Fimages%2Fpng%2FmainCatalog%2Foil4v2.png&w=384&q=75",
     },
   ];
 
   useEffect(() => {
-    // Simulate loading
     setTimeout(() => {
-      setNewsData(staticNewsData); // Set static data after a delay
+      setNewsData(staticNewsData);
       setLoading(false);
-    }, 1000); // Simulate delay for loading
+    }, 1000);
   }, []);
 
   if (loading) {
@@ -73,26 +71,32 @@ const News = () => {
 
   return (
     <div className="container mx-auto py-4 w-full">
-      <div className="border border-gray-300 bg-white shadow-lg w-full max-w-screen-xl p-6 rounded-lg">
-        <h2 className="text-black text-2xl mb-4">Новости:</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="py-8">
+        <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
           {newsData.map((news) => (
-            <a
-              href={`/news/${news.id}`}
+            <div
               key={news.id}
-              className="border border-gray-300 bg-white shadow-lg transition-transform duration-200 flex flex-col p-4 mb-4 hover:scale-105 hover:shadow-2xl rounded-md"
+              className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex"
             >
-              <Image
-                src={news.image}
-                alt={news.title}
-                width={190}
-                height={120}
-                className="w-full h-[120px] object-cover mb-2"
-              />
-              <div className="p-2 text-center">
-                <h3 className="text-lg font-semibold text-gray-800 mb-1">{news.title}</h3>
+              <div className="flex-1 p-6 text-left flex flex-col justify-center">
+                <h1 className="text-4xl font-bold text-gray-800 mb-4">{news.title}</h1>
+                <div className="text-gray-400 text-sm flex items-center gap-4 mt-auto">
+                  <span className="text-lg font-medium"></span>
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-300">
+                    <FaArrowRight  className="text-gray-800 text-2xl" />
+                  </div>
+                </div>
               </div>
-            </a>
+              <div className="relative w-64 h-64">
+                <Image
+                  src={news.image}
+                  alt={news.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-r-lg"
+                />
+              </div>
+            </div>
           ))}
         </div>
       </div>
