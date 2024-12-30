@@ -97,7 +97,7 @@ const HomeContent = () => {
   return (
     <div className="container mx-auto py-4">
       <div className="mb-6"></div>
-      <h1 className="text-6xl font-bold">Выгодное предложение</h1> {/* Сделали жирнее */}
+      <h1 className="text-3xl font-bold">Выгодное предложение</h1> {/* Сделали жирнее */}
 
       {error && <div className="text-red-500 text-center">{error}</div>}
 

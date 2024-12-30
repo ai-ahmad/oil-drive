@@ -39,7 +39,7 @@ export default function Home() {
     <>
       <main className="flex mx-auto w-full">
         
-        <div className="flex-1">
+        <div className="flex-1 container">
           <Banner />
           <HomeContent />
           <ProductsOnSale />
