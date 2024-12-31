@@ -147,7 +147,6 @@ const Navigation = () => {
         </div>
           </div>
         </div>
-
         <button
           onClick={toggleOptionsMenu}
           className="text-white p-2 bg-red-600 rounded-full lg:hidden"
