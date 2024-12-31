@@ -1,22 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { CiShoppingTag } from "react-icons/ci"; 
-import { FaDownload, FaStar } from "react-icons/fa"; 
+import { CiShoppingTag } from "react-icons/ci";
+import { FaDownload, FaStar } from "react-icons/fa";
 import axios from "axios";
-import { jsPDF } from "jspdf"; 
+import { jsPDF } from "jspdf";
 import Loading from "@/app/components/Loading/Loading";
 
 const ProductItem = ({ params }) => {
-  const { id } = params;
+  const { id } = React.use(params); // Unwrap the promise
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [kurs, setKurs] = useState(null);
-  const [activeImage, setActiveImage] = useState(null); 
-  const [prevImage, setPrevImage] = useState(null); 
-  const [animating, setAnimating] = useState(false); 
+  const [activeImage, setActiveImage] = useState(null);
+  const [prevImage, setPrevImage] = useState(null);
+  const [animating, setAnimating] = useState(false);
   const apiUrl = process.env.NEXT_PUBLIC_OILDRIVE_API;
   const imgUrl = process.env.NEXT_PUBLIC_OILDRIVE_IMG_API;
 
@@ -24,14 +25,18 @@ const ProductItem = ({ params }) => {
     if (!id) return;
 
     try {
-      const response = await axios.get(`https://admin-dash-oil-trade.onrender.com/api/v1/card/${id}`);
+      const response = await axios.get(
+        `https://admin-dash-oil-trade.onrender.com/api/v1/card/${id}`
+      );
 
       if (response.status === 200) {
         setProduct(response.data);
-        setActiveImage(response.data.image.all_images[0]); 
+        setActiveImage(response.data.image.all_images[0]);
       } else {
         setError("Product not found.");
       }
+
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching product:", error);
       setError(error.message);
@@ -57,7 +62,7 @@ const ProductItem = ({ params }) => {
 
   useEffect(() => {
     if (!kurs) {
-      fetchKurs(); 
+      fetchKurs();
     }
   }, [kurs]);
 
@@ -103,7 +108,7 @@ const ProductItem = ({ params }) => {
   if (!product) {
     return <div className="text-center">No product available.</div>;
   }
-
+  
   return (
     <div className="flex flex-col lg:flex-row mt-4 container space-x-6">
       <div className="lg:w-full bg-white p-12 rounded-lg shadow-lg flex flex-col space-y-6">
@@ -178,8 +183,8 @@ const ProductItem = ({ params }) => {
             
             <p className="text-gray-700 text-lg"><strong>Скидочная цена: </strong> {product.discount_price}</p>
 
-            <div className="flex items-center space-x-4 mt-4">
-              <button onClick={handleDownload} className="btn btn-primary flex items-center space-x-2">
+            <div className="flex items-center space-x-4 mt-4 border-none">
+              <button onClick={handleDownload} className="btn btn-primary flex items-center space-x-2 border-none">
                 <FaDownload />
                 <span>Скачать PDF</span>
               </button>
@@ -187,7 +192,7 @@ const ProductItem = ({ params }) => {
           </div>
         </div>
 
-        <div className="mt-6 lg:mt-0 lg:w-1/4 lg:ml-8">
+        <div className="mt-6 lg:mt-0">
           <h3 className="text-xl font-semibold text-gray-900">Описание</h3>
           <p className="text-gray-700 text-lg">{product.description}</p>
         </div>

@@ -28,7 +28,7 @@ const ProductsOnSale = () => {
                     воспользуйтесь нашим подборщиком.
                 </p>
                 <Link href="/help-picker" passHref>
-                    <button className="bg-red-600 hover:bg-red-700 text-white text-sm sm:text-base lg:text-lg font-semibold px-6 py-3 rounded-md transition duration-300">
+                    <button className="bg-red-600 border-none hover:bg-red-700 text-white text-sm sm:text-base lg:text-lg font-semibold px-6 py-3 rounded-md transition duration-300">
                         Подобрать масло
                     </button>
                 </Link>

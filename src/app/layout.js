@@ -43,9 +43,9 @@ const Sidebar = dynamic(() => import("./components/SideBar/Sidebar"), {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={""}>
+      <body className={"text-black border-none bg-white"}>
         <Navigation />
-        <main className="flex">
+        <main className="flex bg-white text-black ">
           {children}
         </main>
         <Footer />
