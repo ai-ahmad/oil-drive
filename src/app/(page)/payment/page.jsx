@@ -33,9 +33,10 @@ const Payment = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://oildrive-wtc-backend-1.onrender.com/api/v1/zakaz');
+        const response = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/zakaz');
         const result = await response.json();
-
+        console.log(result);
+        
         if (result.length > 1) {
           setData(result[result.length - 2]);
         }
@@ -52,7 +53,7 @@ const Payment = () => {
   if (loading) {
     return <Loading />;
   }
-
+  
   return (
     <ErrorBoundary>
       <div className="container mx-auto px-4 sm:px-6 lg:px-14">

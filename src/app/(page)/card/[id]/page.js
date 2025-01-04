@@ -9,7 +9,7 @@ import { jsPDF } from "jspdf";
 import Loading from "@/app/components/Loading/Loading";
 
 const ProductItem = ({ params }) => {
-  const { id } = params;
+  const { id } = params
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

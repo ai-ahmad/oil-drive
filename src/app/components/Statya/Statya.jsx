@@ -48,6 +48,7 @@ const Statya = () => {
                   style={{
                     backgroundImage: `url(https://admin-dash-oil-trade.onrender.com${item.images[0]})`,
                   }}
+                  
                 />
               ) : (
                 <div className="w-full h-80 bg-gray-200 flex justify-center items-center">
