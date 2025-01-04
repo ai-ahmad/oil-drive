@@ -112,13 +112,13 @@ const ProductDetail = ({ params }) => {
               {!isFullscreen ? (
                 <button 
                   onClick={handleImageClick} 
-                  className="absolute top-2 right-2 p-2 bg-gray-700 text-white rounded-full focus:outline-none z-50">
+                  className="absolute top-2 right-2 p-2 bg-gray-700 border-none text-white rounded-full focus:outline-none z-50">
                   <FaExpand />
                 </button>
               ) : (
                 <button 
                   onClick={exitFullscreen} 
-                  className="absolute top-2 right-2 p-2 bg-gray-700 text-white rounded-full focus:outline-none z-50">
+                  className="absolute top-2 right-2 p-2 bg-gray-700 border-none text-white rounded-full focus:outline-none z-50">
                   <FaCompress />
                 </button>
               )}

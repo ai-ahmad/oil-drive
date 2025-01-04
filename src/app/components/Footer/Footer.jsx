@@ -3,7 +3,7 @@ import { FaChevronDown } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#262f38] text-gray-400 py-8 px-4 md:px-20">
+    <footer className="bg-[#262f38] text-gray-400 py-8">
       <div className="container mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-start">
           <div>

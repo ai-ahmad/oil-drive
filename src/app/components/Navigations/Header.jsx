@@ -7,8 +7,8 @@ import axios from "axios";
 import Category from "../SideBar/Category";
 import { SlOptionsVertical } from "react-icons/sl";
 import { FaDroplet } from "react-icons/fa6";
-import { FaRegHeart } from "react-icons/fa";
-import { FiShoppingCart } from "react-icons/fi";
+import { SlEnvolopeLetter } from "react-icons/sl";
+import { BiMessageSquareDetail } from "react-icons/bi";
 
 const Navigation = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -61,7 +61,7 @@ const Navigation = () => {
   };
 
   return (
-    <header className="bg-white mb-6">
+    <header className="bg-white pb-6">
       <nav className="hidden lg:block w-full">
         <div className="container mx-auto flex items-center justify-between w-full py-3">
           <div className="space-x-10">
@@ -83,6 +83,7 @@ const Navigation = () => {
             <a href="/contact" className="hover:text-gray-400">
               Контакты
             </a>
+            
           </div>
           <div>
             <span className="text-adaptive-xs">
@@ -94,26 +95,28 @@ const Navigation = () => {
       <div className="container mx-auto flex justify-between items-center py-4 ">
         <button
           onClick={toggleSidebar}
-          className="text-white p-2 bg-slate-800 rounded-full lg:hidden"
+          className="text-white p-2 hover:bg-red-700 border-none bg-red-600 rounded-full lg:hidden"
           aria-label="Open sidebar"
         >
           {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
 
         <div className="flex items-center">
+          <a href="/">
           <Image
             src="/assets/img/oildrive-red.png"
             alt="OilDrive Logo"
             width={230}
             height={56}
-            className="h-12"
+            className="h-12 rounded-md"
           />
+          </a>
         </div>
 
         <div className="hidden lg:flex space-x-4 items-center">
           <button
             onClick={toggleModal}
-            className="btn bg-red-600 px-8 text-white"
+            className="btn bg-red-600 border-none hover:bg-red-700 px-8 text-white"
           >
             <FaBars />
             Каталог
@@ -121,33 +124,27 @@ const Navigation = () => {
           <input
             type="text"
             placeholder="Поиск..."
-            className="input input-bordered w-[500px]"
+            className="input bg-white input-bordered w-[500px]"
           />
         </div>
-        <div>
-          <ul className="flex gap-8">
-            <li className="flex flex-col gap-1 justify-center items-center">
-              <div className="bg-red-500 p-2 text-white rounded-full">
-              <FaDroplet />
-              </div>
-              <span className="text-xs">Подбор масла</span>
-            </li>
-            <div className="hidden lg:flex space-x-4 items-center">
+        <div className="hidden lg:flex">
+          <div className="flex gap-8">
+            
+            <div className=" space-x-4 items-center">
           <button
             onClick={toggleModal}
-            className="btn bg-red-600 px-8 text-white"
+            className="btn bg-red-600 border-none px-8 hover:bg-red-700 text-white"
           >
-            <FaBars />
+            <BiMessageSquareDetail size={18}/>
             Оставить заявку
           </button>
          
         </div>
-          </ul>
+          </div>
         </div>
-
         <button
           onClick={toggleOptionsMenu}
-          className="text-white p-2 bg-slate-800 rounded-full lg:hidden"
+          className="text-white p-2 border-none bg-red-600 rounded-full lg:hidden"
           aria-label="Open options"
         >
           {isOptionsOpen ? (
@@ -162,15 +159,12 @@ const Navigation = () => {
         <div className="lg:hidden p-4">
           <div className="flex flex-col items-center space-y-3">
             <div className="text-center">
-              <div className="text-red-600 text-lg font-semibold">998 99</div>
-              <div className="text-2xl font-bold">797-48-77</div>
+              <div className="text-red-600 text-lg font-semibold">998 99 999-99-99</div>
               <p className="text-gray-500 text-sm">
                 Время работы: с 9.00 до 17.00, сб-вс выходной
               </p>
             </div>
             <div className="text-center">
-              <div className="text-red-600 text-lg font-semibold">998 99</div>
-              <div className="text-2xl font-bold">837-25-70</div>
               <p className="text-gray-500 text-sm">
                 Наша почта:{" "}
                 <a href="mailto:oildrive@gmail.com" className="text-red-600">
@@ -196,7 +190,7 @@ const Navigation = () => {
       >
         <button
           onClick={closeSidebar}
-          className="absolute top-3 right-3 text-3xl text-white"
+          className="absolute top-3 border-none right-3 text-3xl text-white"
           aria-label="Close sidebar"
         >
           <FaTimes />
@@ -221,6 +215,9 @@ const Navigation = () => {
             <a href="/contact" className="hover:text-gray-400 text-lg">
               Контакты
             </a>
+            <a href="/contact" className="hover:text-gray-400 text-lg">
+              Подбор масла
+            </a>
           </div>
           <Category />
         </nav>
@@ -228,7 +225,7 @@ const Navigation = () => {
 
       {isModalOpen && (
         <div className="modal modal-open">
-          <div className="modal-box w-full max-w-md">
+          <div className="modal-box w-full max-w-md bg-white">
             <h2 className="text-lg font-bold mb-4">Оставить заявку</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
@@ -244,7 +241,7 @@ const Navigation = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="input input-bordered w-full"
+                  className="input bg-white input-bordered w-full"
                   required
                 />
               </div>
@@ -261,7 +258,7 @@ const Navigation = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="input input-bordered w-full"
+                  className="input bg-white input-bordered w-full"
                   required
                 />
               </div>
@@ -278,7 +275,7 @@ const Navigation = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="input input-bordered w-full"
+                  className="input bg-white input-bordered w-full"
                   required
                 />
               </div>
@@ -294,18 +291,18 @@ const Navigation = () => {
                   name="comment"
                   value={formData.comment}
                   onChange={handleInputChange}
-                  className="textarea textarea-bordered w-full"
+                  className="textarea bg-white textarea-bordered w-full"
                 />
               </div>
               <div className="modal-action">
                 <button
                   type="button"
                   onClick={toggleModal}
-                  className="btn btn-ghost"
+                  className="btn btn-ghost border-none"
                 >
                   Отмена
                 </button>
-                <button type="submit" className="btn bg-red-600 text-white">
+                <button type="submit" className="btn bg-red-600 border-none text-white">
                   Отправить
                 </button>
               </div>

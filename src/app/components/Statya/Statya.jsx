@@ -33,8 +33,8 @@ const Statya = () => {
   }
 
   return (
-    <div className="p-5 container">
-      <h1 className="text-6xl font-bold text-center mb-10">Статьи и новости</h1>
+    <div className="py-10 container">
+      <h1 className="text-3xl font-bold mb-4">Статьи и новости</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {news.map((item) => (
           <Link href={`/news/${item._id}`} key={item._id}> {/* Используем Link для перехода по ID */}

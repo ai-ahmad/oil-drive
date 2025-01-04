@@ -28,13 +28,13 @@ const Baner = () => {
   ];
 
   return (
-    <div className="relative container w-full h-56 sm:h-72 md:h-96 lg:h-[450px] xl:h-128 2xl:h-144  overflow-hidden rounded-lg">
+    <div className="relative container w-full h-56 sm:h-72 md:h-96 lg:h-[450px] xl:h-128 2xl:h-144 overflow-hidden rounded-lg">
       <Swiper
         modules={[Navigation, Autoplay, Pagination]}
         navigation={true}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 4000 }}
-        loop={true}
+        autoplay={{ delay: 4000 }}  
+        loop={true} 
         className="w-full h-full"
       >
         {slides.map((slide) => (

@@ -8,6 +8,7 @@ import BannerSkeleton from "./components/Banner/BannerSkeleton";
 import HomeContent from "./components/HomeContent/HomeContent";
 import About from "./components/About/About";
 import AbouUs from "./components/AboutUs/AbouUs";
+import OilCategory from "./components/OilCategory/OilCategory";
 import Statya from "./components/Statya/Statya";
 
 const Banner = dynamic(() => import("./components/Banner/Baner"), {
@@ -40,12 +41,12 @@ export default function Home() {
     <>
       <main className="flex mx-auto w-full">
         
-        <div className="flex-1">
+        <div className="flex-1 container">
           <Banner />
+          <OilCategory/>
           <HomeContent />
           <Statya />
           <ProductsOnSale />
-          <HomeContent />
           <News />
           <About />
           <AbouUs />
