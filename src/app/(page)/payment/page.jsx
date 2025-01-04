@@ -28,22 +28,28 @@ class ErrorBoundary extends React.Component {
 
 const Payment = () => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true); // Track loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('https://admin-dash-oil-trade.onrender.com/api/v1/zakaz');
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const result = await response.json();
-        console.log(result);
-        
-        if (result.length > 1) {
-          setData(result[result.length - 2]);
+
+        console.log('API Response:', result);
+
+        if (Array.isArray(result) && result.length > 0) {
+          setData(result[0]); // Работаем с первым элементом массива
+        } else {
+          console.error('No sufficient data in response:', result);
         }
       } catch (error) {
         console.error('Error fetching the data:', error);
       } finally {
-        setLoading(false); // Set loading to false after data is fetched
+        setLoading(false);
       }
     };
 
@@ -53,7 +59,7 @@ const Payment = () => {
   if (loading) {
     return <Loading />;
   }
-  
+
   return (
     <ErrorBoundary>
       <div className="container mx-auto px-4 sm:px-6 lg:px-14">
