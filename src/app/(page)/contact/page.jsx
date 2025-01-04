@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
 import Loading from "@/app/components/Loading/Loading";
@@ -22,6 +23,12 @@ const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), {
   ssr: false,
 });
 
+const Container = ({ children, className }) => {
+  return (
+    <div className={`max-w-3xl mx-auto py-8 px-4 ${className}`}>{children}</div>
+  );
+};
+
 const Contact = () => {
   const [contacts, setContacts] = useState([]);
   const [isMounted, setIsMounted] = useState(false);
@@ -31,9 +38,7 @@ const Contact = () => {
 
     const fetchContacts = async () => {
       try {
-        const response = await axios.get(
-          "https://oildrive-wtc-backend-1.onrender.com/api/v1/contact"
-        );
+        const response = await axios.get("https://oildrive-wtc-backend-1.onrender.com/api/v1/contact");
         setContacts(response.data);
       } catch (error) {
         console.error("Error fetching contacts:", error);
@@ -41,13 +46,6 @@ const Contact = () => {
     };
 
     fetchContacts();
-
-    return () => {
-       mapContainer = document.querySelector(".leaflet-container");
-      if (mapContainer && mapContainer._leaflet_id) {
-        mapContainer._leaflet_id = null;
-      }
-    };
   }, []);
 
   return (
@@ -70,18 +68,25 @@ const Contact = () => {
                   <strong>Описание:</strong> {contact.description}
                 </p>
 
-                {contact.images && contact.images.length > 0 ? (
-                  contact.images.map((image, index) => (
-                    <div key={index} className="mb-4">
-                      <img
-                        src={`https://admin-dash-oil-trade.onrender.com/${image}`}
-                        alt={`contact-${index}`}
-                        className="w-[100px] h-[100px] object-cover rounded"
-                      />
-                    </div>
-                  ))
+                {contact.images.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {contact.images.map((image, index) => (
+                      <div
+                        key={index}
+                        className="overflow-hidden rounded-lg border"
+                      >
+                        <Image
+                          src={image.image}
+                          alt={`Image of ${contact.name}`}
+                          width={400}
+                          height={250}
+                          className="rounded-lg object-cover w-full"
+                        />
+                      </div>
+                    ))}
+                  </div>
                 ) : (
-                  <span className="text-gray-500 italic">No images</span>
+                  <p>No images available for this contact.</p>
                 )}
               </div>
             ))}
