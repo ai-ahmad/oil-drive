@@ -26,6 +26,7 @@ const HomeContent = () => {
         throw new Error("Failed to fetch products data.");
       }
       const data = await response.json();
+      console.log(data);
       setProducts(data);
       setFilteredProducts(data);
       setLoading(false);
