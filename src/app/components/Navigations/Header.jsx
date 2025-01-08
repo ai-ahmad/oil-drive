@@ -149,9 +149,11 @@ const Navigation = () => {
             <ul className="py-4 flex flex-col items-center justify-between gap-3 p-10">
               {categories.length > 0 ? (
                 categories.map((category, index) => (
-                  <li key={index} className="p-2 border rounded-lg w-full flex justify-center hover:bg-red-600 hover:text-white active:scale-95 transition duration-300">
+                  <a href="/category">
+                    <li key={index} className="p-2 border rounded-lg w-full flex justify-center hover:bg-red-600 hover:text-white active:scale-95 transition duration-300">
                     {category.category_name}
                   </li>
+                  </a>
                 ))
               ) : (
                 <p>Нет доступных категорий</p>
