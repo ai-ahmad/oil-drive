@@ -14,6 +14,8 @@ const Navigation = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -60,6 +62,21 @@ const Navigation = () => {
     }
   };
 
+  const fetchCategories = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        "https://admin-dash-oil-trade.onrender.com/api/v1/category"
+      );
+      setCategories(response.data || []);
+    } catch (error) {
+      console.error("Ошибка загрузки категорий:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
   return (
     <header className="bg-white pb-6">
       <nav className="hidden lg:block w-full">
@@ -83,12 +100,9 @@ const Navigation = () => {
             <a href="/contact" className="hover:text-gray-400">
               Контакты
             </a>
-            
           </div>
           <div>
-            <span className="text-adaptive-xs">
-              +998 99 999-99-99
-            </span>
+            <span className="text-adaptive-xs">+998 99 999-99-99</span>
           </div>
         </div>
       </nav>
@@ -103,24 +117,54 @@ const Navigation = () => {
 
         <div className="flex items-center">
           <a href="/">
-          <Image
-            src="/assets/img/oildrive-red.png"
-            alt="OilDrive Logo"
-            width={230}
-            height={56}
-            className="h-12 rounded-md"
-          />
+            <Image
+              src="/assets/img/oildrive-red.png"
+              alt="OilDrive Logo"
+              width={230}
+              height={56}
+              className="h-12 rounded-md"
+            />
           </a>
         </div>
 
         <div className="hidden lg:flex space-x-4 items-center">
           <button
-            onClick={toggleModal}
+            onClick={() => {
+              document.getElementById("my_modal_4").showModal(); 
+              fetchCategories(); // Trigger the function
+            }}
             className="btn bg-red-600 border-none hover:bg-red-700 px-8 text-white"
           >
             <FaBars />
             Каталог
           </button>
+          <dialog id="my_modal_4" className="modal">
+        <div className="modal-box ">
+          <h3 className="font-bold text-lg">Категории</h3>
+          {isLoading ? (
+            <div className="flex items-center justify-center w-full py-5">
+              <span className="loading loading-spinner loading-lg"></span>
+            </div>
+          ) : (
+            <ul className="py-4 flex flex-col items-center justify-between gap-3 p-10">
+              {categories.length > 0 ? (
+                categories.map((category, index) => (
+                  <li key={index} className="p-2 border rounded-lg w-full flex justify-center hover:bg-red-600 hover:text-white active:scale-95 transition duration-300">
+                    {category.category_name}
+                  </li>
+                ))
+              ) : (
+                <p>Нет доступных категорий</p>
+              )}
+            </ul>
+          )}
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn">Закрыть</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
           <input
             type="text"
             placeholder="Поиск..."
@@ -129,17 +173,15 @@ const Navigation = () => {
         </div>
         <div className="hidden lg:flex">
           <div className="flex gap-8">
-            
             <div className=" space-x-4 items-center">
-          <button
-            onClick={toggleModal}
-            className="btn bg-red-600 border-none px-8 hover:bg-red-700 text-white"
-          >
-            <BiMessageSquareDetail size={18}/>
-            Оставить заявку
-          </button>
-         
-        </div>
+              <button
+                onClick={toggleModal}
+                className="btn bg-red-600 border-none px-8 hover:bg-red-700 text-white"
+              >
+                <BiMessageSquareDetail size={18} />
+                Оставить заявку
+              </button>
+            </div>
           </div>
         </div>
         <button
@@ -159,7 +201,9 @@ const Navigation = () => {
         <div className="lg:hidden p-4">
           <div className="flex flex-col items-center space-y-3">
             <div className="text-center">
-              <div className="text-red-600 text-lg font-semibold">998 99 999-99-99</div>
+              <div className="text-red-600 text-lg font-semibold">
+                998 99 999-99-99
+              </div>
               <p className="text-gray-500 text-sm">
                 Время работы: с 9.00 до 17.00, сб-вс выходной
               </p>
@@ -302,7 +346,10 @@ const Navigation = () => {
                 >
                   Отмена
                 </button>
-                <button type="submit" className="btn bg-red-600 border-none text-white">
+                <button
+                  type="submit"
+                  className="btn bg-red-600 border-none text-white"
+                >
                   Отправить
                 </button>
               </div>
@@ -310,7 +357,6 @@ const Navigation = () => {
           </div>
         </div>
       )}
-
     </header>
   );
 };
