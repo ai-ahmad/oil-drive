@@ -86,23 +86,7 @@ const Contact = () => {
               </div>
             ))}
           </div>
-          {isMounted && (
-            <div className="w-full h-80 sm:h-96 mt-6">
-              <DynamicMap
-                center={[41.2995, 69.2401]}
-                zoom={13}
-                style={{ height: "100%", width: "100%" }}
-              >
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                <Marker position={[41.2995, 69.2401]}>
-                  <Popup>Tashkent, Uzbekistan</Popup>
-                </Marker>
-              </DynamicMap>
-            </div>
-          )}
+          
         </div>
       ) : (
         <Loading />
