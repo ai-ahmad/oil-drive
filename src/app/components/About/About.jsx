@@ -10,7 +10,7 @@ const About = () => {
         <div className="flex flex-col lg:flex-row justify-between items-center mb-8">
           {/* Text block on the left */}
           <div className='lg:max-w-[50%]'>
-            <h1 className="text-3xl font-bold">О бренде WTC</h1>
+            <h1 className="text-3xl font-bold">О бренде OilDrive</h1>
             <p className="mt-4 text-xl">
             OilDrive — один из ведущих производителей масел, смазок и иных технических жидкостей. Общество
               создано в 2005 году и является 100% дочерней компанией ПАО OilDrive.
