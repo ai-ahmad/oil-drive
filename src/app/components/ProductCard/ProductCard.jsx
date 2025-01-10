@@ -38,7 +38,7 @@ const ProductCard = ({ product }) => (
           <p className="text-gray-800 text-sm sm:text-base md:text-lg font-semibold">
             {truncateText(product.name)} {/* Truncate product name */}
           </p>
-
+  
           <p className="text-gray-700 text-xs sm:text-sm md:text-base mt-1 line-clamp-3">
             {truncateText(product.description)} {/* Truncate description */}
           </p>

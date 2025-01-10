@@ -30,7 +30,7 @@ const CardComponent = () => {
     <div className="flex gap-4 container justify-between flex-col md:flex-row text-md pt-5">
       {categories.map((category, index) => (
         <a
-          href={category.route || "/"}
+          href={category.route || "/category"}
           key={index}
           className="p-6 rounded-md shadow-md cursor-pointer bg-white hover:bg-red-600 text-red-600 group transition duration-300 block"
         >

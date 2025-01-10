@@ -146,7 +146,7 @@ const Navigation = () => {
               <span className="loading loading-spinner loading-lg"></span>
             </div>
           ) : (
-            <ul className="py-4 flex flex-col items-center justify-between gap-3 p-10">
+            <ul className="py-4 flex flex-col items-center justify-between gap-3 p-10 w-full">
               {categories.length > 0 ? (
                 categories.map((category, index) => (
                   <a href="/category">
