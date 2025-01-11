@@ -1,16 +1,18 @@
-"use client";
-import React from "react";
+  import React from "react";
 
-const NewsSkeleton = () => {
-  return (
-    <div className="border border-gray-300 bg-white shadow-lg transition-transform duration-200 flex flex-col p-4 mb-4 rounded-md">
-      <div className="w-full h-[120px] bg-gray-200 skeleton rounded-md mb-2"></div>
-      <div className="p-2 text-center">
-        <div className="h-6 w-3/4 bg-gray-200 skeleton rounded mb-1 mx-auto"></div>
-        <div className="h-4 w-1/2 bg-gray-200 skeleton rounded mx-auto"></div>
+  const NewsSkeleton = () => {
+    return (
+      <div className="flex  gap-6 bg-white p-4 relative left-8">
+        <div className="flex-1 min-w-[200%]">
+          <div className="skeleton h-44 w-full md:min-w-[45%] bg-gray-100 mb-4"></div>
+          <div className="skeleton h-44 w-full bg-gray-100"></div>
+        </div>
+        <div className="flex-1 min-w-[200%]">
+          <div className="skeleton h-44 w-full bg-gray-100 mb-4"></div>
+          <div className="skeleton h-44 w-full bg-gray-100"></div>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
-export default NewsSkeleton;
+  export default NewsSkeleton;

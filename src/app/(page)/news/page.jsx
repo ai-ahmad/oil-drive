@@ -4,6 +4,7 @@ import Loading from "@/app/components/Loading/Loading";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import PageSkeleton from "./PageSkeleton";
 import { useEffect, useState } from "react";
 
 export default function News() {
@@ -30,7 +31,18 @@ export default function News() {
   }, [apiUrl]);
 
   if (loading) {
-    return <Loading />;
+    return (
+      <div className="container mx-auto py-4 w-full">
+        <div className=" bg-white shadow-lg w-full max-w-screen-xl p-6 rounded-lg">
+          <h2 className="text-black text-2xl mb-4">Новости:</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <PageSkeleton key={index} />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -43,7 +55,7 @@ export default function News() {
         {news.map((item) => (
           <Link href={`/news/${item._id}`} key={item._id}>
             <article
-              className="border border-gray-200 rounded-lg p-4 shadow-md bg-white hover:shadow-lg transition-shadow cursor-pointer"
+              className="border border-gray-200 rounded-lg p-4 shadow-md bg-white hover:shadow-lg  cursor-pointer"
             >
               <Image
                 src={
@@ -59,7 +71,7 @@ export default function News() {
               />
               <time className="text-sm text-gray-500 block mb-2">{item.date}</time>
               <h2 className="text-lg font-semibold text-gray-800 mb-2">
-                <span className="text-red-600 hover:underline">{item.title}</span>
+                <span className="text-red-600 s hover:underline">{item.title}</span>
               </h2>
               <p className="text-gray-700 text-sm sm:text-base">{item.description1}</p>
             </article>
