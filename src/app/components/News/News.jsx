@@ -52,13 +52,12 @@ const News = () => {
 
   if (loading) {
     return (
-      <div className="container mx-auto py-4 w-full">
-        <div className="border border-gray-300 bg-white shadow-lg w-full max-w-screen-xl p-6 rounded-lg">
-          <h2 className="text-black text-2xl mb-4">Новости:</h2>
+      <div className="container mx-auto py-4 w-full ">
+        <div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {Array.from({ length: 6 }).map((_, index) => (
+            {Array.from({ length: 1 }).map((_, index) => (
               <NewsSkeleton key={index} />
-            ))}
+            ))}    
           </div>
         </div>
       </div>
