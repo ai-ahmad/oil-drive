@@ -54,8 +54,8 @@ const News = () => {
     return (
       <div className="container mx-auto py-4 w-full ">
         <div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {Array.from({ length: 1 }).map((_, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+            {Array.from({ length: 4 }).map((_, index) => (
               <NewsSkeleton key={index} />
             ))}    
           </div>
