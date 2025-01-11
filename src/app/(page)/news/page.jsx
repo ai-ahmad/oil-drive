@@ -33,7 +33,7 @@ export default function News() {
   if (loading) {
     return (
       <div className="container mx-auto py-4 w-full">
-        <div className="border border-gray-300 bg-white shadow-lg w-full max-w-screen-xl p-6 rounded-lg">
+        <div className=" bg-white shadow-lg w-full max-w-screen-xl p-6 rounded-lg">
           <h2 className="text-black text-2xl mb-4">Новости:</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
             {Array.from({ length: 4 }).map((_, index) => (
@@ -55,7 +55,7 @@ export default function News() {
         {news.map((item) => (
           <Link href={`/news/${item._id}`} key={item._id}>
             <article
-              className="border border-gray-200 rounded-lg p-4 shadow-md bg-white hover:shadow-lg transition-shadow cursor-pointer"
+              className="border border-gray-200 rounded-lg p-4 shadow-md bg-white hover:shadow-lg  cursor-pointer"
             >
               <Image
                 src={
