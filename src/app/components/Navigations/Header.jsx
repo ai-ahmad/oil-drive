@@ -149,8 +149,8 @@ const Navigation = () => {
             <ul className="py-4 flex flex-col items-center justify-between gap-3 p-10 w-full">
               {categories.length > 0 ? (
                 categories.map((category, index) => (
-                  <a href="/category">
-                    <li key={index} className="p-2 border rounded-lg w-full flex justify-center hover:bg-red-600 hover:text-white active:scale-95 transition duration-300">
+                  <a key={index} href="/category">
+                    <li  className="p-2 border rounded-lg w-full flex justify-center hover:bg-red-600 hover:text-white active:scale-95 transition duration-300">
                     {category.category_name}
                   </li>
                   </a>
