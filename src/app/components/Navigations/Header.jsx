@@ -131,7 +131,7 @@ const Navigation = () => {
           <button
             onClick={() => {
               document.getElementById("my_modal_4").showModal(); 
-              fetchCategories(); // Trigger the function
+              fetchCategories();
             }}
             className="btn bg-red-600 border-none hover:bg-red-700 px-8 text-white"
           >
