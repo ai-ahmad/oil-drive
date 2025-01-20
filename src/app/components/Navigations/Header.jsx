@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { FaPhoneAlt, FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import axios from "axios";
 import Category from "../SideBar/Category";
 import { SlOptionsVertical } from "react-icons/sl";
-import { FaDroplet } from "react-icons/fa6";
-import { SlEnvolopeLetter } from "react-icons/sl";
 import { BiMessageSquareDetail } from "react-icons/bi";
 
 const Navigation = () => {
@@ -115,19 +113,19 @@ const Navigation = () => {
           {isSidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
 
-        <div className="flex items-center">
+        <div className="flex items-center lg:w-full lg:max-w-[20%]">
           <a href="/">
             <Image
               src="/assets/img/oildrive-red.png"
               alt="OilDrive Logo"
-              width={230}
-              height={56}
-              className="h-12 rounded-md"
+              width={200}
+              height={20}
+              className="lg:h-14 rounded-md h-12 lg:w-full"
             />
           </a>
         </div>
 
-        <div className="hidden lg:flex space-x-4 items-center">
+        <div className="hidden lg:flex space-x-4 items-center w-full justify-center">
           <button
             onClick={() => {
               document.getElementById("my_modal_4").showModal(); 
@@ -139,7 +137,7 @@ const Navigation = () => {
             Каталог
           </button>
           <dialog id="my_modal_4" className="modal">
-        <div className="modal-box ">
+        <div className="modal-box">
           <h3 className="font-bold text-lg">Категории</h3>
           {isLoading ? (
             <div className="flex items-center justify-center w-full py-5">
@@ -170,15 +168,15 @@ const Navigation = () => {
           <input
             type="text"
             placeholder="Поиск..."
-            className="input bg-white input-bordered w-[500px]"
+            className="input bg-white input-bordered w-full max-w-[50%]"
           />
         </div>
-        <div className="hidden lg:flex">
-          <div className="flex gap-8">
-            <div className=" space-x-4 items-center">
+        <div className="hidden lg:flex w-full max-w-[21%] items-end">
+          <div className="flex gap-8 w-full">
+            <div className="space-x-4 items-center w-full">
               <button
                 onClick={toggleModal}
-                className="btn bg-red-600 border-none px-8 hover:bg-red-700 text-white"
+                className="btn flex items-center w-full bg-red-600 border-none hover:bg-red-700 text-white"
               >
                 <BiMessageSquareDetail size={18} />
                 Оставить заявку

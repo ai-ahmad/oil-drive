@@ -27,7 +27,7 @@ const CardComponent = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="flex gap-4 container justify-between flex-col md:flex-row text-md pt-5">
+    <div className="flex gap-4 container justify-between flex-col lg:flex-row text-md pt-5">
       {categories.map((category, index) => (
         <a
           href={category.route || "/category"}

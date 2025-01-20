@@ -49,7 +49,7 @@ const Contact = () => {
   return (
     <>
       {contacts.length > 0 ? (
-        <div className="container mx-auto py-6">
+        <div className="container mx-auto py-8">
           <h1 className="text-3xl font-bold text-center md:text-left mb-8">
             Контактные данные
           </h1>

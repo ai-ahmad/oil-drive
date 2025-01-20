@@ -75,14 +75,14 @@ const News = () => {
   return (
     <div className="container mx-auto py-4 w-full">
       <div className="py-8">
-        <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
           {newsData.map((news) => (
             <div
               key={news.id}
               className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex"
             >
               <div className="flex-1 p-6 text-left flex flex-col justify-center">
-                <h1 className="text-xl md:text-3xl font-bold text-gray-800 mb-4">
+                <h1 className="text-xl md:text-xl lg:text-3xl font-semibold md:font-bold text-gray-800 mb-4">
                   {news.title}
                 </h1>
                 <div className="text-gray-400 text-sm flex items-center gap-4 mt-auto">
@@ -92,7 +92,7 @@ const News = () => {
                   </div>
                 </div>
               </div>
-              <div className="relative flex items-center justify-center md:size-64 size-32 my-auto">
+              <div className="relative flex items-center justify-center size-32 md:size-36 lg:size-56  my-auto">
                 <Image
                   src={news.image}
                   alt={news.title}

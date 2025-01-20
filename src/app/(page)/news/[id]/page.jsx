@@ -62,7 +62,7 @@ const NewsItem = ({ params }) => {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-14 mt-8">
+    <div className=" mx-auto w-full my-8">
       <div className="bg-white shadow-lg rounded-xl overflow-hidden max-w-4xl mx-auto">
         {/* Заголовок новости */}
         <div className="bg-gradient-to-r text-black py-4 px-6">

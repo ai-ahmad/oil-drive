@@ -6,7 +6,7 @@ import { FaBars } from "react-icons/fa";
 const DesktopNavigation = ({ toggleModal }) => {
   return (
     <nav className="hidden lg:block w-full bg-white">
-      <div className="container mx-auto flex items-center justify-between py-3">
+      <div className="z mx-auto flex items-center justify-between py-3">
         <div className="space-x-10">
           <a href="/" className="hover:text-gray-400">Главная</a>
           <a href="/news" className="hover:text-gray-400">Новости</a>
