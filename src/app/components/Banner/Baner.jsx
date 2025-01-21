@@ -1,31 +1,39 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import BannerSkeleton from "./BannerSkeleton";
 
 const Baner = () => {
-  const slides = [
-    {
-      _id: "1",
-      image_url: "https://oiltrade.uz/templates/oiltrade/images/3.jpg",
-      description: "GNV",
-    },
-    {
-      _id: "2",
-      image_url: "https://oiltrade.uz/templates/oiltrade/images/1.jpg",
-      description: "Tebeoil",
-    },
-    {
-      _id: "3",
-      image_url: "https://oiltrade.uz/templates/oiltrade/images/2.jpg",
-      description: "SHELL",
-    },
-  ];
+  const [slides, setSlides] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://admin-dash-oil-trade.onrender.com/api/v1/banner");
+        if (!response.ok) throw new Error(`Failed to fetch banners: ${response.status}`);
+        const data = await response.json();
+        setSlides(data);
+        console.log("imagee",data.image_url)
+      } catch (error) {
+        console.error("Error fetching banners:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div className="text-center"><BannerSkeleton /></div>;
+  }
 
   return (
     <div className="relative container w-full h-56 sm:h-72 md:h-96 lg:h-[450px] xl:h-128 2xl:h-144 overflow-hidden rounded-lg">
@@ -33,49 +41,52 @@ const Baner = () => {
         modules={[Navigation, Autoplay, Pagination]}
         navigation={true}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 4000 }}  
-        loop={true} 
+        autoplay={{ delay: 4000 }}
+        loop={true}
         className="w-full h-full"
       >
-        {slides.map((slide) => (
-          <SwiperSlide key={slide._id}>
-            <Image
-              src={slide.image_url}
-              alt={slide.description}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-lg"
-            />
-          </SwiperSlide>
-        ))}
+        {slides.map((slide) => {
+  console.log("Slide data:", slide.image_url); // Вывод данных для проверки
+  return (
+    <SwiperSlide key={slide._id}>
+      <Image
+        src={`https://admin-dash-oil-trade.onrender.com${slide.image_url}`}
+        alt={slide.description}
+        layout="fill"
+        objectFit="cover"
+        className="rounded-lg"
+      />
+    </SwiperSlide>
+  );
+})}
+
       </Swiper>
       <style jsx global>{`
         .swiper-button-next,
         .swiper-button-prev {
-          background-color: #ffffff; /* Red-500 */
-          color: #ef4444; /* White */
-          border-radius: 9999px; /* Fully rounded */
-          padding: 1.05rem 1.3rem; /* p-5 */
-          width: auto; /* Maintain aspect ratio for padding */
+          background-color: #ffffff;
+          color: #ef4444;
+          border-radius: 9999px;
+          padding: 1.05rem 1.3rem;
+          width: auto;
           height: auto;
         }
         .swiper-button-next::after,
         .swiper-button-prev::after {
-          font-size: 1.2rem; /* Adjust arrow size */
+          font-size: 1.2rem;
         }
         .swiper-pagination-bullet {
-          background-color: #ffffff; /* White */
+          background-color: #ffffff;
           opacity: 0.7;
         }
         .swiper-pagination-bullet-active {
-          background-color: #ef4444; /* Red-500 */
+          background-color: #ef4444;
           opacity: 1;
         }
-
         @media (max-width: 768px) {
           .swiper-button-next,
           .swiper-button-prev {
-            display: none; /* Hide navigation arrows on mobile */
+            display: none;
           }
         }
       `}</style>

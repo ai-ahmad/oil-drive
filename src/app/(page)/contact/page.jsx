@@ -6,10 +6,6 @@ import axios from "axios";
 import "leaflet/dist/leaflet.css";
 import Loading from "@/app/components/Loading/Loading";
 
-const DynamicMap = dynamic(
-  () => import("react-leaflet").then((mod) => mod.MapContainer),
-  { ssr: false }
-);
 const TileLayer = dynamic(
   () => import("react-leaflet").then((mod) => mod.TileLayer),
   { ssr: false }
@@ -43,7 +39,7 @@ const Contact = () => {
     fetchContacts();
 
     return () => {
-       mapContainer = document.querySelector(".leaflet-container");
+      const mapContainer = document.querySelector(".leaflet-container");
       if (mapContainer && mapContainer._leaflet_id) {
         mapContainer._leaflet_id = null;
       }
@@ -53,40 +49,46 @@ const Contact = () => {
   return (
     <>
       {contacts.length > 0 ? (
-        <div className="container mx-auto px-4 sm:px-6 lg:px-14">
-          <h1 className="text-3xl font-bold mb-6 text-center sm:text-left">
+        <div className="container mx-auto py-6">
+          <h1 className="text-3xl font-bold text-center md:text-left mb-8">
             Контактные данные
           </h1>
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-6">
             {contacts.map((contact) => (
               <div
                 key={contact._id}
-                className="border border-gray-300 rounded-lg p-4 shadow-md"
+                className="border border-gray-300 rounded-lg p-6 shadow-lg transition-all duration-300 hover:shadow-xl"
               >
-                <p className="text-lg sm:text-xl mb-2">
-                  <strong>Имя:</strong> {contact.name}
-                </p>
-                <p className="text-lg sm:text-xl mb-4">
-                  <strong>Описание:</strong> {contact.description}
-                </p>
+                <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+                  <div className="flex-1">
+                    <p className="text-lg sm:text-xl mb-2 font-semibold text-gray-800">
+                      <strong>Имя:</strong> {contact.name}
+                    </p>
+                    <p className="text-lg sm:text-xl mb-4 text-gray-600">
+                      <strong>Описание:</strong> {contact.description}
+                    </p>
+                  </div>
 
-                {contact.images && contact.images.length > 0 ? (
-                  contact.images.map((image, index) => (
-                    <div key={index} className="mb-4">
-                      <img
-                        src={`https://admin-dash-oil-trade.onrender.com/${image}`}
-                        alt={`contact-${index}`}
-                        className="w-[100px] h-[100px] object-cover rounded"
-                      />
-                    </div>
-                  ))
-                ) : (
-                  <span className="text-gray-500 italic">No images</span>
-                )}
+                  {/* Image Section */}
+                  <div className="w-full sm:w-[150px] h-[150px] overflow-hidden rounded-lg flex justify-center items-center">
+                    {contact.images && contact.images.length > 0 ? (
+                      contact.images.map((image, index) => (
+                        <div key={index} className="mb-4">
+                          <img
+                            src={`https://admin-dash-oil-trade.onrender.com/${image}`}
+                            alt={`contact-${index}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))
+                    ) : (
+                      <span className="text-gray-500 italic">No images</span>
+                    )}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
-          
         </div>
       ) : (
         <Loading />

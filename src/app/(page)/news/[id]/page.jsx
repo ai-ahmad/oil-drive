@@ -5,12 +5,23 @@ import Image from "next/image";
 import Loading from "@/app/components/Loading/Loading";
 
 const NewsItem = ({ params }) => {
-  const { id } = params;
+  const [unwrappedParams, setUnwrappedParams] = useState(null);
+
+  // Unwrap the params object using React.use
+  useEffect(() => {
+    const unwrapParams = async () => {
+      const result = await params; // Unwrapping the Promise
+      setUnwrappedParams(result);
+    };
+
+    unwrapParams();
+  }, [params]);
+
   const [newsItem, setNewsItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchNewsItem = async () => {
+  const fetchNewsItem = async (id) => {
     if (!id) return;
 
     try {
@@ -33,8 +44,10 @@ const NewsItem = ({ params }) => {
   };
 
   useEffect(() => {
-    fetchNewsItem();
-  }, [id]);
+    if (unwrappedParams) {
+      fetchNewsItem(unwrappedParams.id);
+    }
+  }, [unwrappedParams]);
 
   if (loading) {
     return <Loading />;
@@ -52,13 +65,13 @@ const NewsItem = ({ params }) => {
     <div className="container mx-auto px-4 sm:px-6 lg:px-14 mt-8">
       <div className="bg-white shadow-lg rounded-xl overflow-hidden max-w-4xl mx-auto">
         {/* Заголовок новости */}
-        <div className="bg-gradient-to-r  text-black py-4 px-6">
-          <h1 className="text-4xl font-semibold">{newsItem.title}</h1> {/* Увеличен размер шрифта заголовка */}
+        <div className="bg-gradient-to-r text-black py-4 px-6">
+          <h1 className="text-4xl font-semibold">{newsItem.title}</h1>
         </div>
 
         {/* Описание новости 1 */}
         <div className="px-6 py-4">
-          <p className="text-lg text-gray-800 mb-6 leading-relaxed">{newsItem.description1}</p> {/* Немного уменьшен размер шрифта */}
+          <p className="text-lg text-gray-800 mb-6 leading-relaxed">{newsItem.description1}</p>
         </div>
 
         {/* Изображение новости */}
@@ -76,8 +89,6 @@ const NewsItem = ({ params }) => {
         <div className="px-6 py-4">
           <p className="text-lg text-gray-700 mb-6 leading-relaxed">{newsItem.description2}</p>
         </div>
-
-       
       </div>
     </div>
   );

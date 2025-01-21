@@ -10,7 +10,7 @@ import "swiper/css";
 const DEFAULT_IMAGE =
   "https://oiltrade.uz/uploads/posts/2024-11/1732016139_maslo-motornoe-lukojl-m8d_pr47945_1000x1000f.jpg";
 
-const truncateText = (text, length = 45) => {
+const truncateText = (text, length = 40) => {
   if (text.length > length) {
     return text.slice(0, length) + "...";
   }
@@ -20,7 +20,7 @@ const truncateText = (text, length = 45) => {
 const ProductCard = ({ product }) => (
   <>
     <Link href={`/card/${product._id}`}>
-      <div className="shadow-md rounded-lg overflow-hidden p-4 flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow bg-white duration-300 my-7 border">
+      <div className="shadow-md rounded-lg overflow-hidden p-4 flex flex-col justify-between cursor-pointer hover:shadow-lg transition-shadow bg-white duration-300 border">
         {/* Image */}
         <div className="flex justify-center mb-4 h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72">
           <Image
