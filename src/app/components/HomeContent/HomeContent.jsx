@@ -70,6 +70,9 @@ const HomeContent = () => {
             320: {
               slidesPerView: 1, // 1 slide for mobile
             },
+            425: {
+              slidesPerView: 2, // 1 slide for mobile
+            },
             640: {
               slidesPerView: 3, // 3 slides for tablet
             },
