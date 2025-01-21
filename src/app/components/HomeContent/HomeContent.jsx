@@ -26,7 +26,7 @@ const HomeContent = () => {
         throw new Error("Failed to fetch products data.");
       }
       const data = await response.json();
-      console.log(data);
+      console.log("abc", data);
       setProducts(data);
       setFilteredProducts(data);
       setLoading(false);
@@ -52,7 +52,7 @@ const HomeContent = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-2xl lg:text-3xl font-bold mt-10">Выгодное предложение</h1>
+      <h1 className="text-2xl lg:text-3xl font-bold mt-10 mb-4">Выгодное предложение</h1>
 
       {error && <div className="text-red-500 text-center">{error}</div>}
 

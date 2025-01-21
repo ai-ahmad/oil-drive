@@ -3,8 +3,8 @@ import { FaVk, FaOdnoklassniki, FaTelegramPlane } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className="bg-white text-gray-600 py-8 px-4 border-t border-gray-300">
-      <div className="container mx-auto">
+    <div className="bg-white text-gray-600 py-8 px-4 border-t border-gray-300 container">
+      <div className=" mx-auto">
         {/* Social Media and Newsletter Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div className="flex flex-col items-center md:items-start">

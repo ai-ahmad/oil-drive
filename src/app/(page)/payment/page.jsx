@@ -62,7 +62,7 @@ const Payment = () => {
 
   return (
     <ErrorBoundary>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-14">
+      <div className="container mx-auto py-8">
         {!loading && (
           <h1 className="text-3xl font-semibold mb-6 text-center sm:text-left">
             Оплата
@@ -79,7 +79,7 @@ const Payment = () => {
                   alt={data.name}
                   width={400}
                   height={300}
-                  className="w-full max-w-md object-contain rounded-md shadow"
+                  className="w-full mmax-w-d object-contain rounded-md shadow"
                 />
               </div>
             )}

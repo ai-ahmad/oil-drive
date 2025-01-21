@@ -121,7 +121,7 @@ const ProductItem = ({ params }) => {
                   key={index}
                   src={`https://admin-dash-oil-trade.onrender.com/${img}`}
                   alt={`${product.name} image ${index + 1}`}
-                  width={180}  // Увеличиваем размер изображения
+                  width={180}
                   height={180}
                   className={`object-cover cursor-pointer rounded-lg border-4 transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl transform ${
                     activeImage === img ? 'border-red-500 scale-105' : 'border-gray-300 hover:scale-110'

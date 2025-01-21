@@ -39,9 +39,7 @@ export default function Home() {
 
   return (
     <>
-      <main className="flex mx-auto w-full">
-        
-        <div className="flex-1 container">
+      <main className="flex flex-col w-full">
           <Banner />
           <OilCategory/>
           <HomeContent />
@@ -50,7 +48,6 @@ export default function Home() {
           <News />
           <About />
           <AbouUs />
-        </div>
       </main>
 
     </>
