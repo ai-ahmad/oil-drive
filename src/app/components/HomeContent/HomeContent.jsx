@@ -1,18 +1,16 @@
-"use client"; 
+"use client";
 
 import React, { useState, useEffect } from "react";
 import ProductItemSkeleton from "../Card/ProductItemSkeleton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination"; // Import the pagination styles
+import "swiper/css/pagination"; // Import Swiper pagination styles
 import { Pagination } from "swiper/modules"; // Import the Pagination module
 import ProductCard from "../ProductCard/ProductCard";
 
 const HomeContent = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(6);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -26,7 +24,6 @@ const HomeContent = () => {
         throw new Error("Failed to fetch products data.");
       }
       const data = await response.json();
-      console.log("abc", data);
       setProducts(data);
       setFilteredProducts(data);
       setLoading(false);
@@ -40,15 +37,6 @@ const HomeContent = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="container mx-auto">
@@ -68,31 +56,29 @@ const HomeContent = () => {
           loop={true}
           breakpoints={{
             320: {
-              slidesPerView: 1, // 1 slide for mobile
+              slidesPerView: 1, // 1 slide for small devices
             },
-            425: {
-              slidesPerView: 2, // 1 slide for mobile
+            455: {
+              slidesPerView: 2, // 2 slides for slightly larger devices
             },
-            640: {
-              slidesPerView: 3, // 3 slides for tablet
+            845: {
+              slidesPerView: 3, // 3 slides for tablets
             },
-            1024: {
+            1125: {
               slidesPerView: 4, // 4 slides for desktop
             },
           }}
           pagination={{
             clickable: true, // Make the pagination dots clickable
-            type: "bullets", // You can also use 'fraction' or 'progressbar'
+            type: "bullets", // Pagination style
           }}
           modules={[Pagination]} // Enable the Pagination module
         >
-          <div className="mt-10">
-            {currentProducts.map((product) => (
-              <SwiperSlide key={product._id}>
-                <ProductCard product={product} />
-              </SwiperSlide>
-            ))}
-          </div>
+          {filteredProducts.map((product) => (
+            <SwiperSlide key={product._id}>
+              <ProductCard product={product} />
+            </SwiperSlide>
+          ))}
         </Swiper>
       )}
     </div>

@@ -32,7 +32,7 @@ const CardComponent = () => {
         <a
           href={category.route || "/category"}
           key={index}
-          className="p-6 rounded-md shadow-md cursor-pointer bg-white hover:bg-red-600 text-red-600 group transition duration-300 block"
+          className="px-6 py-4 rounded-md shadow-md flex-1 cursor-pointer bg-white hover:bg-red-600 text-red-600 group transition duration-300 block"
         >
           <div className="flex items-center gap-2 group-hover:text-white">
             <RiOilLine className="text-red-600 group-hover:text-white transition duration-300" />

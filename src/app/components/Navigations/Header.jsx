@@ -74,7 +74,6 @@ const Navigation = () => {
     }
   };
 
-
   return (
     <header className="bg-white pb-6">
       <nav className="hidden lg:block w-full">
@@ -100,7 +99,9 @@ const Navigation = () => {
             </a>
           </div>
           <div>
-            <span className="text-adaptive-xs">+998 99 999-99-99</span>
+            <a href="tel:+998999999999">
+              <span className="text-adaptive-xs">+998 99 999-99-99</span>
+            </a>
           </div>
         </div>
       </nav>
@@ -128,7 +129,7 @@ const Navigation = () => {
         <div className="hidden lg:flex space-x-4 items-center w-full justify-center">
           <button
             onClick={() => {
-              document.getElementById("my_modal_4").showModal(); 
+              document.getElementById("my_modal_4").showModal();
               fetchCategories();
             }}
             className="btn bg-red-600 border-none hover:bg-red-700 px-8 text-white"
@@ -137,34 +138,34 @@ const Navigation = () => {
             Каталог
           </button>
           <dialog id="my_modal_4" className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Категории</h3>
-          {isLoading ? (
-            <div className="flex items-center justify-center w-full py-5">
-              <span className="loading loading-spinner loading-lg"></span>
-            </div>
-          ) : (
-            <ul className="py-4 flex flex-col items-center justify-between gap-3 p-10 w-full">
-              {categories.length > 0 ? (
-                categories.map((category, index) => (
-                  <a key={index} href="/category">
-                    <li  className="p-2 border rounded-lg w-full flex justify-center hover:bg-red-600 hover:text-white active:scale-95 transition duration-300">
-                    {category.category_name}
-                  </li>
-                  </a>
-                ))
+            <div className="modal-box">
+              <h3 className="font-bold text-lg">Категории</h3>
+              {isLoading ? (
+                <div className="flex items-center justify-center w-full py-5">
+                  <span className="loading loading-spinner loading-lg"></span>
+                </div>
               ) : (
-                <p>Нет доступных категорий</p>
+                <ul className="py-4 flex flex-col items-center justify-between gap-3 p-10 w-full">
+                  {categories.length > 0 ? (
+                    categories.map((category, index) => (
+                      <a key={index} href="/category">
+                        <li className="p-2 border rounded-lg w-full flex justify-center hover:bg-red-600 hover:text-white active:scale-95 transition duration-300">
+                          {category.category_name}
+                        </li>
+                      </a>
+                    ))
+                  ) : (
+                    <p>Нет доступных категорий</p>
+                  )}
+                </ul>
               )}
-            </ul>
-          )}
-          <div className="modal-action">
-            <form method="dialog">
-              <button className="btn">Закрыть</button>
-            </form>
-          </div>
-        </div>
-      </dialog>
+              <div className="modal-action">
+                <form method="dialog">
+                  <button className="btn">Закрыть</button>
+                </form>
+              </div>
+            </div>
+          </dialog>
           <input
             type="text"
             placeholder="Поиск..."

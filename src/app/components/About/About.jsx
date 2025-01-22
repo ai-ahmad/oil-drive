@@ -39,19 +39,19 @@ const About = () => {
             Выбирая нас, вы получаете:
           </h3>
           <ul className="my-6 md:my-10 flex flex-wrap justify-between items-center gap-6 text-lg md:text-xl font-semibold">
-            <li className="flex items-center gap-3 bg-white p-4 md:p-6 w-full sm:w-[48%] lg:w-[32%] rounded-md shadow-md">
+            <li className="flex items-center gap-3 xl:min-h-32 bg-white p-4 md:p-6 w-full sm:w-[48%] lg:w-[32%] rounded-md shadow-md">
               <PiMedalBold className="text-3xl md:text-4xl" />
               <span className="text-sm md:text-base lg:text-lg">
                 100% гарантию оригинальной продукции
               </span>
             </li>
-            <li className="flex items-center gap-3 bg-white p-4 md:p-6 w-full sm:w-[48%] lg:w-[32%] rounded-md shadow-md">
+            <li className="flex items-center gap-3 xl:min-h-32 bg-white p-4 md:p-6 w-full sm:w-[48%] lg:w-[32%] rounded-md shadow-md">
               <TbTruckDelivery className="text-3xl md:text-4xl" />
               <span className="text-sm md:text-base lg:text-lg">
                 Оперативную доставку по всей России
               </span>
             </li>
-            <li className="flex items-center gap-3 bg-white p-4 md:p-6 w-full sm:w-[48%] lg:w-[32%] rounded-md shadow-md">
+            <li className="flex items-center gap-3 xl:min-h-32 bg-white p-4 md:p-6 w-full sm:w-[48%] lg:w-[32%] rounded-md shadow-md">
               <PiChatCenteredDotsBold className="text-3xl md:text-4xl" />
               <span className="text-sm md:text-base lg:text-lg">
                 Качественную клиентскую поддержку
